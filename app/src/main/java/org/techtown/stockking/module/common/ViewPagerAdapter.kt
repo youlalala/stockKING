@@ -1,4 +1,4 @@
-package org.techtown.stockking
+package org.techtown.stockking.module.common
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

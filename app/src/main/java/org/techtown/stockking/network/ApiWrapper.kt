@@ -27,12 +27,14 @@ class ApiWrapper {
         }
 
         fun getStockDetail(symbol: String, callback: (List<StockList>) -> Unit){
-            val modelCall = NetWorkService.api.stockDetail(symbol)
+            val modelCall = NetWorkService.api2.stockDetail(symbol,"1","10")
             modelCall.enqueue(object : Callback<StockDetailModel> {
                 override fun onResponse(call: Call<StockDetailModel>, response: Response<StockDetailModel>) {
                     val list = response.body()
                     list?.let {
-                        callback.invoke(it.tsla)
+                        Log.i("SSS",it.toString())
+                        callback.invoke(it.contents)
+
                     }
                 }
                 override fun onFailure(call: Call<StockDetailModel>, t: Throwable) {

@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/main_color">
-    <item android:id="@android:id/mask">
-        <shape>
-            <solid android:color="@color/main_color" />
-            <corners android:radius="25dp" />
-        </shape>
-    </item>
-    <item android:id="@android:id/background">
-        <shape>
-            <solid android:color="@color/white" />
-            <corners android:radius="25dp" />
-        </shape>
-    </item>
-</ripple>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true"
+        android:color="@color/main_color"/>
+    <item android:state_selected="true"
+        android:color="@color/main_color"/>
+    <item
+        android:color="#DCDCDC"/>
+</selector>
+
+
+<!--<ripple xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--android:color="@color/main_color">-->
+<!--<item android:id="@android:id/mask">-->
+<!--    <shape>-->
+<!--        <solid android:color="@color/main_color"-->
+<!--            />-->
+<!--        <corners android:radius="25dp" />-->
+<!--    </shape>-->
+<!--</item>-->
+<!--<item android:id="@android:id/background">-->
+<!--    <shape>-->
+<!--        <solid android:color="@color/white" />-->
+<!--        <corners android:radius="25dp" />-->
+<!--    </shape>-->
+<!--</item>-->
+<!--</ripple>-->

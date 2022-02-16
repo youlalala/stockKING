@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".module.DetailActivity"
+    tools:context=".module.common.DetailActivity"
     android:orientation="vertical"
     android:paddingHorizontal="25dp"
     android:paddingTop="30dp">
@@ -13,7 +13,7 @@
         android:id="@+id/back_btn"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
         android:scaleType="fitCenter"
         android:background="@android:color/transparent"
         android:src="@drawable/img_back"/>
@@ -34,20 +34,27 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:paddingBottom="5dp">
                 <TextView
-                    android:id="@+id/name_tv"
-                    android:textSize="30dp"
+                    android:id="@+id/coNameKr_tv"
+                    android:textSize="23dp"
+                    android:textStyle="bold"
                     android:paddingRight="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
-                    android:id="@+id/symbol_tv"
-                    android:textSize="10dp"
+                    android:id="@+id/coNameUs_tv"
+                    android:textSize="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/ticker_tv"
+                android:textSize="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/star"
@@ -58,7 +65,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
 
             <TextView
                 android:id="@+id/price_tv"
@@ -68,9 +76,51 @@
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/percent_tv"
-                android:textSize="10dp"
+                android:textSize="13dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:textSize="13dp"
+                android:text="1일"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:textSize="13dp"
+                android:text="1주"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:textSize="13dp"
+                android:text="1개월"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:textSize="13dp"
+                android:text="3개월"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:textSize="13dp"
+                android:text="1년"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:textSize="13dp"
+                android:text="5년"/>
         </LinearLayout>
 
 
@@ -78,11 +128,11 @@
             android:id="@+id/chart"
             android:layout_width="match_parent"
             android:layout_height="300dp" />
-        <TextView
-            android:id="@+id/test"
-            android:textSize="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+<!--        <TextView-->
+<!--            android:id="@+id/chartDetail_tv"-->
+<!--            android:textSize="30dp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
 
 
     </LinearLayout>

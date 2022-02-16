@@ -11,24 +11,23 @@
         android:networkSecurityConfig="@xml/http"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-        >
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity
+            android:name=".module.account_page.SettingActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@menu/bottom_navigation_item" />
-        <activity android:name=".DetailActivity"/>
-        <activity android:name=".MainActivity">
+
+        <activity android:name=".module.common.DetailActivity" />
+        <activity android:name=".module.common.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
-
-
-<!--    android:theme="@style/Theme.StockKING"-->

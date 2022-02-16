@@ -1,86 +1,104 @@
 package org.techtown.stockking.module.home_page
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import org.techtown.stockking.R
+import org.techtown.stockking.databinding.FragmentAccountBinding
 import org.techtown.stockking.databinding.FragmentHomeBinding
 import org.techtown.stockking.model.StockTopList
+import org.techtown.stockking.module.account_page.SettingActivity
+import org.techtown.stockking.module.common.DetailActivity
 import org.techtown.stockking.network.ApiWrapper
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(){
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var binding: FragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
+        val binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        val switch = binding.textSwitch
-        val version = binding.textVersion
-        val btn1 = binding.realtimeBtn
-        val btn2 = binding.updownBtn
-        val btn3 = binding.transactionBtn
-        val detail = binding.detailTv
-
-        detail.text = "실시간으로 사람들이 많이 검색하고 있는 주식 순위"
-
-        switch.setOnClickListener{
-            if(switch.isChecked){
-                version.text="US"
+        binding.textVersion.setOnClickListener {
+            if(binding.textVersion.text=="US"){
+                binding.textVersion.text="KR"
+                binding.textSwitch.isChecked= false
             }else{
-                version.text="KR"
+                binding.textVersion.text="US"
+                binding.textSwitch.isChecked= true
             }
         }
-
-        binding.textVersion.setOnClickListener{
-            if(version.text=="US"){
-                version.text="KR"
-                switch.isChecked= false
+        binding.textSwitch.setOnClickListener{
+            if(binding.textSwitch.isChecked){
+                binding.textVersion.text="US"
             }else{
-                version.text="US"
-                switch.isChecked= true
+                binding.textVersion.text="KR"
             }
         }
+        binding.detailTv.text = "실시간으로 사람들이 많이 검색하고 있는 주식 순위"
+        binding.realtimeBtn.isSelected = true
+        binding.updownBtn.isSelected = false
+        binding.transactionBtn.isSelected = false
 
-        btn1.setOnClickListener {
-            detail.text = "실시간으로 사람들이 많이 검색하고 있는 주식 순위"
+        binding.realtimeBtn.setOnClickListener {
+            binding.detailTv.text = "실시간으로 사람들이 많이 검색하고 있는 주식 순위"
+            binding.realtimeBtn.isSelected = true
+            binding.updownBtn.isSelected = false
+            binding.transactionBtn.isSelected = false
         }
-        btn2.setOnClickListener {
-            detail.text = "하룻동안 등락이 높은 주식 순위"
+        binding.updownBtn.setOnClickListener {
+            binding.detailTv.text = "하룻동안 등락이 높은 주식 순위"
+            binding.realtimeBtn.isSelected = false
+            binding.updownBtn.isSelected = true
+            binding.transactionBtn.isSelected = false
         }
-        btn3.setOnClickListener {
-            detail.text = "하룻동안 가장 거래가 많았던 주식 순위"
+        binding.transactionBtn.setOnClickListener {
+            binding.detailTv.text = "하룻동안 가장 거래가 많았던 주식 순위"
+            binding.realtimeBtn.isSelected = false
+            binding.updownBtn.isSelected = false
+            binding.transactionBtn.isSelected = true
         }
 
-        ApiWrapper.getStockTopList() {
-            val adapter=dataToList(it)
-            binding.recyclerView.adapter=adapter
-            adapter.setItemClickListener( object : MyAdapter.ItemClickListener {
-                override fun onClick(view: View, position: Int) {
-                    Log.i("SSS", "$position 번 리스트 선택")
-                }
+        //임시
+        binding.tsla.setOnClickListener {
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra("ticker","tsla")
+            startActivity(intent)
+        }
+        binding.aapl.setOnClickListener {
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra("ticker","aapl")
+            startActivity(intent)
+        }
+        binding.goog.setOnClickListener {
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra("ticker","goog")
+            startActivity(intent)
+        }
+
+
+        ApiWrapper.getStockTopList() { it ->
+            binding.recyclerView.adapter=GeneralTopListAdapter(it,onClickItem = {
+
+                val intent = Intent(context, DetailActivity::class.java)
+                intent.putExtra("ticker",it.title)
+                intent.putExtra("coName",it.company)
+                intent.putExtra("price",it.price)
+                intent.putExtra("percent",it.percent)
+                startActivity(intent)
             })
+
         }
         return binding.root
     }
 
-    private fun dataToList(symbolList: List<StockTopList>) : MyAdapter {
-        val dataSymbol = mutableListOf<String>()
-        val dataName = mutableListOf<String>()
-        val dataPrice = mutableListOf<String>()
-        val dataPercent = mutableListOf<String>()
-        symbolList.forEach { element ->
-            dataSymbol.add(element.title)
-            dataName.add(element.company)
-            dataPrice.add(element.price)
-            dataPercent.add(element.percent)
-        }
-        return MyAdapter(dataSymbol,dataName,dataPrice,dataPercent)
-    }
-
 }
+
+
 

@@ -1,8 +1,9 @@
-package org.techtown.stockking
+package org.techtown.stockking.module.common
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
+import org.techtown.stockking.R
 import org.techtown.stockking.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -13,7 +14,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewpager=binding.viewpager
-
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.item_one -> {
@@ -34,14 +34,5 @@ class MainActivity : AppCompatActivity() {
 
         viewpager.adapter = ViewPagerAdapter(this)
 
-        viewpager.registerOnPageChangeCallback(
-            object : ViewPager2.OnPageChangeCallback(){
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    supportActionBar?.title = binding.bottomNavigation.menu.getItem(position).title
-                    binding.bottomNavigation.menu.getItem(position).isChecked=true
-                }
-            }
-        )
     }
 }
