@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".module.common.DetailActivity"
     android:orientation="vertical"
-    android:paddingHorizontal="25dp"
+    android:paddingHorizontal="15dp"
     android:paddingTop="30dp">
 
 
@@ -35,9 +35,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingBottom="5dp">
+                android:paddingBottom="5dp"
+                android:orientation="vertical">
                 <TextView
-                    android:id="@+id/coNameKr_tv"
+                    android:id="@+id/ticker_tv"
+                    android:text="한국어회사이름"
                     android:textSize="23dp"
                     android:textStyle="bold"
                     android:paddingRight="10dp"
@@ -45,16 +47,17 @@
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:id="@+id/coNameUs_tv"
+                    android:text="영어회사이름"
                     android:textSize="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/ticker_tv"
-                android:textSize="13dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+<!--            <TextView-->
+<!--                android:id="@+id/ticker_tv"-->
+<!--                android:textSize="13dp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content" />-->
 
             <Button
                 android:id="@+id/star"
@@ -86,40 +89,41 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/oneday"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:textSize="13dp"
+                android:textSize="10dp"
                 android:text="1일"/>
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:textSize="13dp"
+                android:textSize="10dp"
                 android:text="1주"/>
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:textSize="13dp"
+                android:textSize="10dp"
                 android:text="1개월"/>
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:textSize="13dp"
+                android:textSize="10dp"
                 android:text="3개월"/>
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:textSize="13dp"
+                android:textSize="10dp"
                 android:text="1년"/>
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:textSize="13dp"
+                android:textSize="10dp"
                 android:text="5년"/>
         </LinearLayout>
 
@@ -128,11 +132,22 @@
             android:id="@+id/chart"
             android:layout_width="match_parent"
             android:layout_height="300dp" />
-<!--        <TextView-->
-<!--            android:id="@+id/chartDetail_tv"-->
-<!--            android:textSize="30dp"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"/>-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/coNameKr_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17dp" />
+            <TextView
+                android:id="@+id/description"
+                android:textSize="13dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
 
     </LinearLayout>

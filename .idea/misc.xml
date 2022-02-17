@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/drawable/switch_track_off.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable/switch_track_on.xml" value="0.1835" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.11548913043478261" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.1" />
         <entry key="app/src/main/res/layout/custom_marker_view.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_account.xml" value="0.1" />

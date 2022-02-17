@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.util.Log.i
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -20,15 +21,18 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import kotlinx.coroutines.channels.ticker
+import org.json.JSONArray
 import org.techtown.stockking.R
 import org.techtown.stockking.R.layout.custom_marker_view
 import org.techtown.stockking.databinding.ActivityDetailBinding
-import org.techtown.stockking.model.StockList
+import org.techtown.stockking.model.StockDetailList
+import org.techtown.stockking.model.StockModel
+
 import org.techtown.stockking.network.ApiWrapper
 
 class DetailActivity : AppCompatActivity(){
     lateinit var binding: ActivityDetailBinding
-
+    private val TAG = this.javaClass.simpleName
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -36,39 +40,52 @@ class DetailActivity : AppCompatActivity(){
 
         val intent=intent
         val ticker= intent.getStringExtra("ticker").toString()
-        binding.tickerTv.text = ticker
-        binding.coNameKrTv.text = "테슬라"
-//        binding.coNameUsTv.text = intent.getStringExtra("coName")
-//        binding.priceTv.text = intent.getStringExtra("price")
-//        val percent = intent.getStringExtra("percent")
-//        if(percent?.substring(0,1)=="-"){
-//            binding.percentTv.setTextColor(Color.RED)
-//        }else{
-//            binding.percentTv.setTextColor(Color.BLUE)
-//        }
-//        binding.percentTv.text = percent
+        ApiWrapper.getCompanyInfo(ticker){
+            binding.tickerTv.text = it[0].symbol
+            binding.coNameUsTv.text=it[0].name
+            binding.coNameKrTv.text=it[0].kr_name
+            binding.description.text=it[0].kr_desc
+        }
+        binding.priceTv.text = intent.getStringExtra("price")
+        val percent = intent.getStringExtra("percent")
+        if(percent?.substring(0,1)=="-"){
+            binding.percentTv.setTextColor(Color.RED)
+        }else{
+            binding.percentTv.setTextColor(Color.BLUE)
+        }
+        binding.percentTv.text = percent
         binding.star.setOnClickListener {
             showPopup(ticker)
         }
         binding.backBtn.setOnClickListener{
             finish()
         }
+        binding.oneday.setOnClickListener{
+            ApiWrapper.getStockIntraday(ticker){
+                i(TAG,it.toString())
+            }
+        }
+
         ApiWrapper.getStockDetail(ticker) {
-            Log.i("SSS",it.toString())
+            binding.priceTv.text=it[it.size-1].high
             drawGraph(it)
         }
     }
-
-    private fun drawGraph(stockList : List<StockList>){
+    // : List<StockDetailList>
+    private fun drawGraph(stockList : List<StockDetailList>){
+    //private fun drawGraph(stockList : JSONArray){
         val lineChart: LineChart = binding.chart
 
         val dateList = mutableListOf<String>()
         val priceList = mutableListOf<String>()
 
         stockList.forEach { element ->
-            dateList.add(0,element.timestamp)
-            priceList.add(0,element.high)
+            dateList.add(element.timestamp)
+            priceList.add(element.high)
         }
+
+        i("SSS",dateList.toString())
+
 
         val entries = ArrayList<Entry>()
         for(i in 0 until priceList.size){

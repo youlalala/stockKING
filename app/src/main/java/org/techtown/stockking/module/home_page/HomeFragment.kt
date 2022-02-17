@@ -65,24 +65,6 @@ class HomeFragment : Fragment(){
             binding.transactionBtn.isSelected = true
         }
 
-        //임시
-        binding.tsla.setOnClickListener {
-            val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra("ticker","tsla")
-            startActivity(intent)
-        }
-        binding.aapl.setOnClickListener {
-            val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra("ticker","aapl")
-            startActivity(intent)
-        }
-        binding.goog.setOnClickListener {
-            val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra("ticker","goog")
-            startActivity(intent)
-        }
-
-
         ApiWrapper.getStockTopList() { it ->
             binding.recyclerView.adapter=GeneralTopListAdapter(it,onClickItem = {
 

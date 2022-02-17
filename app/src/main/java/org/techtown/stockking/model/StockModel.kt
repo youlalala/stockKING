@@ -1,12 +1,6 @@
 package org.techtown.stockking.model
 
-data class StockDetailModel (
-    var currentPage: String,
-    var symbolStart: String,
-    var contents: List<StockDetailList>
-)
-
-data class StockDetailList(
+data class StockModel (
     var symbol: String,
     var timestamp: String,
     var open: String,
@@ -14,4 +8,5 @@ data class StockDetailList(
     var low: String,
     var close: String,
     var volume: String
+
 )

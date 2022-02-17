@@ -68,38 +68,7 @@
 
             />
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/tsla"
-            android:backgroundTint="@drawable/button_selector_color"
-            android:background="@drawable/button_shape"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="3dp"
-            android:text="tsla" />
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/aapl"
-            android:backgroundTint="@drawable/button_selector_color"
-            android:background="@drawable/button_shape"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="3dp"
-            android:text="aapl" />
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/goog"
-            android:backgroundTint="@drawable/button_selector_color"
-            android:background="@drawable/button_shape"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="3dp"
-            android:text="goog" />
-    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="match_parent"
