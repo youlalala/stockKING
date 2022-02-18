@@ -1,32 +1,23 @@
-package org.techtown.stockking.module.common
+package org.techtown.stockking.module.common.detail_page
 
-import CustomMarkerView
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.util.Log.i
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.MarkerView
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import com.github.mikephil.charting.highlight.Highlight
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener
-import kotlinx.coroutines.channels.ticker
-import org.json.JSONArray
 import org.techtown.stockking.R
 import org.techtown.stockking.R.layout.custom_marker_view
 import org.techtown.stockking.databinding.ActivityDetailBinding
 import org.techtown.stockking.model.StockDetailList
-import org.techtown.stockking.model.StockModel
 
 import org.techtown.stockking.network.ApiWrapper
 
@@ -71,11 +62,9 @@ class DetailActivity : AppCompatActivity(){
             drawGraph(it)
         }
     }
-    // : List<StockDetailList>
-    private fun drawGraph(stockList : List<StockDetailList>){
-    //private fun drawGraph(stockList : JSONArray){
-        val lineChart: LineChart = binding.chart
 
+    fun drawGraph(stockList : List<StockDetailList>){
+        val lineChart: LineChart = binding.chart
         val dateList = mutableListOf<String>()
         val priceList = mutableListOf<String>()
 
@@ -84,7 +73,7 @@ class DetailActivity : AppCompatActivity(){
             priceList.add(element.high)
         }
 
-        i("SSS",dateList.toString())
+        Log.i("SSS", dateList.toString())
 
 
         val entries = ArrayList<Entry>()
@@ -94,7 +83,7 @@ class DetailActivity : AppCompatActivity(){
 
 
         val dataset= LineDataSet(entries, null)
-        dataset.color = resources.getColor(R.color.main_color)
+        dataset.color = getColor(R.color.main_color)
         dataset.setCircleColor(R.color.sub_color)
 
         val labels = ArrayList<String>()
@@ -106,7 +95,7 @@ class DetailActivity : AppCompatActivity(){
         val yAxisL=lineChart.axisLeft
         val yAxisR=lineChart.axisRight
 
-        lineChart.xAxis.valueFormatter=IndexAxisValueFormatter(labels)
+        lineChart.xAxis.valueFormatter= IndexAxisValueFormatter(labels)
         //description 지우기
         lineChart.description=null
         //x축 y축 숨기기
@@ -122,7 +111,7 @@ class DetailActivity : AppCompatActivity(){
         dataset.setDrawValues(false)
 
         //marker
-        val marker = CustomMarkerView(this, custom_marker_view,labels)
+        val marker = CustomMarkerView(this, R.layout.custom_marker_view,labels)
         lineChart.marker = marker
 
         lineChart.xAxis.position = XAxis.XAxisPosition.BOTTOM

@@ -1,3 +1,5 @@
+package org.techtown.stockking.module.common.detail_page
+
 import android.content.Context
 import android.graphics.Canvas
 import android.widget.TextView

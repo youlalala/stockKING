@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".module.common.DetailActivity"
+    tools:context=".module.common.detail_page.DetailActivity"
     android:orientation="vertical"
     android:paddingHorizontal="15dp"
     android:paddingTop="30dp">

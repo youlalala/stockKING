@@ -20,7 +20,7 @@
             android:name="com.google.android.actions"
             android:resource="@menu/bottom_navigation_item" />
 
-        <activity android:name=".module.common.DetailActivity" />
+        <activity android:name=".module.common.detail_page.DetailActivity" />
         <activity android:name=".module.common.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

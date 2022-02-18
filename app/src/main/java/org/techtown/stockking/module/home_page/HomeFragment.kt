@@ -2,45 +2,26 @@ package org.techtown.stockking.module.home_page
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import org.techtown.stockking.R
-import org.techtown.stockking.databinding.FragmentAccountBinding
 import org.techtown.stockking.databinding.FragmentHomeBinding
-import org.techtown.stockking.model.StockTopList
-import org.techtown.stockking.module.account_page.SettingActivity
-import org.techtown.stockking.module.common.DetailActivity
+import org.techtown.stockking.module.common.detail_page.DetailActivity
 import org.techtown.stockking.network.ApiWrapper
 
 
 class HomeFragment : Fragment(){
 
+    lateinit var binding: FragmentHomeBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        binding.textVersion.setOnClickListener {
-            if(binding.textVersion.text=="US"){
-                binding.textVersion.text="KR"
-                binding.textSwitch.isChecked= false
-            }else{
-                binding.textVersion.text="US"
-                binding.textSwitch.isChecked= true
-            }
-        }
-        binding.textSwitch.setOnClickListener{
-            if(binding.textSwitch.isChecked){
-                binding.textVersion.text="US"
-            }else{
-                binding.textVersion.text="KR"
-            }
-        }
+
         binding.detailTv.text = "실시간으로 사람들이 많이 검색하고 있는 주식 순위"
         binding.realtimeBtn.isSelected = true
         binding.updownBtn.isSelected = false
@@ -65,20 +46,42 @@ class HomeFragment : Fragment(){
             binding.transactionBtn.isSelected = true
         }
 
-        ApiWrapper.getStockTopList() { it ->
-            binding.recyclerView.adapter=GeneralTopListAdapter(it,onClickItem = {
+        topList("us")
+        binding.textSwitch.setOnClickListener{
+            if(binding.textSwitch.isChecked){
+                binding.textVersion.text="KR"
+                topList("kr")
+            }else{
+                binding.textVersion.text="US"
+                topList("us")
 
+            }
+        }
+//        binding.textVersion.setOnClickListener {
+//            if(binding.textVersion.text=="US"){
+//                binding.textVersion.text="KR"
+//                binding.textSwitch.isChecked= false
+//            }else{
+//                binding.textVersion.text="US"
+//                binding.textSwitch.isChecked= true
+//            }
+//        }
+
+        return binding.root
+    }
+
+    fun topList(version: String){
+        ApiWrapper.getStockTopList() { it ->
+            binding.recyclerView.adapter=GeneralTopListAdapter(it,version,onClickItem = {
                 val intent = Intent(context, DetailActivity::class.java)
                 intent.putExtra("ticker",it.title)
-                intent.putExtra("coName",it.company)
-                intent.putExtra("price",it.price)
                 intent.putExtra("percent",it.percent)
                 startActivity(intent)
             })
-
         }
-        return binding.root
+
     }
+
 
 }
 

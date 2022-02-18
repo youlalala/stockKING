@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.techtown.stockking.databinding.ItemRecyclerviewBinding
 import org.techtown.stockking.model.StockTopList
+import org.techtown.stockking.network.ApiWrapper
 
 class GeneralTopListAdapter(
     private val stockTopList: List<StockTopList>,
+    val version:String,
     val onClickItem: (stockTopList: StockTopList)-> Unit)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
@@ -24,8 +26,18 @@ class GeneralTopListAdapter(
         val binding=(holder as ViewHolder).binding
 
         binding.itemId.text = (position+1).toString()
-        binding.itemTicker.text = stockTopList[position].title
-        binding.itemConame.text =stockTopList[position].company
+        val ticker = stockTopList[position].title
+        binding.itemTicker.text = ticker
+
+        if(version=="us")
+            binding.itemConame.text =stockTopList[position].company
+        else{
+            ApiWrapper.getCompanyInfo(ticker){ it->
+                binding.itemConame.text = it[0].kr_name
+            }
+        }
+
+
         binding.itemPrice.text = stockTopList[position].price
 
         if(stockTopList[position].percent.substring(0,1)=="-"){
