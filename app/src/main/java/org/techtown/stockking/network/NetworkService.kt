@@ -13,7 +13,7 @@ import retrofit2.http.Query
 
 object NetWorkService{
     //private const val BASE_URL ="https://compact-haiku-335913.du.r.appspot.com/"
-    private const val BASE_URL2 ="http://172.30.1.42:8080"
+    private const val BASE_URL2 ="http://172.30.1.3:8080"
 //    private val retrofit: Retrofit = Retrofit.Builder()
 //            .baseUrl(BASE_URL)
 //            .addConverterFactory(GsonConverterFactory.create())
