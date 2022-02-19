@@ -41,11 +41,13 @@ class DetailActivity : AppCompatActivity(){
                     binding.coNameUsTv.text=NOINFOMATION
                     binding.coNameKrTv.text=NOINFOMATION
                     binding.description.text=NOINFOMATION
+                    binding.cap.text=NOINFOMATION
                 }else{
                     binding.tickerTv.text = it[0].symbol
                     binding.coNameUsTv.text=it[0].name
                     binding.coNameKrTv.text=it[0].kr_name
                     binding.description.text=it[0].kr_desc
+                    binding.cap.text=it[0].cap
                 }
             }
 

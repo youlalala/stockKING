@@ -53,12 +53,6 @@
                     android:layout_height="wrap_content"/>
             </LinearLayout>
 
-<!--            <TextView-->
-<!--                android:id="@+id/ticker_tv"-->
-<!--                android:textSize="13dp"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content" />-->
-
             <Button
                 android:id="@+id/star"
                 android:layout_width="40dp"
@@ -136,18 +130,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp">
             <TextView
                 android:id="@+id/coNameKr_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:textSize="17dp" />
             <TextView
                 android:id="@+id/description"
                 android:textSize="13dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:text="시가 총액"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textSize="15dp" />
+            <TextView
+                android:id="@+id/cap"
+                android:textSize="13dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
 
