@@ -1,7 +1,7 @@
 package org.techtown.stockking.model
 
 
-data class companyInfoModel (
+data class CompanyInfoModel (
     var symbol: String,
     var name: String,
     var kr_name: String,

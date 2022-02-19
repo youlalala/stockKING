@@ -10,7 +10,7 @@ import android.widget.Filter
 import kotlin.collections.ArrayList
 
 class SearchListAdapter(
-    private val stockTopList: List<StockTopList>,
+    val stockTopList: List<StockTopList>,
     val onClickItem: (stockTopList: StockTopList)-> Unit)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
@@ -23,7 +23,6 @@ class SearchListAdapter(
     override fun getItemCount(): Int{
         return filterList.size
     }
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder

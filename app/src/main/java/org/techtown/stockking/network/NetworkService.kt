@@ -1,9 +1,8 @@
 package org.techtown.stockking.network
 
-import org.techtown.stockking.model.StockDetailModel
 import org.techtown.stockking.model.StockModel
 import org.techtown.stockking.model.StockTopListModel
-import org.techtown.stockking.model.companyInfoModel
+import org.techtown.stockking.model.CompanyInfoModel
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -36,17 +35,15 @@ interface ApiInterface{
     @GET("company-info/{symbol}")
     fun companyInfo(
         @Path("symbol") arg:String
-    ): Call<List<companyInfoModel>>
+    ): Call<List<CompanyInfoModel>>
 
     @GET("intraday/{symbol}")
     fun stockIntraday(
         @Path("symbol") arg1:String,
     ): Call<List<StockModel>>
 
-    @GET("searchData/list/{symbol}")
-    fun stockDetail(
+    @GET("daily/full-data/{symbol}")
+    fun stockDaily(
         @Path("symbol") arg1:String,
-        @Query("offset") arg2:Int,
-        @Query("limit") arg3:Int
-    ): Call<StockDetailModel>
+    ): Call<List<StockModel>>
 }

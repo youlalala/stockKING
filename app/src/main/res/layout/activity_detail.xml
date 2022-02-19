@@ -5,15 +5,15 @@
     android:layout_height="match_parent"
     tools:context=".module.common.detail_page.DetailActivity"
     android:orientation="vertical"
-    android:paddingHorizontal="15dp"
-    android:paddingTop="30dp">
+    android:paddingHorizontal="16dp"
+    android:paddingTop="40dp">
 
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/back_btn"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
         android:scaleType="fitCenter"
         android:background="@android:color/transparent"
         android:src="@drawable/img_back"/>
@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="10dp">
+            android:paddingBottom="20dp">
 
             <TextView
                 android:id="@+id/price_tv"
@@ -83,38 +83,42 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/oneday"
+                android:id="@+id/one_day_btn"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:textSize="10dp"
                 android:text="1일"/>
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/one_week_btn"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:textSize="10dp"
                 android:text="1주"/>
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/one_month"
+                android:id="@+id/one_month_btn"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:textSize="10dp"
                 android:text="1개월"/>
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/three_month_btn"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:textSize="10dp"
                 android:text="3개월"/>
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/one_year_btn"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:textSize="10dp"
                 android:text="1년"/>
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/five_year_btn"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
