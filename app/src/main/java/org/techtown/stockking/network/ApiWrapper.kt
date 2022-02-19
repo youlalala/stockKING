@@ -8,7 +8,7 @@ import retrofit2.Response
 
 class ApiWrapper {
     companion object{
-        //?
+
         private val TAG = this.javaClass.simpleName
         fun getStockTopList(callback: (List<StockTopList>) -> Unit){
             val modelCall = NetWorkService.api2.stockTopList("realtime")
@@ -26,7 +26,6 @@ class ApiWrapper {
                 }
             })
         }
-
 
         fun getStockIntraday(symbol: String, callback: (List<StockModel>) -> Unit){
             val modelCall = NetWorkService.api2.stockIntraday(symbol)

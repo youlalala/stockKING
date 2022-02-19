@@ -20,10 +20,10 @@ class GeneralTopListAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
-            = ViewHolder(ItemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            = GeneralTopViewHolder(ItemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val binding=(holder as ViewHolder).binding
+        val binding=(holder as GeneralTopViewHolder).binding
 
         binding.itemId.text = (position+1).toString()
         val ticker = stockTopList[position].title
