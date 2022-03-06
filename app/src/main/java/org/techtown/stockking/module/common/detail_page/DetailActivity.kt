@@ -53,9 +53,9 @@ class DetailActivity : AppCompatActivity(){
         binding.priceTv.text = intent.getStringExtra("price")
         val percent = intent.getStringExtra("percent")
         if(percent?.substring(0,1)=="-"){
-            binding.percentTv.setTextColor(Color.RED)
-        }else{
             binding.percentTv.setTextColor(Color.BLUE)
+        }else{
+            binding.percentTv.setTextColor(Color.RED)
         }
         binding.percentTv.text = percent
         binding.star.setOnClickListener {

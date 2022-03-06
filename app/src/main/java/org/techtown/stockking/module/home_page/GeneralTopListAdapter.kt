@@ -41,9 +41,9 @@ class GeneralTopListAdapter(
         binding.itemPrice.text = stockTopList[position].price
 
         if(stockTopList[position].percent.substring(0,1)=="-"){
-            binding.itemPercent.setTextColor(Color.RED)
-        }else{
             binding.itemPercent.setTextColor(Color.BLUE)
+        }else{
+            binding.itemPercent.setTextColor(Color.RED)
         }
         binding.itemPercent.text = stockTopList[position].percent
 

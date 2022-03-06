@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/button_selector_color.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable/button_shape.xml" value="0.1835" />
+        <entry key="app/src/main/res/drawable/img_back.xml" value="0.2065" />
         <entry key="app/src/main/res/drawable/outline_account_circle_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/switch_thumb.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/switch_track_off.xml" value="0.1835" />
@@ -14,7 +15,7 @@
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.1" />
         <entry key="app/src/main/res/layout/custom_marker_view.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_account.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.22644927536231885" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.15163934426229508" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.22826086956521738" />
         <entry key="app/src/main/res/layout/item_recyclerview.xml" value="0.1393110435663627" />
         <entry key="app/src/main/res/layout/search_recyclerview.xml" value="0.1" />

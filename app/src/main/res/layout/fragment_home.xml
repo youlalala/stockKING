@@ -10,6 +10,7 @@
         android:orientation="horizontal">
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/realtime_btn"
+            android:textColor="@color/button_text_color"
             android:backgroundTint="@drawable/button_selector_color"
             android:background="@drawable/button_shape"
             android:layout_height="wrap_content"
@@ -19,6 +20,7 @@
             android:text="실시간" />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/updown_btn"
+            android:textColor="@color/button_text_color"
             android:backgroundTint="@drawable/button_selector_color"
             android:background="@drawable/button_shape"
             android:layout_height="wrap_content"
@@ -28,6 +30,7 @@
             android:text="등락율" />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/transaction_btn"
+            android:textColor="@color/button_text_color"
             android:backgroundTint="@drawable/button_selector_color"
             android:background="@drawable/button_shape"
             android:layout_height="wrap_content"
