@@ -108,7 +108,10 @@ class DetailActivity : AppCompatActivity(){
         val priceList = ArrayList<String>()
 
         stockList.forEach { element ->
-            dateList.add(element.timestamp)
+
+            val day=element.timestamp.subSequence(0,10).toString()
+            val time=element.timestamp.subSequence(11,16)
+            dateList.add(day+" "+time)
             priceList.add(element.high)
         }
 
