@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.util.Log.i
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -33,7 +34,6 @@ class DetailActivity : AppCompatActivity(){
         val ticker= intent.getStringExtra("ticker").toString()
 
             ApiWrapper.getCompanyInfo(ticker){
-                Log.i("hmm",it.toString())
                 if(it.isEmpty()){
                     binding.tickerTv.text = NOINFOMATION
                     binding.coNameUsTv.text=NOINFOMATION
@@ -46,8 +46,21 @@ class DetailActivity : AppCompatActivity(){
                     binding.coNameKrTv.text=it[0].kr_name
                     binding.description.text=it[0].kr_desc
                     binding.cap.text=it[0].cap
+
+                    //더보기
+                    i("SSS","maxline"+binding.description.lineCount)
+                    if(binding.description.lineCount>3){
+                        binding.description.maxLines=3
+                        binding.viewMore.visibility= View.VISIBLE
+                        binding.viewMore.setOnClickListener {
+                            binding.description.maxLines=binding.description.lineCount
+                            binding.viewMore.visibility= View.GONE
+                        }
+                    }
                 }
             }
+
+
 
 
         binding.priceTv.text = intent.getStringExtra("price")
@@ -92,7 +105,6 @@ class DetailActivity : AppCompatActivity(){
         val lineChart: LineChart = binding.chart
 
         val dateList = ArrayList<String>()
-        //val priceList = mutableListOf<String>()
         val priceList = ArrayList<String>()
 
         stockList.forEach { element ->

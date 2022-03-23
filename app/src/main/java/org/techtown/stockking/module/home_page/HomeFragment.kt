@@ -2,6 +2,7 @@ package org.techtown.stockking.module.home_page
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,6 +73,7 @@ class HomeFragment : Fragment(){
 
     fun topList(version: String){
         ApiWrapper.getStockTopList() { it ->
+            Log.i("la",it.toString())
             binding.recyclerView.adapter=GeneralTopListAdapter(it,version,onClickItem = {
                 val intent = Intent(context, DetailActivity::class.java)
                 intent.putExtra("ticker",it.title)
