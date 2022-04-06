@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".module.common.detail_page.DetailActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingHorizontal="16dp"
     android:paddingTop="40dp">
@@ -23,165 +23,177 @@
         android:id="@+id/main_scroll"
         android:layout_weight="1"
         android:fillViewport="true" >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingHorizontal="5dp">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingBottom="5dp"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/ticker_tv"
-                    android:text="한국어회사이름"
-                    android:textSize="23dp"
-                    android:textStyle="bold"
-                    android:paddingRight="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:id="@+id/coNameUs_tv"
-                    android:text="영어회사이름"
-                    android:textSize="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/star"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/img_star_border" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="20dp">
-
-            <TextView
-                android:id="@+id/price_tv"
-                android:textSize="20dp"
-                android:paddingRight="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/percent_tv"
-                android:textSize="13dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/one_day_btn"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:textSize="10dp"
-                android:text="1일"/>
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/one_week_btn"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:textSize="10dp"
-                android:text="1주"/>
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/one_month_btn"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:textSize="10dp"
-                android:text="1개월"/>
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/three_month_btn"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:textSize="10dp"
-                android:text="3개월"/>
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/one_year_btn"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:textSize="10dp"
-                android:text="1년"/>
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/five_year_btn"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:textSize="10dp"
-                android:text="5년"/>
-        </LinearLayout>
-
-
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/chart"
-            android:layout_width="match_parent"
-            android:layout_height="300dp" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginBottom="10dp">
-            <TextView
-                android:id="@+id/coNameKr_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:textSize="17dp" />
-            <TextView
-                android:id="@+id/description"
-                android:textSize="13dp"
+            android:paddingHorizontal="5dp">
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/view_more"
-                android:textColor="@color/main_color"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="..More"
-                android:visibility="gone"
-                />
+                android:paddingBottom="5dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingBottom="5dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/ticker_tv"
+                        android:text="한국어회사이름"
+                        android:textSize="23dp"
+                        android:textStyle="bold"
+                        android:paddingRight="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/coNameUs_tv"
+                        android:text="영어회사이름"
+                        android:textSize="15dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/star"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/img_star_border" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="20dp">
+
+                <TextView
+                    android:id="@+id/price_tv"
+                    android:textSize="20dp"
+                    android:paddingRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/percent_tv"
+                    android:textSize="13dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/one_day_btn"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="10dp"
+                    android:text="1일"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/one_week_btn"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="10dp"
+                    android:text="1주"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/one_month_btn"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="10dp"
+                    android:text="1개월"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/three_month_btn"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="10dp"
+                    android:text="3개월"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/one_year_btn"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="10dp"
+                    android:text="1년"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/five_year_btn"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="10dp"
+                    android:text="5년"/>
+            </LinearLayout>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/line_chart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
+            <com.github.mikephil.charting.charts.CandleStickChart
+                android:id="@+id/candlestick_chart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/chart_btn"
+                android:layout_gravity="right"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="10dp"
+                android:text="line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="10dp">
+                <TextView
+                    android:id="@+id/coNameKr_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="17dp" />
+                <TextView
+                    android:id="@+id/description"
+                    android:textSize="13dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/view_more"
+                    android:textColor="@color/main_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..More"
+                    android:visibility="gone"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:text="시가 총액"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="15dp" />
+                <TextView
+                    android:id="@+id/cap"
+                    android:textSize="13dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:text="시가 총액"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:textSize="15dp" />
-            <TextView
-                android:id="@+id/cap"
-                android:textSize="13dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-
-    </LinearLayout>
 
     </ScrollView>
 

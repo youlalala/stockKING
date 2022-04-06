@@ -2,6 +2,9 @@ package org.techtown.stockking.module.common.detail_page
 
 import android.content.DialogInterface
 import android.graphics.Color
+import android.graphics.Color.green
+import android.graphics.Color.red
+import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.util.Log.i
@@ -11,9 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import org.techtown.stockking.R
 import org.techtown.stockking.databinding.ActivityDetailBinding
@@ -78,37 +79,53 @@ class DetailActivity : AppCompatActivity(){
             finish()
         }
 
+
+
         ApiWrapper.getStockIntraday(ticker){
             binding.priceTv.text=it[it.size-1].high
-            drawGraph(it)
+            drawLineChart(it)
+            drawCandleChart(it)
         }
+//        var chart= "line"
+//        binding.chartBtn.setOnClickListener{
+//            if (chart == "line"){
+//
+//            }else{
+//                ApiWrapper.getStockIntraday(ticker){
+//                    drawLineChart(it)
+//                }
+//                chart = "line"
+//            }
+//        }
 
         //한달 그래프
         binding.oneMonthBtn.setOnClickListener{
             ApiWrapper.getStockIntraday(ticker){
                 binding.priceTv.text=it[it.size-1].high
-                drawGraph(it)
+                drawLineChart(it)
             }
         }
         //3달 그래프
         binding.threeMonthBtn.setOnClickListener{
             ApiWrapper.getStockDaily(ticker){
                 binding.priceTv.text=it[it.size-1].high
-                drawGraph(it)
+                drawLineChart(it)
             }
         }
 
 
+
+
     }
 
-    fun drawGraph(stockList : List<StockModel>){
-        val lineChart: LineChart = binding.chart
+    fun drawLineChart(stockList : List<StockModel>){
+        val lineChart = binding.lineChart
 
         val dateList = ArrayList<String>()
         val priceList = ArrayList<String>()
 
-        stockList.forEach { element ->
 
+        stockList.forEach { element ->
             val day=element.timestamp.subSequence(0,10).toString()
             val time=element.timestamp.subSequence(11,16)
             dateList.add(day+" "+time)
@@ -155,6 +172,60 @@ class DetailActivity : AppCompatActivity(){
         lineChart.data = data
         lineChart.legend.isEnabled=false
         lineChart.invalidate()
+    }
+
+    fun drawCandleChart(stockList : List<StockModel>){
+        val candleChart = binding.candlestickChart
+
+        val dateList = ArrayList<String>()
+        val priceList = ArrayList<String>()
+
+        val entries = ArrayList<CandleEntry>()
+        for(i in 0..30){
+            entries.add(CandleEntry(
+                i.toFloat(),
+                stockList[i].high.toFloat(),
+                stockList[i].low.toFloat(),
+                stockList[i].open.toFloat(),
+                stockList[i].close.toFloat()
+            ))
+        }
+        i("SSS","candle"+entries[3])
+
+
+//        stockList.forEach { element ->
+//            val day=element.timestamp.subSequence(0,10).toString()
+//            val time=element.timestamp.subSequence(11,16)
+//            dateList.add(day+" "+time)
+//            priceList.add(element.high)
+//        }
+//
+//        //entry
+//        val entries = ArrayList<Entry>()
+//        for(i in 0 until priceList.size){
+//            entries.add(Entry(i.toFloat(), priceList[i].toFloat()))
+//        }
+
+        val dataset= CandleDataSet(entries, null).apply{
+            // 심지 부분
+            shadowColor = Color.LTGRAY
+            shadowWidth = 0.1F
+
+            // 음봄
+            decreasingColor = Color.BLUE
+            decreasingPaintStyle = Paint.Style.FILL
+            // 양봉
+            increasingColor = Color.RED
+            increasingPaintStyle = Paint.Style.FILL
+
+            neutralColor = Color.DKGRAY
+            // 터치시 노란 선 제거
+            highLightColor = Color.TRANSPARENT
+        }
+
+        candleChart.data=CandleData(dataset)
+
+
     }
 
 

@@ -1,6 +1,8 @@
 package org.techtown.stockking.module.search_page
 
 
+import android.content.Context
+import android.graphics.drawable.PictureDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +13,7 @@ import kotlin.collections.ArrayList
 
 class SearchListAdapter(
     val stockTopList: List<StockTopList>,
+    val context : SearchFragment,
     val onClickItem: (stockTopList: StockTopList)-> Unit)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
@@ -36,6 +39,20 @@ class SearchListAdapter(
 
 
         binding.itemConame.text =filterList[position].company
+
+//        //SVG string content
+//        val svgString = filterList[position].img
+//
+//        //convert SVG string to an object of type SVG
+//        val svg = SVG.getFromString(svgString)
+//
+//        //create a drawable from svg
+//        val drawable = PictureDrawable(svg.renderToPicture())
+//
+//        //finally load the drawable with Glide.
+//        Glide.with(context)
+//            .load(drawable)
+//            .into(binding.testImg)
 
 
         holder.itemView.setOnClickListener{

@@ -1,5 +1,6 @@
 package org.techtown.stockking.module.search_page
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log.i
@@ -27,7 +28,7 @@ class SearchFragment : Fragment() {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
 
         ApiWrapper.getStockTopList() { it ->
-            adapter= SearchListAdapter(it,onClickItem = {
+            adapter= SearchListAdapter(it,this,onClickItem = {
                 val intent = Intent(context, DetailActivity::class.java)
                 intent.putExtra("ticker",it.title)
                 intent.putExtra("percent",it.percent)
