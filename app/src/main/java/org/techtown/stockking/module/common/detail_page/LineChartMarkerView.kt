@@ -10,7 +10,7 @@ import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.utils.MPPointF
 import org.techtown.stockking.R
 
-class CustomMarkerView(
+class LineChartMarkerView(
     context: Context,
     layout: Int,
     private val labels: ArrayList<String>

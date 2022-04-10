@@ -2,17 +2,13 @@ package org.techtown.stockking.module.common.detail_page
 
 import android.content.DialogInterface
 import android.graphics.Color
-import android.graphics.Color.green
-import android.graphics.Color.red
 import android.graphics.Paint
 import android.os.Bundle
-import android.util.Log
 import android.util.Log.i
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
@@ -86,17 +82,18 @@ class DetailActivity : AppCompatActivity(){
             drawLineChart(it)
             drawCandleChart(it)
         }
-//        var chart= "line"
-//        binding.chartBtn.setOnClickListener{
-//            if (chart == "line"){
-//
-//            }else{
-//                ApiWrapper.getStockIntraday(ticker){
-//                    drawLineChart(it)
-//                }
-//                chart = "line"
-//            }
-//        }
+
+        binding.chartBtn.setOnClickListener{
+            if (binding.chartBtn.text == "line"){
+                binding.lineChart.visibility=View.GONE
+                binding.candlestickChart.visibility=View.VISIBLE
+                binding.chartBtn.text = "candle"
+            }else{
+                binding.lineChart.visibility=View.VISIBLE
+                binding.candlestickChart.visibility=View.GONE
+                binding.chartBtn.text = "line"
+            }
+        }
 
         //한달 그래프
         binding.oneMonthBtn.setOnClickListener{
@@ -163,7 +160,7 @@ class DetailActivity : AppCompatActivity(){
         dataset.setDrawValues(false)
 
         //marker
-        val marker = CustomMarkerView(this, R.layout.custom_marker_view,dateList)
+        val marker = LineChartMarkerView(this, R.layout.linechart_marker_view,dateList)
         lineChart.marker = marker
 
         lineChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
@@ -178,10 +175,11 @@ class DetailActivity : AppCompatActivity(){
         val candleChart = binding.candlestickChart
 
         val dateList = ArrayList<String>()
-        val priceList = ArrayList<String>()
-
         val entries = ArrayList<CandleEntry>()
         for(i in 0..30){
+            val day=stockList[i].timestamp.subSequence(0,10).toString()
+            val time=stockList[i].timestamp.subSequence(11,16)
+            dateList.add(day+" "+time)
             entries.add(CandleEntry(
                 i.toFloat(),
                 stockList[i].high.toFloat(),
@@ -192,19 +190,6 @@ class DetailActivity : AppCompatActivity(){
         }
         i("SSS","candle"+entries[3])
 
-
-//        stockList.forEach { element ->
-//            val day=element.timestamp.subSequence(0,10).toString()
-//            val time=element.timestamp.subSequence(11,16)
-//            dateList.add(day+" "+time)
-//            priceList.add(element.high)
-//        }
-//
-//        //entry
-//        val entries = ArrayList<Entry>()
-//        for(i in 0 until priceList.size){
-//            entries.add(Entry(i.toFloat(), priceList[i].toFloat()))
-//        }
 
         val dataset= CandleDataSet(entries, null).apply{
             // 심지 부분
@@ -220,9 +205,25 @@ class DetailActivity : AppCompatActivity(){
 
             neutralColor = Color.DKGRAY
             // 터치시 노란 선 제거
-            highLightColor = Color.TRANSPARENT
+            //highLightColor = Color.TRANSPARENT
         }
+        val xAxis=candleChart.xAxis
+        val yAxisL=candleChart.axisLeft
+        val yAxisR=candleChart.axisRight
+        //description 지우기
+        candleChart.description=null
+        //x축 y축 숨기기
+        xAxis.isEnabled=false
+        yAxisR.isEnabled=false
+        //데이터 값 표시 X
+        dataset.setDrawValues(false)
+        //marker
+        val marker = CandleChartMarkerView(this, R.layout.candlechart_marker_view,dateList,entries)
+        candleChart.marker = marker
 
+        candleChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+
+        candleChart.legend.isEnabled=false
         candleChart.data=CandleData(dataset)
 
 
