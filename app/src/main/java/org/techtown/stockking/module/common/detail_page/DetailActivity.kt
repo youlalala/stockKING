@@ -20,7 +20,6 @@ import org.techtown.stockking.network.ApiWrapper
 
 class DetailActivity : AppCompatActivity(){
     lateinit var binding: ActivityDetailBinding
-    private val TAG = this.javaClass.simpleName
     private val NOINFOMATION = "정보 없음"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
