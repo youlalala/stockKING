@@ -11,9 +11,10 @@
         android:orientation="horizontal"
         android:layout_marginTop="50dp">
         <TextView
+            android:id="@+id/user_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="OOO 님"
+            android:text="로그인 하세요"
             android:textSize="30dp"/>
         <TextView
             android:id="@+id/setting_tv"

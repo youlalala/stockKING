@@ -12,6 +12,11 @@
         android:gravity="center"
         android:padding="8dp"
         android:layout_margin="10dp">
+        <ImageView
+            android:id="@+id/test_img"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"/>
         <TextView
             android:id="@+id/item_ticker"
             android:layout_weight="3"

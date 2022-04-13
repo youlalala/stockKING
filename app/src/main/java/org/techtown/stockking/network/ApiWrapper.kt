@@ -1,5 +1,6 @@
 package org.techtown.stockking.network
 
+import android.util.Log
 import android.util.Log.i
 import org.techtown.stockking.model.*
 import retrofit2.Call
@@ -77,6 +78,38 @@ class ApiWrapper {
                 }
             })
         }
+
+//        fun getImg(symbol: String, callback: (Response<String>) -> Unit){
+//            val call = NetWorkService.api2.companyimg()
+//            call.enqueue(object : Callback<List<CompanyInfoModel>> {
+//                override fun onResponse(call: Call<Response<String>>, response: Response<Response<String>>) {
+//                    val list = response.body()
+//                    i(TAG,"companyinfo response")
+//                    i(TAG,list.toString())
+//                    list?.let{
+//                        callback.invoke(it)
+//                    }
+//                }
+//                override fun onFailure(call: Call<Response<String>>, t: Throwable) {
+//                    i(TAG,"companyinfo fail")
+//                    call.cancel()
+//                }
+//            })
+//        }
+    fun postToken(userData: UserModel , onResult: (UserModel?)->Unit){
+        val modelCall = NetWorkService.api2.requestLogin(userData)
+        modelCall.enqueue(object : Callback<UserModel> {
+            override fun onResponse(call: Call<UserModel>, response: Response<UserModel>
+            ) {
+                onResult(response.body())
+            }
+
+            override fun onFailure(call: Call<UserModel>, t: Throwable) {
+                Log.i("sss","cancel : "+"t:"+t)
+                modelCall.cancel()
+            }
+        })
+    }
 
     }
 

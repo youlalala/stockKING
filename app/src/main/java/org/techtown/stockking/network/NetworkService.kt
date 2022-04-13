@@ -3,16 +3,16 @@ package org.techtown.stockking.network
 import org.techtown.stockking.model.StockModel
 import org.techtown.stockking.model.StockTopListModel
 import org.techtown.stockking.model.CompanyInfoModel
+import org.techtown.stockking.model.UserModel
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 object NetWorkService{
     //private const val BASE_URL ="https://compact-haiku-335913.du.r.appspot.com/"
-    private const val BASE_URL2 ="http://172.30.1.39:8080"
+    private const val BASE_URL2 ="http://172.30.1.37:8080"
 //    private val retrofit: Retrofit = Retrofit.Builder()
 //            .baseUrl(BASE_URL)
 //            .addConverterFactory(GsonConverterFactory.create())
@@ -46,4 +46,12 @@ interface ApiInterface{
     fun stockDaily(
         @Path("symbol") arg1:String,
     ): Call<List<StockModel>>
+
+    @GET("sendimg")
+    fun companyimg(): Response<String>
+
+    @POST("login")
+    fun requestLogin(
+        @Body userData: UserModel
+    ): Call<UserModel>
 }
