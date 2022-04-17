@@ -9,10 +9,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import org.techtown.stockking.R
+import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.databinding.ActivityDetailBinding
 import org.techtown.stockking.model.StockModel
 
@@ -231,7 +233,7 @@ class DetailActivity : AppCompatActivity(){
 
     private fun showPopup(ticker: String){
         val alertDialog : AlertDialog
-        val msg = "XXX 님의 즐겨찾기에 $ticker 를 추가합니다."
+        val msg = MySharedPreferences.getUserName(this)+" 님의 즐겨찾기에 $ticker 를 추가합니다."
         val btnOK = "OK"
         val btnNO = "cancel"
         val builder = AlertDialog.Builder(this)
