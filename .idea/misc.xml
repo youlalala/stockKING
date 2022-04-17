@@ -22,7 +22,7 @@
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.1" />
         <entry key="app/src/main/res/layout/candlechart_marker_view.xml" value="0.9" />
         <entry key="app/src/main/res/layout/custom_marker_view.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/fragment_account.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_account.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.15163934426229508" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.22826086956521738" />
         <entry key="app/src/main/res/layout/item_recyclerview.xml" value="0.1393110435663627" />
