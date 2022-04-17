@@ -4,6 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.tasks.OnCompleteListener
 import com.kakao.sdk.user.UserApiClient
 import org.techtown.stockking.R
 import org.techtown.stockking.common.MySharedPreferences
@@ -24,6 +27,8 @@ class SettingActivity : AppCompatActivity() {
         binding.logoutBtn.setOnClickListener {
             if (MySharedPreferences.getMethod(this) == "kakao") {
                 kakaoLogout()
+            }else if(MySharedPreferences.getMethod(this) == "google"){
+                googleLogout()
             }
         }
     }
@@ -39,5 +44,23 @@ class SettingActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+    }
+    private fun googleLogout(){
+        // 구글 로그아웃을 위해 로그인 세션 가져오기
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.server_client_id))
+            .requestEmail()
+            .build()
+        val googleSignInClient = GoogleSignIn.getClient(this, gso)
+
+        //preference clear
+        MySharedPreferences.clearPreference(this)
+
+        googleSignInClient.signOut()
+            .addOnCompleteListener(this, OnCompleteListener<Void?> {
+                val intent= Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            })
     }
 }

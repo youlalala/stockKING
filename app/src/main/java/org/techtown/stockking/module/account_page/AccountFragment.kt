@@ -11,7 +11,6 @@ import org.techtown.stockking.databinding.FragmentAccountBinding
 
 class AccountFragment : Fragment() {
 
-//    lateinit var binding: FragmentAccountBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

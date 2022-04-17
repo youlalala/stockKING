@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import org.techtown.stockking.R
@@ -27,7 +28,16 @@ class MainActivity : AppCompatActivity() {
         val token = MySharedPreferences.getToken(this)
 
         if (method == "kakao") {
-            ApiWrapper.postToken(UserModel(token=token)){}
+            val userInfo = UserModel(
+                method = "kakao",
+                token= MySharedPreferences.getToken(this)
+            )
+
+            Log.i("sss","userInfo : "+userInfo)
+
+            ApiWrapper.postToken(userInfo){
+                Log.i("sss","it!!!"+it.toString())
+            }
 
             //response 받아오기 :
 
@@ -51,6 +61,14 @@ class MainActivity : AppCompatActivity() {
                         MySharedPreferences.setUserName(this,user.kakaoAccount?.profile?.nickname.toString())
                     }
                 }
+            }
+        }else if(method == "google"){
+            //response 받아오기 :
+
+            //일단 없으니까 내가 .. 가져오기
+            val acct = GoogleSignIn.getLastSignedInAccount(this)
+            if(acct != null) {
+                MySharedPreferences.setUserName(this,acct?.givenName.toString())
             }
         }else {
             val intent = Intent(this, LoginActivity::class.java)
