@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
+import android.util.Log
 import android.util.Log.i
 import android.view.View
 import android.widget.Toast
@@ -69,8 +70,14 @@ class DetailActivity : AppCompatActivity(){
             binding.percentTv.setTextColor(Color.RED)
         }
         binding.percentTv.text = percent
+
         binding.star.setOnClickListener {
-            showPopup(ticker)
+
+            if(binding.star.isSelected){
+                binding.star.isSelected = false
+            } else{
+                binding.star.isSelected = true
+            }
         }
         binding.backBtn.setOnClickListener{
             finish()
@@ -228,27 +235,6 @@ class DetailActivity : AppCompatActivity(){
         candleChart.data=CandleData(dataset)
 
 
-    }
-
-
-    private fun showPopup(ticker: String){
-        val alertDialog : AlertDialog
-        val msg = MySharedPreferences.getUserName(this)+" 님의 즐겨찾기에 $ticker 를 추가합니다."
-        val btnOK = "OK"
-        val btnNO = "cancel"
-        val builder = AlertDialog.Builder(this)
-        builder.setMessage(msg) //팝업창 내용 지정
-        builder.setCancelable(false) //외부 레이아웃 클릭시도 팝업창이 사라지지않게 설정
-        builder.setPositiveButton(btnOK, DialogInterface.OnClickListener { dialog, which ->
-            Toast.makeText(application, btnOK, Toast.LENGTH_SHORT).show()
-            binding.star.setBackgroundResource(R.drawable.img_star_full)
-        })
-        builder.setNegativeButton(btnNO, DialogInterface.OnClickListener { dialog, which ->
-            Toast.makeText(application, btnNO, Toast.LENGTH_SHORT).show()
-            binding.star.setBackgroundResource(R.drawable.img_star_border)
-        })
-        alertDialog = builder.create()
-        alertDialog.show()
     }
 }
 
