@@ -1,22 +1,22 @@
 package org.techtown.stockking.module.common.detail_page
 
+import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
+import android.os.Vibrator
 import android.util.Log
 import android.util.Log.i
 import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import org.techtown.stockking.R
 import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.databinding.ActivityDetailBinding
+import org.techtown.stockking.model.BookmarkModel
 import org.techtown.stockking.model.StockModel
 
 import org.techtown.stockking.network.ApiWrapper
@@ -32,32 +32,43 @@ class DetailActivity : AppCompatActivity(){
         val intent=intent
         val ticker= intent.getStringExtra("ticker").toString()
 
-            ApiWrapper.getCompanyInfo(ticker){
-                if(it.isEmpty()){
-                    binding.tickerTv.text = NOINFOMATION
-                    binding.coNameUsTv.text=NOINFOMATION
-                    binding.coNameKrTv.text=NOINFOMATION
-                    binding.description.text=NOINFOMATION
-                    binding.cap.text=NOINFOMATION
-                }else{
-                    binding.tickerTv.text = it[0].symbol
-                    binding.coNameUsTv.text=it[0].name
-                    binding.coNameKrTv.text=it[0].kr_name
-                    binding.description.text=it[0].kr_desc
-                    binding.cap.text=it[0].cap
+        //즐겨찾기 확인
+        ApiWrapper.getBookmark(MySharedPreferences.getToken(this)){
+            i("SSS","test it"+it)
+            for(i in it.indices){
+                if(it[i].symbol==ticker){
+                    binding.star.isSelected = true
+                }
+            }
+        }
 
-                    //더보기
-                    i("SSS","maxline"+binding.description.lineCount)
-                    if(binding.description.lineCount>3){
-                        binding.description.maxLines=3
-                        binding.viewMore.visibility= View.VISIBLE
-                        binding.viewMore.setOnClickListener {
-                            binding.description.maxLines=binding.description.lineCount
-                            binding.viewMore.visibility= View.GONE
-                        }
+        //회사 정보 입력
+        ApiWrapper.getCompanyInfo(ticker){
+            if(it.isEmpty()){
+                binding.tickerTv.text = NOINFOMATION
+                binding.coNameUsTv.text=NOINFOMATION
+                binding.coNameKrTv.text=NOINFOMATION
+                binding.description.text=NOINFOMATION
+                binding.cap.text=NOINFOMATION
+            }else{
+                binding.tickerTv.text = it[0].symbol
+                binding.coNameUsTv.text=it[0].name
+                binding.coNameKrTv.text=it[0].kr_name
+                binding.description.text=it[0].kr_desc
+                binding.cap.text=it[0].cap
+
+                //더보기
+                i("SSS","maxline"+binding.description.lineCount)
+                if(binding.description.lineCount>3){
+                    binding.description.maxLines=3
+                    binding.viewMore.visibility= View.VISIBLE
+                    binding.viewMore.setOnClickListener {
+                        binding.description.maxLines=binding.description.lineCount
+                        binding.viewMore.visibility= View.GONE
                     }
                 }
             }
+        }
 
 
 
@@ -74,8 +85,22 @@ class DetailActivity : AppCompatActivity(){
         binding.star.setOnClickListener {
 
             if(binding.star.isSelected){
+                ApiWrapper.postBookmark(
+                    BookmarkModel(
+                        token = MySharedPreferences.getToken(this),
+                        request = "delete",
+                        symbol = ticker)
+                ){}
                 binding.star.isSelected = false
             } else{
+                val vibrator = getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+                vibrator.vibrate(80)
+                ApiWrapper.postBookmark(
+                    BookmarkModel(
+                        token = MySharedPreferences.getToken(this),
+                        request = "add",
+                        symbol = ticker)
+                ){}
                 binding.star.isSelected = true
             }
         }

@@ -1,9 +1,6 @@
 package org.techtown.stockking.network
 
-import org.techtown.stockking.model.StockModel
-import org.techtown.stockking.model.StockTopListModel
-import org.techtown.stockking.model.CompanyInfoModel
-import org.techtown.stockking.model.UserModel
+import org.techtown.stockking.model.*
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -47,11 +44,21 @@ interface ApiInterface{
         @Path("symbol") arg1:String,
     ): Call<List<StockModel>>
 
-    @GET("sendimg")
-    fun companyimg(): Response<String>
+//    @GET("sendimg")
+//    fun companyimg(): Response<String>
 
     @POST("login")
     fun requestLogin(
         @Body userData: UserModel
     ): Call<UserModel>
+
+    @POST("bookmark")
+    fun requestBookmark(
+        @Body bookmarkData: BookmarkModel
+    ): Call<BookmarkModel>
+
+    @GET("bookmarkpersonal/{token}")
+    fun bookMarkPersonalList(
+        @Path("token") arg1:String,
+    ): Call<List<BookMarkPersonalModel>>
 }

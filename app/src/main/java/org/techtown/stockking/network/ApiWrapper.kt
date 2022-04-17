@@ -96,20 +96,49 @@ class ApiWrapper {
 //                }
 //            })
 //        }
-    fun postToken(userData: UserModel , onResult: (UserModel?)->Unit){
-        val modelCall = NetWorkService.api2.requestLogin(userData)
-        modelCall.enqueue(object : Callback<UserModel> {
-            override fun onResponse(call: Call<UserModel>, response: Response<UserModel>
-            ) {
-                onResult(response.body())
-            }
+        fun postToken(userData: UserModel , onResult: (UserModel?)->Unit){
+            val modelCall = NetWorkService.api2.requestLogin(userData)
+            modelCall.enqueue(object : Callback<UserModel> {
+                override fun onResponse(call: Call<UserModel>, response: Response<UserModel>
+                ) {
+                    onResult(response.body())
+                }
 
-            override fun onFailure(call: Call<UserModel>, t: Throwable) {
-                Log.i("sss","cancel : "+"t:"+t)
-                modelCall.cancel()
-            }
-        })
-    }
+                override fun onFailure(call: Call<UserModel>, t: Throwable) {
+                    Log.i("sss","cancel : "+"t:"+t)
+                    modelCall.cancel()
+                }
+            })
+        }
+
+        fun postBookmark(bookmarkData: BookmarkModel , onResult: (BookmarkModel?)->Unit){
+            val modelCall = NetWorkService.api2.requestBookmark(bookmarkData)
+            modelCall.enqueue(object : Callback<BookmarkModel> {
+                override fun onResponse(call: Call<BookmarkModel>, response: Response<BookmarkModel>
+                ) {
+                    onResult(response.body())
+                }
+                override fun onFailure(call: Call<BookmarkModel>, t: Throwable) {
+                    Log.i("sss","cancel : "+"t:"+t)
+                    modelCall.cancel()
+                }
+            })
+        }
+        fun getBookmark(token: String, callback: (List<BookMarkPersonalModel>) -> Unit){
+            val modelCall = NetWorkService.api2.bookMarkPersonalList(token)
+            modelCall.enqueue(object : Callback<List<BookMarkPersonalModel>> {
+                override fun onResponse(call: Call<List<BookMarkPersonalModel>>, response: Response<List<BookMarkPersonalModel>>) {
+                    val data = response.body()
+                    data?.let {
+                        callback.invoke(it)
+                    }
+                }
+                override fun onFailure(call: Call<List<BookMarkPersonalModel>>, t: Throwable) {
+                    i(TAG,"intraday stock fail")
+                    modelCall.cancel()
+                }
+            })
+        }
 
     }
 
