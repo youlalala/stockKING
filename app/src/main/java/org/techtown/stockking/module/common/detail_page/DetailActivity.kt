@@ -1,12 +1,10 @@
 package org.techtown.stockking.module.common.detail_page
 
 import android.content.Context
-import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
 import android.os.Vibrator
-import android.util.Log
 import android.util.Log.i
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +16,7 @@ import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.databinding.ActivityDetailBinding
 import org.techtown.stockking.model.BookmarkModel
 import org.techtown.stockking.model.StockModel
+import org.techtown.stockking.model.StockModel2
 
 import org.techtown.stockking.network.ApiWrapper
 
@@ -49,13 +48,13 @@ class DetailActivity : AppCompatActivity(){
                 binding.coNameUsTv.text=NOINFOMATION
                 binding.coNameKrTv.text=NOINFOMATION
                 binding.description.text=NOINFOMATION
-                binding.cap.text=NOINFOMATION
+                binding.shareout.text=NOINFOMATION
             }else{
                 binding.tickerTv.text = it[0].symbol
-                binding.coNameUsTv.text=it[0].name
-                binding.coNameKrTv.text=it[0].kr_name
-                binding.description.text=it[0].kr_desc
-                binding.cap.text=it[0].cap
+                binding.coNameUsTv.text=it[0].name_en
+                binding.coNameKrTv.text=it[0].name_kr
+                binding.description.text=it[0].desc_kr
+                binding.shareout.text=it[0].shareout
 
                 //더보기
                 i("SSS","maxline"+binding.description.lineCount)
@@ -110,11 +109,6 @@ class DetailActivity : AppCompatActivity(){
 
 
 
-        ApiWrapper.getStockIntraday(ticker){
-            binding.priceTv.text=it[it.size-1].high
-            drawLineChart(it)
-            drawCandleChart(it)
-        }
 
         binding.chartBtn.setOnClickListener{
             if (binding.chartBtn.text == "line"){
@@ -128,37 +122,115 @@ class DetailActivity : AppCompatActivity(){
             }
         }
 
-        //한달 그래프
-        binding.oneMonthBtn.setOnClickListener{
-            ApiWrapper.getStockIntraday(ticker){
-                binding.priceTv.text=it[it.size-1].high
-                drawLineChart(it)
-            }
+        ApiWrapper.getStockDaily(ticker){
+            binding.priceTv.text=it[it.size-1].high
+            drawLineChart(it)
         }
-        //3달 그래프
-        binding.threeMonthBtn.setOnClickListener{
+        //1일 그래프
+        binding.oneDayBtn.setOnClickListener{
             ApiWrapper.getStockDaily(ticker){
                 binding.priceTv.text=it[it.size-1].high
                 drawLineChart(it)
             }
         }
+        //1주 그래프
+        binding.oneWeekBtn.setOnClickListener{
+            ApiWrapper.getStockWeekly(ticker){
+                binding.priceTv.text=it[it.size-1].high
+                drawLineChart(it)
+            }
+        }
+        //1달 그래프
+        binding.oneMonthBtn.setOnClickListener{
+            ApiWrapper.getStockMonthly(ticker){
+                binding.priceTv.text=it[it.size-1].high
+                drawLineChart2(it)
+            }
+        }
+        //3달 그래프
+        binding.threeMonthBtn.setOnClickListener{
+            ApiWrapper.getStock3Monthly(ticker){
+                binding.priceTv.text=it[it.size-1].high
+                drawLineChart2(it)
+            }
+        }
+        //1년 그래프
+        binding.oneYearBtn.setOnClickListener{
+            ApiWrapper.getStockYearly(ticker){
+                binding.priceTv.text=it[it.size-1].high
+                drawLineChart2(it)
+            }
+        }
+
 
 
 
 
     }
 
-    fun drawLineChart(stockList : List<StockModel>){
+    fun drawLineChart(stockList: List<StockModel>){
         val lineChart = binding.lineChart
 
         val dateList = ArrayList<String>()
         val priceList = ArrayList<String>()
 
+        stockList.forEach { element ->
+            val day=element.datetime.subSequence(0,10).toString()
+            val time=element.datetime.subSequence(11,16)
+            dateList.add(day+" "+time)
+            priceList.add(element.high)
+        }
+
+        //entry
+        val entries = ArrayList<Entry>()
+        for(i in 0 until priceList.size){
+            entries.add(Entry(i.toFloat(), priceList[i].toFloat()))
+        }
+
+        val dataset= LineDataSet(entries, null)
+        dataset.color = getColor(R.color.main_color)
+        //원 없애기
+        dataset.setDrawCircles(false)
+
+        val xAxis=lineChart.xAxis
+        val yAxisL=lineChart.axisLeft
+        val yAxisR=lineChart.axisRight
+
+        lineChart.xAxis.valueFormatter= IndexAxisValueFormatter(dateList)
+        //description 지우기
+        lineChart.description=null
+        //x축 y축 숨기기
+        xAxis.isEnabled=false
+        yAxisR.isEnabled=false
+
+        //최대 y축 설정
+        val space = dataset.yMax/100
+        yAxisL.axisMaximum = dataset.yMax+space
+
+
+        //데이터 값 표시 X
+        dataset.setDrawValues(false)
+
+        //marker
+        val marker = LineChartMarkerView(this, R.layout.linechart_marker_view,dateList)
+        lineChart.marker = marker
+
+        lineChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+        val data = LineData(dataset)
+
+        lineChart.data = data
+        lineChart.legend.isEnabled=false
+        lineChart.invalidate()
+    }
+
+    fun drawLineChart2(stockList: List<StockModel2>){
+        val lineChart = binding.lineChart
+
+        val dateList = ArrayList<String>()
+        val priceList = ArrayList<String>()
 
         stockList.forEach { element ->
-            val day=element.timestamp.subSequence(0,10).toString()
-            val time=element.timestamp.subSequence(11,16)
-            dateList.add(day+" "+time)
+            dateList.add(element.date)
             priceList.add(element.high)
         }
 
@@ -210,8 +282,8 @@ class DetailActivity : AppCompatActivity(){
         val dateList = ArrayList<String>()
         val entries = ArrayList<CandleEntry>()
         for(i in 0..30){
-            val day=stockList[i].timestamp.subSequence(0,10).toString()
-            val time=stockList[i].timestamp.subSequence(11,16)
+            val day=stockList[i].datetime.subSequence(0,10).toString()
+            val time=stockList[i].datetime.subSequence(11,16)
             dateList.add(day+" "+time)
             entries.add(CandleEntry(
                 i.toFloat(),

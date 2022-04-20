@@ -8,17 +8,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 object NetWorkService{
-    //private const val BASE_URL ="https://compact-haiku-335913.du.r.appspot.com/"
-    private const val BASE_URL2 ="http://172.30.1.48:8080"
-//    private val retrofit: Retrofit = Retrofit.Builder()
-//            .baseUrl(BASE_URL)
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
+    private const val BASE_URL =" http://teststock.cafe24app.com"
+    private const val BASE_URL2 ="http://172.30.1.2:8080"
+    private val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     private val retrofit2: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL2)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-    //val api: ApiInterface = retrofit.create(ApiInterface::class.java)
+    val api: ApiInterface = retrofit.create(ApiInterface::class.java)
     val api2: ApiInterface = retrofit2.create(ApiInterface::class.java)
 }
 
@@ -29,23 +29,37 @@ interface ApiInterface{
         @Path("toplist") arg:String
     ): Call<StockTopListModel>
 
-    @GET("company-info/{symbol}")
+    @GET("stock/company/specific/{symbol}")
     fun companyInfo(
         @Path("symbol") arg:String
     ): Call<List<CompanyInfoModel>>
 
-    @GET("intraday/{symbol}")
-    fun stockIntraday(
-        @Path("symbol") arg1:String,
-    ): Call<List<StockModel>>
-
-    @GET("daily/full-data/{symbol}")
+    // 1일
+    @GET("stock/intraday/specific/for-daily/{symbol}")
     fun stockDaily(
+        @Path("symbol") arg1: String,
+    ): Call<List<StockModel>>
+    // 1주
+    @GET("stock/intraday/specific/for-weekly/{symbol}")
+    fun stockWeekly(
         @Path("symbol") arg1:String,
     ): Call<List<StockModel>>
+    // 1달
+    @GET("stock/daily/specific/for-monthly/{symbol}")
+    fun stockMonthly(
+        @Path("symbol") arg1:String,
+    ): Call<List<StockModel2>>
+    //3달
+    @GET("stock/daily/specific/for-3monthly/{symbol}")
+    fun stock3Monthly(
+        @Path("symbol") arg1:String,
+    ): Call<List<StockModel2>>
+    //1년
+    @GET("stock/daily/specific/for-yearly/{symbol}")
+    fun stockYearly(
+        @Path("symbol") arg1:String,
+    ): Call<List<StockModel2>>
 
-//    @GET("sendimg")
-//    fun companyimg(): Response<String>
 
     @POST("login")
     fun requestLogin(

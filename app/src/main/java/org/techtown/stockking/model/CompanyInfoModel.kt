@@ -3,9 +3,10 @@ package org.techtown.stockking.model
 
 data class CompanyInfoModel (
     var symbol: String,
-    var name: String,
-    var kr_name: String,
-    var description: String,
-    var kr_desc: String,
-    var cap: String
+    var name_en: String,
+    var name_kr: String,
+    var desc_en: String,
+    var desc_kr: String,
+    var img: String,
+    var shareout: String
 )

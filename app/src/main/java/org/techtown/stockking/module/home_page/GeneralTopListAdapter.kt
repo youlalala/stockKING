@@ -33,7 +33,7 @@ class GeneralTopListAdapter(
             binding.itemConame.text =stockTopList[position].company
         else{
             ApiWrapper.getCompanyInfo(ticker){ it->
-                binding.itemConame.text = it[0].kr_name
+                binding.itemConame.text = it[0].name_kr
             }
         }
 
