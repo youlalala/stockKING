@@ -4,68 +4,79 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:padding="8dp"
-        android:layout_margin="3dp">
-        <TextView
-            android:id="@+id/item_id"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="10dp"
-            />
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="7"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/item_ticker"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textStyle="bold"
-                android:textSize="18dp"
-                android:singleLine="true"
-                android:ellipsize="end"
-                />
-            <TextView
-                android:id="@+id/item_coname"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textSize="13dp"
-                android:singleLine="true"
-                android:ellipsize="end"
-                />
-        </LinearLayout>
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:paddingVertical="8dp"
+    android:paddingHorizontal="5dp"
+    android:layout_marginBottom="8dp">
 
+    <TextView
+        android:id="@+id/item_id"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="10dp"
+        />
+    <TextView
+        android:id="@+id/item_img"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="10dp"
+        android:text="img"
+        />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="6"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <TextView
-            android:id="@+id/item_price"
-            android:layout_width="0dp"
-            android:layout_weight="3"
+            android:id="@+id/item_ticker"
             android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:textStyle="bold"
-            android:textSize="13dp"
-            android:gravity="right"
+            android:textSize="15dp"
+            android:singleLine="true"
+            android:ellipsize="end"
             />
         <TextView
-            android:id="@+id/item_percent"
-            android:layout_width="0dp"
-            android:layout_weight="3"
+            android:id="@+id/item_coname"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="13dp"
-            android:gravity="right"
+            android:layout_width="wrap_content"
+            android:textSize="10dp"
+            android:singleLine="true"
+            android:ellipsize="end"
             />
     </LinearLayout>
-<!--    <View-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="1dp"-->
-<!--    android:background="@color/black" />-->
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/item_percent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="13dp"
+            android:gravity="right"
+            android:text="percent"
+            />
+        <TextView
+            android:id="@+id/item_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="11dp"
+            android:gravity="right"
+            />
+
+
+    </LinearLayout>
+
+
+
 </LinearLayout>

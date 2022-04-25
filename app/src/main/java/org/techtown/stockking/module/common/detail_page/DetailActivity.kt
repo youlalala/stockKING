@@ -14,6 +14,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import org.techtown.stockking.R
 import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.databinding.ActivityDetailBinding
+
 import org.techtown.stockking.model.BookmarkModel
 import org.techtown.stockking.model.StockModel
 import org.techtown.stockking.model.StockModel2
@@ -27,6 +28,7 @@ class DetailActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         val intent=intent
         val ticker= intent.getStringExtra("ticker").toString()
@@ -107,9 +109,6 @@ class DetailActivity : AppCompatActivity(){
             finish()
         }
 
-
-
-
         binding.chartBtn.setOnClickListener{
             if (binding.chartBtn.text == "line"){
                 binding.lineChart.visibility=View.GONE
@@ -125,12 +124,15 @@ class DetailActivity : AppCompatActivity(){
         ApiWrapper.getStockDaily(ticker){
             binding.priceTv.text=it[it.size-1].high
             drawLineChart(it)
+            drawCandleChart(it)
         }
         //1일 그래프
         binding.oneDayBtn.setOnClickListener{
             ApiWrapper.getStockDaily(ticker){
                 binding.priceTv.text=it[it.size-1].high
                 drawLineChart(it)
+                drawCandleChart(it)
+
             }
         }
         //1주 그래프
@@ -138,6 +140,7 @@ class DetailActivity : AppCompatActivity(){
             ApiWrapper.getStockWeekly(ticker){
                 binding.priceTv.text=it[it.size-1].high
                 drawLineChart(it)
+                drawCandleChart(it)
             }
         }
         //1달 그래프
@@ -145,6 +148,7 @@ class DetailActivity : AppCompatActivity(){
             ApiWrapper.getStockMonthly(ticker){
                 binding.priceTv.text=it[it.size-1].high
                 drawLineChart2(it)
+                //drawCandleChart(it)
             }
         }
         //3달 그래프
@@ -152,6 +156,7 @@ class DetailActivity : AppCompatActivity(){
             ApiWrapper.getStock3Monthly(ticker){
                 binding.priceTv.text=it[it.size-1].high
                 drawLineChart2(it)
+                //drawCandleChart(it)
             }
         }
         //1년 그래프
@@ -159,6 +164,7 @@ class DetailActivity : AppCompatActivity(){
             ApiWrapper.getStockYearly(ticker){
                 binding.priceTv.text=it[it.size-1].high
                 drawLineChart2(it)
+                //drawCandleChart(it)
             }
         }
 
@@ -201,11 +207,16 @@ class DetailActivity : AppCompatActivity(){
         lineChart.description=null
         //x축 y축 숨기기
         xAxis.isEnabled=false
+        yAxisL.isEnabled=false
         yAxisR.isEnabled=false
 
-        //최대 y축 설정
+        //라인굵기
+        dataset.lineWidth=2.0F
+
+        //최대 , 최소 y축 설정
         val space = dataset.yMax/100
         yAxisL.axisMaximum = dataset.yMax+space
+        yAxisL.axisMinimum = dataset.yMin-space
 
 
         //데이터 값 표시 X
@@ -230,7 +241,7 @@ class DetailActivity : AppCompatActivity(){
         val priceList = ArrayList<String>()
 
         stockList.forEach { element ->
-            dateList.add(element.date)
+            dateList.add(element.date.subSequence(0,10).toString())
             priceList.add(element.high)
         }
 
@@ -254,11 +265,16 @@ class DetailActivity : AppCompatActivity(){
         lineChart.description=null
         //x축 y축 숨기기
         xAxis.isEnabled=false
-        yAxisR.isEnabled=false
+        yAxisL.isEnabled=false
+        //yAxisR.isEnabled=false
 
-        //최대 y축 설정
+        //라인굵기
+        dataset.lineWidth=2.0F
+
+        //최대, 최소 y축 설정
         val space = dataset.yMax/100
         yAxisL.axisMaximum = dataset.yMax+space
+        yAxisL.axisMinimum = dataset.yMin-space
 
 
         //데이터 값 표시 X
@@ -319,7 +335,8 @@ class DetailActivity : AppCompatActivity(){
         candleChart.description=null
         //x축 y축 숨기기
         xAxis.isEnabled=false
-        yAxisR.isEnabled=false
+        yAxisL.isEnabled=false
+        //yAxisR.isEnabled=false
         //데이터 값 표시 X
         dataset.setDrawValues(false)
         //marker

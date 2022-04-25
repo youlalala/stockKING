@@ -7,13 +7,14 @@ import com.github.mikephil.charting.components.MarkerView
 import com.github.mikephil.charting.data.CandleEntry
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.utils.MPPointF
 import org.techtown.stockking.R
 
 class CandleChartMarkerView (
     context: Context,
     layout: Int,
     private val labels: ArrayList<String>,
-    private val entries: ArrayList<CandleEntry>
+    private val entries: ArrayList<CandleEntry>,
 ): MarkerView(context, layout) {
 
     private val date: TextView = findViewById(R.id.date_tv)
@@ -21,6 +22,7 @@ class CandleChartMarkerView (
     private val low: TextView = findViewById(R.id.low_tv)
     private val open: TextView = findViewById(R.id.open_tv)
     private val close: TextView = findViewById(R.id.close_tv)
+
     private val uiScreenWidth = resources.displayMetrics.widthPixels
 
     override fun draw(canvas: Canvas, posx: Float, posy: Float) {

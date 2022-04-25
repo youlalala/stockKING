@@ -9,19 +9,32 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.utils.MPPointF
 import org.techtown.stockking.R
+import org.techtown.stockking.databinding.ActivityDetailBinding
 
 class LineChartMarkerView(
     context: Context,
     layout: Int,
-    private val labels: ArrayList<String>
+    private val labels: ArrayList<String>,
     ): MarkerView(context, layout) {
 
     private val date: TextView = findViewById(R.id.date_tv)
     private val price: TextView = findViewById(R.id.price_tv)
+    private val uiScreenWidth = resources.displayMetrics.widthPixels
 
+//    override fun getOffset(): MPPointF {
+//        return MPPointF(-(width / 2f), -height.toFloat()+120)
+//    }
+    override fun draw(canvas: Canvas, posx: Float, posy: Float) {
+        // Check marker position and update offsets.
+        var posx = posx
+        if (uiScreenWidth - posx - width < width) {
+            posx -= width.toFloat()
+        }
 
-    override fun getOffset(): MPPointF {
-        return MPPointF(-(width / 2f), -height.toFloat()+120)
+        // translate to the correct position and draw
+        canvas.translate(posx, posy)
+        draw(canvas)
+        canvas.translate(-posx, -posy)
     }
 
 
