@@ -20,6 +20,8 @@ import org.techtown.stockking.model.StockModel
 import org.techtown.stockking.model.StockModel2
 
 import org.techtown.stockking.network.ApiWrapper
+import java.lang.Math.round
+import java.text.DecimalFormat
 
 class DetailActivity : AppCompatActivity(){
     lateinit var binding: ActivityDetailBinding
@@ -71,11 +73,8 @@ class DetailActivity : AppCompatActivity(){
             }
         }
 
-
-
-
         binding.priceTv.text = intent.getStringExtra("price")
-        val percent = intent.getStringExtra("percent")
+        var percent = intent.getStringExtra("percent")
         if(percent?.substring(0,1)=="-"){
             binding.percentTv.setTextColor(Color.BLUE)
         }else{
@@ -122,23 +121,23 @@ class DetailActivity : AppCompatActivity(){
         }
 
         ApiWrapper.getStockDaily(ticker){
-            binding.priceTv.text=it[it.size-1].high
+            calPercnet(it)
             drawLineChart(it)
             drawCandleChart(it)
         }
         //1일 그래프
+
         binding.oneDayBtn.setOnClickListener{
             ApiWrapper.getStockDaily(ticker){
-                binding.priceTv.text=it[it.size-1].high
+                calPercnet(it)
                 drawLineChart(it)
                 drawCandleChart(it)
-
             }
         }
         //1주 그래프
         binding.oneWeekBtn.setOnClickListener{
             ApiWrapper.getStockWeekly(ticker){
-                binding.priceTv.text=it[it.size-1].high
+                calPercnet(it)
                 drawLineChart(it)
                 drawCandleChart(it)
             }
@@ -146,7 +145,7 @@ class DetailActivity : AppCompatActivity(){
         //1달 그래프
         binding.oneMonthBtn.setOnClickListener{
             ApiWrapper.getStockMonthly(ticker){
-                binding.priceTv.text=it[it.size-1].high
+                calPercnet2(it)
                 drawLineChart2(it)
                 //drawCandleChart(it)
             }
@@ -154,7 +153,7 @@ class DetailActivity : AppCompatActivity(){
         //3달 그래프
         binding.threeMonthBtn.setOnClickListener{
             ApiWrapper.getStock3Monthly(ticker){
-                binding.priceTv.text=it[it.size-1].high
+                calPercnet2(it)
                 drawLineChart2(it)
                 //drawCandleChart(it)
             }
@@ -162,16 +161,37 @@ class DetailActivity : AppCompatActivity(){
         //1년 그래프
         binding.oneYearBtn.setOnClickListener{
             ApiWrapper.getStockYearly(ticker){
-                binding.priceTv.text=it[it.size-1].high
+                calPercnet2(it)
                 drawLineChart2(it)
                 //drawCandleChart(it)
             }
         }
 
+    }
 
-
-
-
+    fun calPercnet(it: List<StockModel>){
+        val df = DecimalFormat("#.##")
+        var percent = df.format((it.last().high.toFloat()-it[0].high.toFloat())/it[0].high.toFloat()*100).toString()
+        if(percent?.substring(0,1)=="-"){
+            binding.percentTv.setTextColor(Color.BLUE)
+            percent = percent+"%"
+        }else{
+            binding.percentTv.setTextColor(Color.RED)
+            percent = "+"+percent+"%"
+        }
+        binding.percentTv.text = percent
+    }
+    fun calPercnet2(it: List<StockModel2>){
+        val df = DecimalFormat("#.##")
+        var percent = df.format((it.last().high.toFloat()-it[0].high.toFloat())/it[0].high.toFloat()*100).toString()
+        if(percent?.substring(0,1)=="-"){
+            binding.percentTv.setTextColor(Color.BLUE)
+            percent = percent+"%"
+        }else{
+            binding.percentTv.setTextColor(Color.RED)
+            percent = "+"+percent+"%"
+        }
+        binding.percentTv.text = percent
     }
 
     fun drawLineChart(stockList: List<StockModel>){

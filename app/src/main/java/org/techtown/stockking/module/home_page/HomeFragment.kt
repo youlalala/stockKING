@@ -78,6 +78,7 @@ class HomeFragment : Fragment(){
                 val intent = Intent(context, DetailActivity::class.java)
                 intent.putExtra("ticker",it.title)
                 intent.putExtra("percent",it.percent)
+                intent.putExtra("price",it.price)
                 startActivity(intent)
             })
         }
