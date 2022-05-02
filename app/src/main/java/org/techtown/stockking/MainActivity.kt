@@ -1,17 +1,17 @@
-package org.techtown.stockking.module.common
+package org.techtown.stockking
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
-import org.techtown.stockking.R
 import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.databinding.ActivityMainBinding
 import org.techtown.stockking.model.UserModel
+import org.techtown.stockking.module.common.LoginActivity
+import org.techtown.stockking.adapter.ViewPagerAdapter
 import org.techtown.stockking.network.ApiWrapper
 
 class MainActivity : AppCompatActivity() {

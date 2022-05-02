@@ -1,14 +1,13 @@
 package org.techtown.stockking.module.search_page
 
 
-import android.content.Context
-import android.graphics.drawable.PictureDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.techtown.stockking.databinding.SearchRecyclerviewBinding
 import org.techtown.stockking.model.StockTopList
 import android.widget.Filter
+import org.techtown.stockking.SearchFragment
 import kotlin.collections.ArrayList
 
 class SearchListAdapter(

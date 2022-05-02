@@ -1,4 +1,4 @@
-package org.techtown.stockking.module.home_page
+package org.techtown.stockking.adapter
 
 
 import android.graphics.Color
@@ -9,21 +9,17 @@ import org.techtown.stockking.databinding.ItemRecyclerviewBinding
 import org.techtown.stockking.model.StockTopList
 import org.techtown.stockking.network.ApiWrapper
 
-class GeneralTopListAdapter(
+class RealtimeTopListAdapter(
     private val stockTopList: List<StockTopList>,
     val version:String,
     val onClickItem: (stockTopList: StockTopList)-> Unit)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
-    override fun getItemCount(): Int{
-        return stockTopList.size
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
-            = GeneralTopViewHolder(ItemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            = RealtimeTopListViewHolder(ItemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val binding=(holder as GeneralTopViewHolder).binding
+        val binding=(holder as RealtimeTopListViewHolder).binding
 
         binding.itemId.text = (position+1).toString()
         val ticker = stockTopList[position].title
@@ -51,5 +47,11 @@ class GeneralTopListAdapter(
             onClickItem.invoke(stockTopList[position])
         }
     }
+
+    override fun getItemCount(): Int{
+        return stockTopList.size
+    }
+
+    class RealtimeTopListViewHolder(val binding: ItemRecyclerviewBinding): RecyclerView.ViewHolder(binding.root)
 }
 

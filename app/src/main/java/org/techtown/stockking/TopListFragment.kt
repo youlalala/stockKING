@@ -1,4 +1,4 @@
-package org.techtown.stockking.module.home_page
+package org.techtown.stockking
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,20 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import org.techtown.stockking.databinding.FragmentHomeBinding
+import org.techtown.stockking.adapter.RealtimeTopListAdapter
+import org.techtown.stockking.databinding.FragmentToplistBinding
 import org.techtown.stockking.module.common.detail_page.DetailActivity
+
 import org.techtown.stockking.network.ApiWrapper
 
 
-class HomeFragment : Fragment(){
+class TopListFragment : Fragment(){
 
-    lateinit var binding: FragmentHomeBinding
+    lateinit var binding: FragmentToplistBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragmentToplistBinding.inflate(inflater, container, false)
 
 
         binding.detailTv.text = "실시간으로 사람들이 많이 검색하고 있는 주식 순위"
@@ -74,7 +76,7 @@ class HomeFragment : Fragment(){
     fun topList(version: String){
         ApiWrapper.getStockTopList() { it ->
             Log.i("la",it.toString())
-            binding.recyclerView.adapter=GeneralTopListAdapter(it,version,onClickItem = {
+            binding.recyclerView.adapter= RealtimeTopListAdapter(it,version,onClickItem = {
                 val intent = Intent(context, DetailActivity::class.java)
                 intent.putExtra("ticker",it.title)
                 intent.putExtra("percent",it.percent)

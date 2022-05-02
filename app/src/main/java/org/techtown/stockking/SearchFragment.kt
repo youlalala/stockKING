@@ -1,21 +1,16 @@
-package org.techtown.stockking.module.search_page
+package org.techtown.stockking
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log.i
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import org.techtown.stockking.databinding.FragmentSearchBinding
-import org.techtown.stockking.model.StockTopList
 import org.techtown.stockking.module.common.detail_page.DetailActivity
-import org.techtown.stockking.module.home_page.GeneralTopListAdapter
+import org.techtown.stockking.module.search_page.SearchListAdapter
 import org.techtown.stockking.network.ApiWrapper
-import java.util.Locale.filter
 
 class SearchFragment : Fragment() {
 
