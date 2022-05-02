@@ -145,24 +145,24 @@ class DetailActivity : AppCompatActivity(){
         //1달 그래프
         binding.oneMonthBtn.setOnClickListener{
             ApiWrapper.getStockMonthly(ticker){
-                calPercnet2(it)
-                drawLineChart2(it)
+                //calPercnet2(it)
+                drawLineChart(it)
                 //drawCandleChart(it)
             }
         }
         //3달 그래프
         binding.threeMonthBtn.setOnClickListener{
             ApiWrapper.getStock3Monthly(ticker){
-                calPercnet2(it)
-                drawLineChart2(it)
+                //calPercnet2(it)
+                //drawLineChart2(it)
                 //drawCandleChart(it)
             }
         }
         //1년 그래프
         binding.oneYearBtn.setOnClickListener{
             ApiWrapper.getStockYearly(ticker){
-                calPercnet2(it)
-                drawLineChart2(it)
+                //calPercnet2(it)
+                //drawLineChart2(it)
                 //drawCandleChart(it)
             }
         }
@@ -201,9 +201,14 @@ class DetailActivity : AppCompatActivity(){
         val priceList = ArrayList<String>()
 
         stockList.forEach { element ->
-            val day=element.datetime.subSequence(0,10).toString()
-            val time=element.datetime.subSequence(11,16)
-            dateList.add(day+" "+time)
+            if (element.date.isNullOrEmpty()){
+                val day=element.datetime.subSequence(0,10).toString()
+                val time=element.datetime.subSequence(11,16)
+                dateList.add(day+" "+time)
+            }else{
+                dateList.add(element.date.subSequence(0,10).toString())
+            }
+
             priceList.add(element.high)
         }
 

@@ -62,51 +62,51 @@ class ApiWrapper {
             })
         }
 
-        fun getStockMonthly(symbol: String, callback: (List<StockModel2>) -> Unit){
+        fun getStockMonthly(symbol: String, callback: (List<StockModel>) -> Unit){
             val modelCall = NetWorkService.api.stockMonthly(symbol)
-            modelCall.enqueue(object : Callback<List<StockModel2>> {
-                override fun onResponse(call: Call<List<StockModel2>>, response: Response<List<StockModel2>>) {
+            modelCall.enqueue(object : Callback<List<StockModel>> {
+                override fun onResponse(call: Call<List<StockModel>>, response: Response<List<StockModel>>) {
                     val data = response.body()
                     data?.let {
                         i(TAG,"1monthly stock response")
                         callback.invoke(it)
                     }
                 }
-                override fun onFailure(call: Call<List<StockModel2>>, t: Throwable) {
+                override fun onFailure(call: Call<List<StockModel>>, t: Throwable) {
                     i(TAG,"1monthly stock fail")
                     modelCall.cancel()
                 }
             })
         }
 
-        fun getStock3Monthly(symbol: String, callback: (List<StockModel2>) -> Unit){
+        fun getStock3Monthly(symbol: String, callback: (List<StockModel>) -> Unit){
             val modelCall = NetWorkService.api.stock3Monthly(symbol)
-            modelCall.enqueue(object : Callback<List<StockModel2>> {
-                override fun onResponse(call: Call<List<StockModel2>>, response: Response<List<StockModel2>>) {
+            modelCall.enqueue(object : Callback<List<StockModel>> {
+                override fun onResponse(call: Call<List<StockModel>>, response: Response<List<StockModel>>) {
                     val data = response.body()
                     data?.let {
                         i(TAG,"3monthly stock response")
                         callback.invoke(it)
                     }
                 }
-                override fun onFailure(call: Call<List<StockModel2>>, t: Throwable) {
+                override fun onFailure(call: Call<List<StockModel>>, t: Throwable) {
                     i(TAG,"3monthly stock fail")
                     modelCall.cancel()
                 }
             })
         }
 
-        fun getStockYearly(symbol: String, callback: (List<StockModel2>) -> Unit){
+        fun getStockYearly(symbol: String, callback: (List<StockModel>) -> Unit){
             val modelCall = NetWorkService.api.stockYearly(symbol)
-            modelCall.enqueue(object : Callback<List<StockModel2>> {
-                override fun onResponse(call: Call<List<StockModel2>>, response: Response<List<StockModel2>>) {
+            modelCall.enqueue(object : Callback<List<StockModel>> {
+                override fun onResponse(call: Call<List<StockModel>>, response: Response<List<StockModel>>) {
                     val data = response.body()
                     data?.let {
                         i(TAG,"3monthly stock response")
                         callback.invoke(it)
                     }
                 }
-                override fun onFailure(call: Call<List<StockModel2>>, t: Throwable) {
+                override fun onFailure(call: Call<List<StockModel>>, t: Throwable) {
                     i(TAG,"3monthly stock fail")
                     modelCall.cancel()
                 }

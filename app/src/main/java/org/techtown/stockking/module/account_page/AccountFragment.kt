@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import org.techtown.stockking.common.AppLog
 import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.databinding.FragmentAccountBinding
 import org.techtown.stockking.model.BookmarkModel
@@ -39,6 +40,15 @@ class AccountFragment : Fragment() {
                 val intent = Intent(context, DetailActivity::class.java)
                 intent.putExtra("ticker",it.symbol)
                 startActivity(intent)
+            },
+                onClickStar={
+                    AppLog.i("Stock", "onClickStar")
+//                ApiWrapper.postBookmark(
+//                    BookmarkModel(
+//                        token = MySharedPreferences.getToken(),
+//                        request = "delete",
+//                        symbol = it.symbol)
+//                ){}
             })
         }
     }

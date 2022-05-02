@@ -23,11 +23,14 @@
             android:singleLine="true"
             android:ellipsize="end"
             />
-        <Button
+        <ImageButton
             android:id="@+id/star"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:background="@drawable/img_star_full"/>
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@null"
+            android:src="@drawable/ic_bookmarks_on"
+            android:scaleType="center"
+            />
     </LinearLayout>
 
 </LinearLayout>
