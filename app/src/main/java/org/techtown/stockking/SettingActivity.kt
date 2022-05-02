@@ -1,4 +1,4 @@
-package org.techtown.stockking.module.account_page
+package org.techtown.stockking
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,10 +8,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
 import com.kakao.sdk.user.UserApiClient
-import org.techtown.stockking.R
 import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.databinding.ActivitySettingBinding
-import org.techtown.stockking.module.common.LoginActivity
 
 class SettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

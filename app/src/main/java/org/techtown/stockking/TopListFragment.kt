@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import org.techtown.stockking.adapter.RealtimeTopListAdapter
 import org.techtown.stockking.databinding.FragmentToplistBinding
-import org.techtown.stockking.module.common.detail_page.DetailActivity
 
 import org.techtown.stockking.network.ApiWrapper
 

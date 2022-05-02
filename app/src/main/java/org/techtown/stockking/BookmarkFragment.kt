@@ -9,9 +9,7 @@ import android.view.ViewGroup
 import org.techtown.stockking.common.AppLog
 import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.databinding.FragmentBookmarkBinding
-import org.techtown.stockking.module.account_page.BookmarkListAdapter
-import org.techtown.stockking.module.account_page.SettingActivity
-import org.techtown.stockking.module.common.detail_page.DetailActivity
+import org.techtown.stockking.adapter.BookmarkListAdapter
 import org.techtown.stockking.network.ApiWrapper
 
 class BookmarkFragment : Fragment() {

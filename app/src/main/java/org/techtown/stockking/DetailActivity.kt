@@ -1,4 +1,4 @@
-package org.techtown.stockking.module.common.detail_page
+package org.techtown.stockking
 
 import android.content.Context
 import android.graphics.Color
@@ -11,16 +11,15 @@ import androidx.appcompat.app.AppCompatActivity
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import org.techtown.stockking.R
 import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.databinding.ActivityDetailBinding
 
 import org.techtown.stockking.model.BookmarkModel
 import org.techtown.stockking.model.StockModel
-import org.techtown.stockking.model.StockModel2
+import org.techtown.stockking.module.common.detail_page.CandleChartMarkerView
+import org.techtown.stockking.module.common.detail_page.LineChartMarkerView
 
 import org.techtown.stockking.network.ApiWrapper
-import java.lang.Math.round
 import java.text.DecimalFormat
 
 class DetailActivity : AppCompatActivity(){
@@ -181,7 +180,7 @@ class DetailActivity : AppCompatActivity(){
         }
         binding.percentTv.text = percent
     }
-    fun calPercnet2(it: List<StockModel2>){
+    fun calPercnet2(it: List<StockModel>){
         val df = DecimalFormat("#.##")
         var percent = df.format((it.last().high.toFloat()-it[0].high.toFloat())/it[0].high.toFloat()*100).toString()
         if(percent?.substring(0,1)=="-"){
@@ -259,7 +258,7 @@ class DetailActivity : AppCompatActivity(){
         lineChart.invalidate()
     }
 
-    fun drawLineChart2(stockList: List<StockModel2>){
+    fun drawLineChart2(stockList: List<StockModel>){
         val lineChart = binding.lineChart
 
         val dateList = ArrayList<String>()

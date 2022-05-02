@@ -1,4 +1,4 @@
-package org.techtown.stockking.module.search_page
+package org.techtown.stockking.adapter
 
 
 import android.view.LayoutInflater
@@ -90,6 +90,8 @@ class SearchListAdapter(
             }
         }
     }
+
+    class SearchViewHolder(val binding: SearchRecyclerviewBinding): RecyclerView.ViewHolder(binding.root)
 
 }
 

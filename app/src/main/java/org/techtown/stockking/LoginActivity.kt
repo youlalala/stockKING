@@ -1,4 +1,4 @@
-package org.techtown.stockking.module.common
+package org.techtown.stockking
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +9,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
-import org.techtown.stockking.MainActivity
-import org.techtown.stockking.R
 import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.databinding.ActivityLoginBinding
 import org.techtown.stockking.model.UserModel

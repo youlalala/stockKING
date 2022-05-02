@@ -8,8 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import org.techtown.stockking.databinding.FragmentSearchBinding
-import org.techtown.stockking.module.common.detail_page.DetailActivity
-import org.techtown.stockking.module.search_page.SearchListAdapter
+import org.techtown.stockking.adapter.SearchListAdapter
 import org.techtown.stockking.network.ApiWrapper
 
 class SearchFragment : Fragment() {

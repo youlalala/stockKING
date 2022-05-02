@@ -1,17 +1,11 @@
-package org.techtown.stockking.module.account_page
+package org.techtown.stockking.adapter
 
 
-import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
-import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.databinding.BookmarkRecyclerviewBinding
 import org.techtown.stockking.model.BookMarkPersonalModel
-import org.techtown.stockking.model.BookmarkModel
-import org.techtown.stockking.network.ApiWrapper
 
 
 class BookmarkListAdapter(
@@ -50,5 +44,6 @@ class BookmarkListAdapter(
 //                ){}
         }
     }
+    class BookmarkViewHolder(val binding: BookmarkRecyclerviewBinding): RecyclerView.ViewHolder(binding.root)
 }
 
