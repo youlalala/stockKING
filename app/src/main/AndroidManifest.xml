@@ -14,18 +14,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name=".module.common.LoginActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".module.account_page.SettingActivity"
+            android:name=".SettingActivity"
             android:exported="false" />
 
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@menu/bottom_navigation_item" />
 
-        <activity android:name=".module.common.detail_page.DetailActivity" />
-        <activity android:name=".module.common.MainActivity">
+        <activity android:name=".DetailActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
