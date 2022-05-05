@@ -21,19 +21,11 @@ class RealtimeTopListAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val binding=(holder as RealtimeTopListViewHolder).binding
 
+
         binding.itemId.text = (position+1).toString()
         val ticker = stockTopList[position].title
         binding.itemTicker.text = ticker
-
-        if(version=="us")
-            binding.itemConame.text =stockTopList[position].company
-        else{
-            ApiWrapper.getCompanyInfo(ticker){ it->
-                binding.itemConame.text = it[0].name_kr
-            }
-        }
-
-
+        binding.itemConame.text =stockTopList[position].company
         binding.itemPrice.text = stockTopList[position].price
 
         if(stockTopList[position].percent.substring(0,1)=="-"){
@@ -43,6 +35,9 @@ class RealtimeTopListAdapter(
         }
         binding.itemPercent.text = stockTopList[position].percent
 
+        holder.itemView.setOnClickListener{
+            onClickItem.invoke(stockTopList[position])
+        }
         holder.itemView.setOnClickListener{
             onClickItem.invoke(stockTopList[position])
         }

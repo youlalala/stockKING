@@ -17,11 +17,18 @@ class TopListFragment : Fragment(){
 
     lateinit var binding: FragmentToplistBinding
 
+    //viewmodel
+    //private val viewModel: RealTimeViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentToplistBinding.inflate(inflater, container, false)
+
+        //val realtimeAdapter = RealtimeTopListAdapter()
+        //binding.recyclerView.adapter=realtimeAdapter
+        //subscribeUi(realtimeAdapter)
 
 
         binding.detailTv.text = "실시간으로 사람들이 많이 검색하고 있는 주식 순위"
@@ -59,16 +66,6 @@ class TopListFragment : Fragment(){
 
             }
         }
-//        binding.textVersion.setOnClickListener {
-//            if(binding.textVersion.text=="US"){
-//                binding.textVersion.text="KR"
-//                binding.textSwitch.isChecked= false
-//            }else{
-//                binding.textVersion.text="US"
-//                binding.textSwitch.isChecked= true
-//            }
-//        }
-
         return binding.root
     }
 
@@ -86,7 +83,11 @@ class TopListFragment : Fragment(){
 
     }
 
-
+//    private fun subscribeUi(adapter: RealtimeTopListAdapter){
+//        viewModel.stocks.observe(viewLifecycleOwner){ stocks ->
+//            realtimeAdapter.submitList(stocks)
+//        }
+//    }
 }
 
 
