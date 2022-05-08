@@ -5,9 +5,8 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.techtown.stockking.databinding.ItemRecyclerviewBinding
+import org.techtown.stockking.databinding.ToplistRecyclerviewBinding
 import org.techtown.stockking.model.StockTopList
-import org.techtown.stockking.network.ApiWrapper
 
 class RealtimeTopListAdapter(
     private val stockTopList: List<StockTopList>,
@@ -16,7 +15,7 @@ class RealtimeTopListAdapter(
     : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
-            = RealtimeTopListViewHolder(ItemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            = RealtimeTopListViewHolder(ToplistRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val binding=(holder as RealtimeTopListViewHolder).binding
@@ -47,6 +46,6 @@ class RealtimeTopListAdapter(
         return stockTopList.size
     }
 
-    class RealtimeTopListViewHolder(val binding: ItemRecyclerviewBinding): RecyclerView.ViewHolder(binding.root)
+    class RealtimeTopListViewHolder(val binding: ToplistRecyclerviewBinding): RecyclerView.ViewHolder(binding.root)
 }
 
