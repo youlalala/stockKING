@@ -3,7 +3,7 @@
     <style name="Theme.StockKING" parent="Theme.AppCompat.Light">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/sub_color</item>
-        <item name="colorPrimaryDark">@color/main_color</item>
+        <item name="colorPrimaryDark">@color/main_black_color</item>
         <item name="colorPrimaryVariant">@color/sub_color</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -15,5 +15,19 @@
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/sub_color</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+    </style>
+
+    <style name="TitleStyle" parent="android:TextAppearance">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/main_black_color</item>
+        <item name="android:fontFamily">@font/app_font</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+    <style name="TextStyle" parent="android:TextAppearance">
+        <item name="android:textSize">130dp</item>
+        <item name="android:textColor">@color/main_black_color</item>
+        <item name="android:fontFamily">@font/app_font</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 </resources>

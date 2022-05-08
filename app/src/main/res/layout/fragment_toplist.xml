@@ -3,9 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center">
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:src="@drawable/logo_img"/>
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <androidx.appcompat.widget.AppCompatButton
@@ -13,8 +18,9 @@
             android:textColor="@color/button_text_color"
             android:backgroundTint="@drawable/button_selector_color"
             android:background="@drawable/button_shape"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_width="match_parent"
+            android:textSize="13dp"
             android:layout_weight="1"
             android:layout_marginHorizontal="3dp"
             android:text="실시간" />
@@ -23,8 +29,9 @@
             android:textColor="@color/button_text_color"
             android:backgroundTint="@drawable/button_selector_color"
             android:background="@drawable/button_shape"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_width="match_parent"
+            android:textSize="13dp"
             android:layout_weight="1"
             android:layout_marginHorizontal="3dp"
             android:text="등락율" />
@@ -33,44 +40,57 @@
             android:textColor="@color/button_text_color"
             android:backgroundTint="@drawable/button_selector_color"
             android:background="@drawable/button_shape"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_width="match_parent"
+            android:textSize="13dp"
             android:layout_weight="1"
             android:layout_marginHorizontal="3dp"
-            android:text="시가 총액" />
+            android:text="시가총액" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/detail_tv"
-        android:textAlignment="center"
-        android:paddingVertical="20dp"
-        android:textColor="@color/main_color"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="5dp">
+        android:orientation="horizontal"
+        android:layout_marginVertical="20dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/button_title_tv"
+                style="@style/TitleStyle"
+                android:textColor="#474C53"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:textSize="20dp"
+                android:text="title_tv"/>
+            <TextView
+                android:id="@+id/button_detail_tv"
+                style="@style/TextStyle"
+                android:textColor="#9EA0A7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13dp"
+                android:text="detail_tv"/>
+        </LinearLayout>
+
+
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
-        <TextView
-            android:id="@+id/text_version"
-            android:text="US"
-            android:paddingRight="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/text_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:track="@drawable/switch_track_selector"
             android:thumb="@drawable/switch_thumb"
-
             />
     </LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

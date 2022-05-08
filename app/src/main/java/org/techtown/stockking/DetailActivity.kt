@@ -218,7 +218,7 @@ class DetailActivity : AppCompatActivity(){
         }
 
         val dataset= LineDataSet(entries, null)
-        dataset.color = getColor(R.color.main_color)
+        dataset.color = getColor(R.color.main_green_color)
         //원 없애기
         dataset.setDrawCircles(false)
 
@@ -276,7 +276,7 @@ class DetailActivity : AppCompatActivity(){
         }
 
         val dataset= LineDataSet(entries, null)
-        dataset.color = getColor(R.color.main_color)
+        dataset.color = getColor(R.color.main_green_color)
         //원 없애기
         dataset.setDrawCircles(false)
 

@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">stockKING</string>
     <string name="server_client_id">627913824889-1194gpufj63rmijq7ir97n2fr86vb835.apps.googleusercontent.com</string>
+
+    <!--    toplist button-->
+    <string name="topList_btn1_title">실시간</string>
+    <string name="topList_btn1_detail">실시간으로 사람들이 많이 검색하고 있는 주식 순위</string>
+    <string name="topList_btn2_title">등락율</string>
+    <string name="topList_btn2_detail">하룻동안 등락이 높은 주식 순위</string>
+    <string name="topList_btn3_title">시가총액</string>
+    <string name="topList_btn3_detail">시가총액이 높은 주식 순위</string>
 </resources>

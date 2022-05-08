@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.techtown.stockking.databinding.SearchRecyclerviewBinding
 import org.techtown.stockking.model.StockTopList
 import android.widget.Filter
-import org.techtown.stockking.SearchFragment
+import org.techtown.stockking.fragment.SearchFragment
 import kotlin.collections.ArrayList
 
 class SearchListAdapter(
