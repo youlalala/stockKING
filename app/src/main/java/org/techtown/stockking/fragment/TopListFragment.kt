@@ -28,6 +28,10 @@ class TopListFragment : Fragment(){
     ): View? {
         binding = FragmentToplistBinding.inflate(inflater, container, false)
 
+        binding.moneySwitch.showText = true
+        binding.moneySwitch.textOff = "$"
+        binding.moneySwitch.textOn = "₩"
+
         binding.buttonTitleTv.text = resources.getString(R.string.topList_btn1_title)
         binding.buttonDetailTv.text = resources.getString(R.string.topList_btn1_detail)
         binding.realtimeBtn.isSelected = true
