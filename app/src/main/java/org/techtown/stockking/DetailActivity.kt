@@ -34,7 +34,7 @@ class DetailActivity : AppCompatActivity(){
         val intent=intent
         val ticker= intent.getStringExtra("ticker").toString()
 
-        //즐겨찾기 확인
+        //즐겨찾기 check
         ApiWrapper.getBookmark(MySharedPreferences.getToken(this)){
             i("SSS","test it"+it)
             for(i in it.indices){

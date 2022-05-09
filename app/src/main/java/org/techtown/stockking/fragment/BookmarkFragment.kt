@@ -26,7 +26,7 @@ class BookmarkFragment : Fragment() {
             val intent = Intent(context, SettingActivity::class.java)
             startActivity(intent)
         }
-        binding.userNameTv.text=MySharedPreferences.getUserName(requireContext())+" 님"
+        binding.userNameTv.text=MySharedPreferences.getUserName(requireContext())+" 님의 즐겨찾기"
 
 
 

@@ -1,29 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SettingActivity"
-    android:paddingHorizontal="35dp"
-    android:paddingVertical="30dp"
-    android:orientation="vertical">
+    android:paddingHorizontal="20dp"
+    android:layout_marginTop="44dp"
+    android:orientation="vertical"
+    android:paddingTop="44dp">
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/back_btn"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@android:color/transparent"
+        android:scaleType="center"
+        android:src="@drawable/ic_arrow_back" />
+
+    <TextView
+        android:id="@+id/setting_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="설정"
+        style="@style/TextStyle"
+        android:textSize="17dp"/>
+
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setting_tv"
+        android:layout_marginTop="30dp"
         android:orientation="vertical">
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/back_btn"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginBottom="50dp"
-            android:scaleType="fitCenter"
-            android:background="@android:color/transparent"
-            android:src="@drawable/img_back"/>
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,13 +63,14 @@
                     android:layout_height="wrap_content"
                     android:text="알림설정"
                     android:textSize="15dp"
-                    tools:layout_editor_absoluteX="4dp"
-                    tools:layout_editor_absoluteY="278dp" />
+                    style="@style/TitleStyle"
+                    android:layout_marginBottom="10dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="즐겨찾기 해놓은 주식은 관련 알람이 뜹니다."
+                    android:text="즐겨찾기 해 놓은 주식의 정보를 알려드립니다."
                     android:textSize="10dp"
+                    style="@style/TextStyle"
                     tools:layout_editor_absoluteX="4dp"
                     tools:layout_editor_absoluteY="309dp" />
 
@@ -58,15 +81,10 @@
                 android:id="@+id/text_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:track="@drawable/switch_track_selector"
+                app:track="@drawable/switch_track_selector"
                 android:thumb="@drawable/switch_thumb"
                 />
         </LinearLayout>
-
-
-
-
-
 
 
 
@@ -74,18 +92,34 @@
 
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/withdraw_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="탈퇴하기" />
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/logout_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/withdraw_btn"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/button_shape"
+        android:backgroundTint="@drawable/button_selector_color"
+        style="@style/TextStyle"
+        android:textSize="16dp"
         android:text="로그아웃" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/withdraw_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/button_shape"
+        android:backgroundTint="@drawable/button_selector_color"
+        android:textColor="#BBBDC4"
+        style="@style/TextStyle"
+        android:textSize="16dp"
+        android:text="탈퇴하기" />
 
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
