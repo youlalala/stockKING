@@ -21,6 +21,7 @@ class LoginActivity : AppCompatActivity() {
         val binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
                 //Login Fail
