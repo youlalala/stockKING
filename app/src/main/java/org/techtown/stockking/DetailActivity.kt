@@ -107,18 +107,25 @@ class DetailActivity : AppCompatActivity(){
             finish()
         }
 
-        binding.chartBtn.setOnClickListener{
-            if (binding.chartBtn.text == "line"){
-                binding.lineChart.visibility=View.GONE
-                binding.candlestickChart.visibility=View.VISIBLE
-                binding.chartBtn.text = "candle"
-            }else{
-                binding.lineChart.visibility=View.VISIBLE
-                binding.candlestickChart.visibility=View.GONE
-                binding.chartBtn.text = "line"
-            }
+        binding.lineChartBtn.setOnClickListener{
+            binding.lineChart.visibility=View.VISIBLE
+            binding.candlestickChart.visibility=View.GONE
+            binding.lineChartBtn.setShadowLayer(1F, 2F, 2F, Color.BLACK)
+            binding.candleChartBtn.setShadowLayer(0F, 0F, 0F, Color.WHITE)
+        }
+        binding.candleChartBtn.setOnClickListener {
+            binding.lineChart.visibility=View.GONE
+            binding.candlestickChart.visibility=View.VISIBLE
+            binding.candleChartBtn.setShadowLayer(1F, 2F, 2F, Color.BLACK)
+            binding.lineChartBtn.setShadowLayer(0F, 0F, 0F, Color.WHITE)
         }
 
+        binding.oneDayBtn.isSelected=true
+        binding.oneWeekBtn.isSelected=false
+        binding.oneMonthBtn.isSelected=false
+        binding.threeMonthBtn.isSelected=false
+        binding.oneYearBtn.isSelected=false
+        binding.fiveYearBtn.isSelected=false
         ApiWrapper.getStockDaily(ticker){
             calPercnet(it)
             drawLineChart(it)
@@ -127,6 +134,12 @@ class DetailActivity : AppCompatActivity(){
         //1일 그래프
 
         binding.oneDayBtn.setOnClickListener{
+            binding.oneDayBtn.isSelected=true
+            binding.oneWeekBtn.isSelected=false
+            binding.oneMonthBtn.isSelected=false
+            binding.threeMonthBtn.isSelected=false
+            binding.oneYearBtn.isSelected=false
+            binding.fiveYearBtn.isSelected=false
             ApiWrapper.getStockDaily(ticker){
                 calPercnet(it)
                 drawLineChart(it)
@@ -135,6 +148,12 @@ class DetailActivity : AppCompatActivity(){
         }
         //1주 그래프
         binding.oneWeekBtn.setOnClickListener{
+            binding.oneDayBtn.isSelected=false
+            binding.oneWeekBtn.isSelected=true
+            binding.oneMonthBtn.isSelected=false
+            binding.threeMonthBtn.isSelected=false
+            binding.oneYearBtn.isSelected=false
+            binding.fiveYearBtn.isSelected=false
             ApiWrapper.getStockWeekly(ticker){
                 calPercnet(it)
                 drawLineChart(it)
@@ -143,10 +162,16 @@ class DetailActivity : AppCompatActivity(){
         }
         //1달 그래프
         binding.oneMonthBtn.setOnClickListener{
+            binding.oneDayBtn.isSelected=false
+            binding.oneWeekBtn.isSelected=false
+            binding.oneMonthBtn.isSelected=true
+            binding.threeMonthBtn.isSelected=false
+            binding.oneYearBtn.isSelected=false
+            binding.fiveYearBtn.isSelected=false
             ApiWrapper.getStockMonthly(ticker){
-                //calPercnet2(it)
+                calPercnet(it)
                 drawLineChart(it)
-                //drawCandleChart(it)
+                drawCandleChart(it)
             }
         }
         //3달 그래프
@@ -165,22 +190,19 @@ class DetailActivity : AppCompatActivity(){
                 //drawCandleChart(it)
             }
         }
+        //5년그래프
+        //1년 그래프
+        binding.fiveYearBtn.setOnClickListener{
+            ApiWrapper.getStockYearly(ticker){
+                //calPercnet2(it)
+                //drawLineChart2(it)
+                //drawCandleChart(it)
+            }
+        }
 
     }
 
     fun calPercnet(it: List<StockModel>){
-        val df = DecimalFormat("#.##")
-        var percent = df.format((it.last().high.toFloat()-it[0].high.toFloat())/it[0].high.toFloat()*100).toString()
-        if(percent?.substring(0,1)=="-"){
-            binding.percentTv.setTextColor(Color.BLUE)
-            percent = percent+"%"
-        }else{
-            binding.percentTv.setTextColor(Color.RED)
-            percent = "+"+percent+"%"
-        }
-        binding.percentTv.text = percent
-    }
-    fun calPercnet2(it: List<StockModel>){
         val df = DecimalFormat("#.##")
         var percent = df.format((it.last().high.toFloat()-it[0].high.toFloat())/it[0].high.toFloat()*100).toString()
         if(percent?.substring(0,1)=="-"){
@@ -205,9 +227,8 @@ class DetailActivity : AppCompatActivity(){
                 val time=element.datetime.subSequence(11,16)
                 dateList.add(day+" "+time)
             }else{
-                dateList.add(element.date.subSequence(0,10).toString())
+                dateList.add(element.date)
             }
-
             priceList.add(element.high)
         }
 
@@ -258,73 +279,19 @@ class DetailActivity : AppCompatActivity(){
         lineChart.invalidate()
     }
 
-    fun drawLineChart2(stockList: List<StockModel>){
-        val lineChart = binding.lineChart
-
-        val dateList = ArrayList<String>()
-        val priceList = ArrayList<String>()
-
-        stockList.forEach { element ->
-            dateList.add(element.date.subSequence(0,10).toString())
-            priceList.add(element.high)
-        }
-
-        //entry
-        val entries = ArrayList<Entry>()
-        for(i in 0 until priceList.size){
-            entries.add(Entry(i.toFloat(), priceList[i].toFloat()))
-        }
-
-        val dataset= LineDataSet(entries, null)
-        dataset.color = getColor(R.color.main_green_color)
-        //원 없애기
-        dataset.setDrawCircles(false)
-
-        val xAxis=lineChart.xAxis
-        val yAxisL=lineChart.axisLeft
-        val yAxisR=lineChart.axisRight
-
-        lineChart.xAxis.valueFormatter= IndexAxisValueFormatter(dateList)
-        //description 지우기
-        lineChart.description=null
-        //x축 y축 숨기기
-        xAxis.isEnabled=false
-        yAxisL.isEnabled=false
-        //yAxisR.isEnabled=false
-
-        //라인굵기
-        dataset.lineWidth=2.0F
-
-        //최대, 최소 y축 설정
-        val space = dataset.yMax/100
-        yAxisL.axisMaximum = dataset.yMax+space
-        yAxisL.axisMinimum = dataset.yMin-space
-
-
-        //데이터 값 표시 X
-        dataset.setDrawValues(false)
-
-        //marker
-        val marker = LineChartMarkerView(this, R.layout.linechart_marker_view,dateList)
-        lineChart.marker = marker
-
-        lineChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
-        val data = LineData(dataset)
-
-        lineChart.data = data
-        lineChart.legend.isEnabled=false
-        lineChart.invalidate()
-    }
-
     fun drawCandleChart(stockList : List<StockModel>){
         val candleChart = binding.candlestickChart
 
         val dateList = ArrayList<String>()
         val entries = ArrayList<CandleEntry>()
-        for(i in 0..30){
-            val day=stockList[i].datetime.subSequence(0,10).toString()
-            val time=stockList[i].datetime.subSequence(11,16)
-            dateList.add(day+" "+time)
+        for(i in 0..29){
+            if (stockList[i].date.isNullOrEmpty()){
+                val day=stockList[i].datetime.subSequence(0,10).toString()
+                val time=stockList[i].datetime.subSequence(11,16)
+                dateList.add(day+" "+time)
+            }else{
+                dateList.add(stockList[i].date)
+            }
             entries.add(CandleEntry(
                 i.toFloat(),
                 stockList[i].high.toFloat(),

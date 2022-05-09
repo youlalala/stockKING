@@ -6,7 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingHorizontal="15dp"
-    android:paddingTop="44dp">
+    android:paddingTop="44dp"
+    style="@style/TextStyle">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -93,55 +94,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/one_day_btn"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:textSize="10dp"
-                    android:text="1일"/>
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/one_week_btn"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:textSize="10dp"
-                    android:text="1주"/>
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/one_month_btn"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:textSize="10dp"
-                    android:text="1개월"/>
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/three_month_btn"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:textSize="10dp"
-                    android:text="3개월"/>
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/one_year_btn"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:textSize="10dp"
-                    android:text="1년"/>
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/five_year_btn"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:textSize="10dp"
-                    android:text="5년"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="20dp"
+            android:paddingHorizontal="5dp">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/line_chart_btn"
+                android:layout_gravity="right"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="15dp"
+                android:text="라인" />
+            <TextView
+                android:id="@+id/candle_chart_btn"
+                android:layout_gravity="right"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="15dp"
+                android:text="캔들" />
             </LinearLayout>
-
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/line_chart"
                 android:layout_width="match_parent"
@@ -151,14 +129,72 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:visibility="gone"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/chart_btn"
-                android:layout_gravity="right"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textSize="10dp"
-                android:text="line" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/one_day_btn"
+                    android:layout_height="35dp"
+                    android:layout_width="match_parent"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_weight="1"
+                    android:textSize="14dp"
+                    android:background="@drawable/chart_button_selector"
+                    android:textColor="@color/chart_button_text_color"
+                    android:text="1일"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/one_week_btn"
+                    android:layout_height="35dp"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="5dp"
+                    android:textSize="14dp"
+                    android:background="@drawable/chart_button_selector"
+                    android:textColor="@color/chart_button_text_color"
+                    android:text="1주"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/one_month_btn"
+                    android:layout_height="35dp"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="5dp"
+                    android:textSize="14dp"
+                    android:background="@drawable/chart_button_selector"
+                    android:textColor="@color/chart_button_text_color"
+                    android:text="1개월"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/three_month_btn"
+                    android:layout_height="35dp"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="5dp"
+                    android:textSize="14dp"
+                    android:background="@drawable/chart_button_selector"
+                    android:textColor="@color/chart_button_text_color"
+                    android:text="3개월"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/one_year_btn"
+                    android:layout_height="35dp"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="5dp"
+                    android:textSize="14dp"
+                    android:background="@drawable/chart_button_selector"
+                    android:textColor="@color/chart_button_text_color"
+                    android:text="1년"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/five_year_btn"
+                    android:layout_height="35dp"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="5dp"
+                    android:textSize="14dp"
+                    android:background="@drawable/chart_button_selector"
+                    android:textColor="@color/chart_button_text_color"
+                    android:text="5년"/>
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"

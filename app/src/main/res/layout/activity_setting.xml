@@ -85,14 +85,7 @@
                 android:thumb="@drawable/switch_thumb"
                 />
         </LinearLayout>
-
-
-
     </LinearLayout>
-
-
-
-
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/logout_btn"
