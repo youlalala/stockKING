@@ -83,12 +83,21 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
         <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/money_switch"
+            android:id="@+id/exchange_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:switchTextAppearance="@style/switchTextAppearance"
             app:track="@drawable/switch_track_selector"
             android:thumb="@drawable/switch_thumb"
+            />
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sort_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:switchTextAppearance="@style/switchTextAppearance"
+            app:track="@drawable/switch_track_selector"
+            android:thumb="@drawable/switch_thumb"
+            android:visibility="gone"
             />
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/asc_switch"

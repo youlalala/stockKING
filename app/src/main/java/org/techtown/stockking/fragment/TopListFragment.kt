@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import org.techtown.stockking.DetailActivity
 import org.techtown.stockking.R
@@ -29,9 +30,9 @@ class TopListFragment : Fragment(){
     ): View? {
         binding = FragmentToplistBinding.inflate(inflater, container, false)
 
-        binding.moneySwitch.showText = true
-        binding.moneySwitch.textOff = "$"
-        binding.moneySwitch.textOn = "₩"
+        binding.exchangeSwitch.showText = true
+        binding.exchangeSwitch.textOff = "$"
+        binding.exchangeSwitch.textOn = "₩"
 
         binding.buttonTitleTv.text = resources.getString(R.string.topList_btn1_title)
         binding.buttonDetailTv.text = resources.getString(R.string.topList_btn1_detail)
@@ -56,6 +57,11 @@ class TopListFragment : Fragment(){
             binding.realtimeBtn.isSelected = true
             binding.updownBtn.isSelected = false
             binding.transactionBtn.isSelected = false
+
+            binding.exchangeSwitch.visibility = View.VISIBLE
+            binding.sortSwitch.visibility = View.GONE
+
+
             ApiWrapper.getTopListRealtime() { it ->
                 Log.i("la",it.toString())
                 binding.recyclerView.adapter= RealtimeTopListAdapter(it,onClickItem = {
@@ -66,6 +72,7 @@ class TopListFragment : Fragment(){
                     startActivity(intent)
                 })
             }
+
         }
         binding.updownBtn.setOnClickListener {
             binding.buttonTitleTv.text = resources.getString(R.string.topList_btn2_title)
@@ -73,7 +80,25 @@ class TopListFragment : Fragment(){
             binding.realtimeBtn.isSelected = false
             binding.updownBtn.isSelected = true
             binding.transactionBtn.isSelected = false
-            getTopList("change","asc")
+
+            //switch
+            binding.exchangeSwitch.visibility = View.GONE
+            binding.sortSwitch.visibility = View.VISIBLE
+            binding.sortSwitch.showText = true
+            binding.sortSwitch.textOff = "△"
+            binding.sortSwitch.textOn = "▼"
+
+            getTopList("change","desc")
+
+            binding.sortSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+                if(isChecked){
+                    getTopList("change","asc")
+                }else{
+                    getTopList("change","desc")
+                }
+            }
+
+
             //getTopList("change","desc")
         }
         binding.transactionBtn.setOnClickListener {
