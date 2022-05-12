@@ -10,7 +10,6 @@ import org.techtown.stockking.model.StockTopList
 
 class RealtimeTopListAdapter(
     private val stockTopList: List<StockTopList>,
-    val version:String,
     val onClickItem: (stockTopList: StockTopList)-> Unit)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 

@@ -22,7 +22,7 @@ class SearchFragment : Fragment() {
     ): View? {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
 
-        ApiWrapper.getStockTopList() { it ->
+        ApiWrapper.getTopListRealtime() { it ->
             adapter= SearchListAdapter(it,this,onClickItem = {
                 val intent = Intent(context, DetailActivity::class.java)
                 intent.putExtra("ticker",it.title)

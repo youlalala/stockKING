@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import org.techtown.stockking.DetailActivity
 import org.techtown.stockking.R
 import org.techtown.stockking.adapter.RealtimeTopListAdapter
+import org.techtown.stockking.adapter.TopListChangeAdapter
 import org.techtown.stockking.databinding.FragmentToplistBinding
 
 import org.techtown.stockking.network.ApiWrapper
@@ -38,12 +39,33 @@ class TopListFragment : Fragment(){
         binding.updownBtn.isSelected = false
         binding.transactionBtn.isSelected = false
 
+        ApiWrapper.getTopListRealtime() { it ->
+            Log.i("la",it.toString())
+            binding.recyclerView.adapter= RealtimeTopListAdapter(it,onClickItem = {
+                val intent = Intent(context, DetailActivity::class.java)
+                intent.putExtra("ticker",it.title)
+                intent.putExtra("percent",it.percent)
+                intent.putExtra("price",it.price)
+                startActivity(intent)
+            })
+        }
+
         binding.realtimeBtn.setOnClickListener {
             binding.buttonTitleTv.text = resources.getString(R.string.topList_btn1_title)
             binding.buttonDetailTv.text = resources.getString(R.string.topList_btn1_detail)
             binding.realtimeBtn.isSelected = true
             binding.updownBtn.isSelected = false
             binding.transactionBtn.isSelected = false
+            ApiWrapper.getTopListRealtime() { it ->
+                Log.i("la",it.toString())
+                binding.recyclerView.adapter= RealtimeTopListAdapter(it,onClickItem = {
+                    val intent = Intent(context, DetailActivity::class.java)
+                    intent.putExtra("ticker",it.title)
+                    intent.putExtra("percent",it.percent)
+                    intent.putExtra("price",it.price)
+                    startActivity(intent)
+                })
+            }
         }
         binding.updownBtn.setOnClickListener {
             binding.buttonTitleTv.text = resources.getString(R.string.topList_btn2_title)
@@ -51,6 +73,8 @@ class TopListFragment : Fragment(){
             binding.realtimeBtn.isSelected = false
             binding.updownBtn.isSelected = true
             binding.transactionBtn.isSelected = false
+            getTopList("change","asc")
+            //getTopList("change","desc")
         }
         binding.transactionBtn.setOnClickListener {
             binding.buttonTitleTv.text = resources.getString(R.string.topList_btn3_title)
@@ -60,30 +84,23 @@ class TopListFragment : Fragment(){
             binding.transactionBtn.isSelected = true
         }
 
-        topList("us")
 
         return binding.root
     }
 
-    fun topList(version: String){
-        ApiWrapper.getStockTopList() { it ->
-            Log.i("la",it.toString())
-            binding.recyclerView.adapter= RealtimeTopListAdapter(it,version,onClickItem = {
-                val intent = Intent(context, DetailActivity::class.java)
-                intent.putExtra("ticker",it.title)
-                intent.putExtra("percent",it.percent)
-                intent.putExtra("price",it.price)
-                startActivity(intent)
-            })
+    fun getTopList(filter1: String, filter2: String){
+        if(filter1 == "change"){
+            ApiWrapper.getTopListChange(filter2) { it ->
+                Log.i("SSS",it.toString())
+                binding.recyclerView.adapter= TopListChangeAdapter(it,onClickItem = {
+                    val intent = Intent(context, DetailActivity::class.java)
+                    intent.putExtra("ticker",it.symbol)
+                    startActivity(intent)
+                })
+            }
         }
-
     }
 
-//    private fun subscribeUi(adapter: RealtimeTopListAdapter){
-//        viewModel.stocks.observe(viewLifecycleOwner){ stocks ->
-//            realtimeAdapter.submitList(stocks)
-//        }
-//    }
 }
 
 

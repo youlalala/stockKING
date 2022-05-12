@@ -1,6 +1,6 @@
 package org.techtown.stockking.model
 
-data class StockTopListModel(
+data class TopListRealtimeModel(
     var symbols: List<StockTopList>
 )
 

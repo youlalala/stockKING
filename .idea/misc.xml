@@ -52,6 +52,7 @@
         <entry key="app/src/main/res/layout/item_recyclerview.xml" value="0.22" />
         <entry key="app/src/main/res/layout/linechart_marker_view.xml" value="0.3390625" />
         <entry key="app/src/main/res/layout/search_recyclerview.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/toplist_change_recyclerview.xml" value="0.175" />
         <entry key="app/src/main/res/layout/toplist_recyclerview.xml" value="0.14437689969604864" />
         <entry key="app/src/main/res/menu/bottom_navigation_item.xml" value="0.2520833333333333" />
         <entry key="app/src/main/res/menu/search_menu.xml" value="0.1" />
