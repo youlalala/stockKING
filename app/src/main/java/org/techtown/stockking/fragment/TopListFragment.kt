@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import org.techtown.stockking.DetailActivity
 import org.techtown.stockking.R
 import org.techtown.stockking.adapter.RealtimeTopListAdapter
+import org.techtown.stockking.adapter.TopListCapAdapter
 import org.techtown.stockking.adapter.TopListChangeAdapter
 import org.techtown.stockking.databinding.FragmentToplistBinding
 
@@ -33,6 +34,10 @@ class TopListFragment : Fragment(){
         binding.exchangeSwitch.showText = true
         binding.exchangeSwitch.textOff = "$"
         binding.exchangeSwitch.textOn = "₩"
+
+        binding.sortSwitch.showText = true
+        binding.sortSwitch.textOff = "△"
+        binding.sortSwitch.textOn = "▼"
 
         binding.buttonTitleTv.text = resources.getString(R.string.topList_btn1_title)
         binding.buttonDetailTv.text = resources.getString(R.string.topList_btn1_detail)
@@ -84,12 +89,8 @@ class TopListFragment : Fragment(){
             //switch
             binding.exchangeSwitch.visibility = View.GONE
             binding.sortSwitch.visibility = View.VISIBLE
-            binding.sortSwitch.showText = true
-            binding.sortSwitch.textOff = "△"
-            binding.sortSwitch.textOn = "▼"
 
             getTopList("change","desc")
-
             binding.sortSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
                 if(isChecked){
                     getTopList("change","asc")
@@ -97,9 +98,6 @@ class TopListFragment : Fragment(){
                     getTopList("change","desc")
                 }
             }
-
-
-            //getTopList("change","desc")
         }
         binding.transactionBtn.setOnClickListener {
             binding.buttonTitleTv.text = resources.getString(R.string.topList_btn3_title)
@@ -107,8 +105,21 @@ class TopListFragment : Fragment(){
             binding.realtimeBtn.isSelected = false
             binding.updownBtn.isSelected = false
             binding.transactionBtn.isSelected = true
-        }
 
+            //switch
+            binding.exchangeSwitch.visibility = View.VISIBLE
+            binding.sortSwitch.visibility = View.GONE
+
+            getTopList("cap","en")
+
+            binding.sortSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+                if(isChecked){
+                    getTopList("cap","kr")
+                }else{
+                    getTopList("cap","en")
+                }
+            }
+        }
 
         return binding.root
     }
@@ -116,12 +127,20 @@ class TopListFragment : Fragment(){
     fun getTopList(filter1: String, filter2: String){
         if(filter1 == "change"){
             ApiWrapper.getTopListChange(filter2) { it ->
-                Log.i("SSS",it.toString())
                 binding.recyclerView.adapter= TopListChangeAdapter(it,onClickItem = {
                     val intent = Intent(context, DetailActivity::class.java)
                     intent.putExtra("ticker",it.symbol)
                     startActivity(intent)
                 })
+            }
+        }else if(filter1 == "cap"){
+            ApiWrapper.getTopListCap(filter2){ it ->
+                binding.recyclerView.adapter= TopListCapAdapter(it,onClickItem = {
+                    val intent = Intent(context, DetailActivity::class.java)
+                    intent.putExtra("ticker",it.symbol)
+                    startActivity(intent)
+                })
+
             }
         }
     }

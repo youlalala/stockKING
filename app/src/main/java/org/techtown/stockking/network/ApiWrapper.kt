@@ -10,18 +10,52 @@ import retrofit2.Response
 class ApiWrapper {
     companion object{
         private val TAG = this.javaClass.simpleName
-        fun getStockTopList(callback: (List<StockTopList>) -> Unit){
-            val modelCall = NetWorkService.api2.stockTopList("realtime")
-            modelCall.enqueue(object : Callback<StockTopListModel> {
-                override fun onResponse(call: Call<StockTopListModel>, response: Response<StockTopListModel>) {
+        fun getTopListRealtime(callback: (List<StockTopList>) -> Unit){
+            val modelCall = NetWorkService.api2.topListRealtime("realtime")
+            modelCall.enqueue(object : Callback<TopListRealtimeModel> {
+                override fun onResponse(call: Call<TopListRealtimeModel>, response: Response<TopListRealtimeModel>) {
                     val list = response.body()
                     i(TAG,"stock top list response")
                     list?.let{
                         callback.invoke(it.symbols)
                     }
                 }
-                override fun onFailure(call: Call<StockTopListModel>, t: Throwable) {
+                override fun onFailure(call: Call<TopListRealtimeModel>, t: Throwable) {
                     i(TAG,"stock top list response")
+                    modelCall.cancel()
+                }
+            })
+        }
+
+        fun getTopListChange(sort: String, callback: (List<TopListChangeModel>) -> Unit){
+            val modelCall = NetWorkService.api.topListChange(sort)
+            modelCall.enqueue(object : Callback<List<TopListChangeModel>> {
+                override fun onResponse(call: Call<List<TopListChangeModel>>, response: Response<List<TopListChangeModel>>) {
+                    val list = response.body()
+                    i(TAG,"change top list response")
+                    list?.let{
+                        callback.invoke(it)
+                    }
+                }
+                override fun onFailure(call: Call<List<TopListChangeModel>>, t: Throwable) {
+                    i(TAG,"change top list fail")
+                    modelCall.cancel()
+                }
+            })
+        }
+
+        fun getTopListCap(exchange: String, callback: (List<TopListCapModel>) -> Unit){
+            val modelCall = NetWorkService.api.topListCap(exchange)
+            modelCall.enqueue(object : Callback<List<TopListCapModel>> {
+                override fun onResponse(call: Call<List<TopListCapModel>>, response: Response<List<TopListCapModel>>) {
+                    val list = response.body()
+                    i(TAG,"cap top list response")
+                    list?.let{
+                        callback.invoke(it)
+                    }
+                }
+                override fun onFailure(call: Call<List<TopListCapModel>>, t: Throwable) {
+                    i(TAG,"cap top list fail")
                     modelCall.cancel()
                 }
             })
