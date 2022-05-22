@@ -61,6 +61,24 @@ class ApiWrapper {
             })
         }
 
+        fun getSearch(method: String, keyword: String, callback: (List<SearchModel>) -> Unit){
+            val modelCall = NetWorkService.api.search(method,keyword)
+            modelCall.enqueue(object : Callback<List<SearchModel>> {
+                override fun onResponse(call: Call<List<SearchModel>>, response: Response<List<SearchModel>>) {
+                    val list = response.body()
+                    i(TAG,"search list response")
+                    list?.let{
+                        callback.invoke(it)
+                    }
+                }
+                override fun onFailure(call: Call<List<SearchModel>>, t: Throwable) {
+                    i(TAG,"search list fail")
+                    modelCall.cancel()
+                }
+            })
+        }
+
+
         fun getStockDaily(symbol: String, callback: (List<StockModel>) -> Unit){
             val modelCall = NetWorkService.api.stockDaily(symbol)
             modelCall.enqueue(object : Callback<List<StockModel>> {

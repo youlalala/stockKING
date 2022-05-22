@@ -21,13 +21,14 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
+        val context = this
 
-        ApiWrapper.getTopListRealtime() { it ->
+        ApiWrapper.getSearch("en","") { it ->
             adapter= SearchListAdapter(it,this,onClickItem = {
-                val intent = Intent(context, DetailActivity::class.java)
-                intent.putExtra("ticker",it.title)
-                intent.putExtra("percent",it.percent)
-                startActivity(intent)
+//                val intent = Intent(context, DetailActivity::class.java)
+//                intent.putExtra("ticker",it.title)
+//                intent.putExtra("percent",it.percent)
+//                startActivity(intent)
             })
             binding.searchRecyclerView.adapter=adapter
         }
@@ -41,7 +42,16 @@ class SearchFragment : Fragment() {
 
             //글자 칠때 마다 변함
             override fun onQueryTextChange(newText: String): Boolean {
-                adapter?.getFilter()?.filter(newText)
+                //adapter?.getFilter()?.filter(newText)
+                ApiWrapper.getSearch("en",newText) { it ->
+                    adapter= SearchListAdapter(it,context,onClickItem = {
+//                        val intent = Intent(context, DetailActivity::class.java)
+//                        intent.putExtra("ticker",it.title)
+//                        intent.putExtra("percent",it.percent)
+//                        startActivity(intent)
+                    })
+                    binding.searchRecyclerView.adapter=adapter
+                }
                 return true
             }
         })

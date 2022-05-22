@@ -8,18 +8,19 @@ import org.techtown.stockking.databinding.SearchRecyclerviewBinding
 import org.techtown.stockking.model.StockTopList
 import android.widget.Filter
 import org.techtown.stockking.fragment.SearchFragment
+import org.techtown.stockking.model.SearchModel
 import kotlin.collections.ArrayList
 
 class SearchListAdapter(
-    val stockTopList: List<StockTopList>,
+    val searchList: List<SearchModel>,
     val context : SearchFragment,
-    val onClickItem: (stockTopList: StockTopList)-> Unit)
+    val onClickItem: (searchList: SearchModel)-> Unit)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
-    private var filterList: List<StockTopList>
+    private var filterList: List<SearchModel>
 
     init{
-        this.filterList = stockTopList
+        this.filterList = searchList
     }
 
     override fun getItemCount(): Int{
@@ -33,11 +34,11 @@ class SearchListAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val binding=(holder as SearchViewHolder).binding
 
-        val ticker = filterList[position].title
+        val ticker = filterList[position].symbol
         binding.itemTicker.text = ticker
 
 
-        binding.itemConame.text =filterList[position].company
+        binding.itemConame.text =filterList[position].name_en
 
 //        //SVG string content
 //        val svgString = filterList[position].img
@@ -59,37 +60,6 @@ class SearchListAdapter(
         }
     }
 
-
-    fun getFilter(): Filter? {
-        return object : Filter() {
-            override fun performFiltering(constraint: CharSequence): FilterResults {
-                val charString = constraint.toString()
-                filterList = if (charString.isEmpty()) {
-                    stockTopList
-                } else {
-                    val filteredList = ArrayList<StockTopList>()
-                    if (stockTopList != null) {
-                        for (stock in stockTopList) {
-                            //검색 종류
-                            if(stock.title.toLowerCase().contains(charString.toLowerCase())
-                            or stock.company.toLowerCase().contains(charString.toLowerCase())) {
-                                filteredList.add(stock);
-                            }
-                        }
-                    }
-                    filteredList
-                }
-                val filterResults = FilterResults()
-                filterResults.values = filterList
-                return filterResults
-            }
-
-            override fun publishResults(constraint: CharSequence, results: FilterResults) {
-                filterList  = results.values as ArrayList<StockTopList>
-                notifyDataSetChanged()
-            }
-        }
-    }
 
     class SearchViewHolder(val binding: SearchRecyclerviewBinding): RecyclerView.ViewHolder(binding.root)
 
