@@ -3,11 +3,14 @@ package org.techtown.stockking
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.drawable.PictureDrawable
 import android.os.Bundle
 import android.os.Vibrator
 import android.util.Log.i
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.caverock.androidsvg.SVG
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
@@ -48,19 +51,32 @@ class DetailActivity : AppCompatActivity(){
         ApiWrapper.getCompanyInfo(ticker){
             if(it.isEmpty()){
                 binding.tickerTv.text = NOINFOMATION
-                binding.coNameUsTv.text=NOINFOMATION
                 binding.coNameKrTv.text=NOINFOMATION
                 binding.description.text=NOINFOMATION
                 binding.shareout.text=NOINFOMATION
             }else{
                 binding.tickerTv.text = it[0].symbol
-                binding.coNameUsTv.text=it[0].name_en
                 binding.coNameKrTv.text=it[0].name_kr
                 binding.description.text=it[0].desc_kr
                 binding.shareout.text=it[0].shareout
 
+                //img
+                //SVG string content
+                val svgString = it[0].img
+
+                //convert SVG string to an object of type SVG
+                val svg = SVG.getFromString(svgString)
+
+                //create a drawable from svg
+                val drawable = PictureDrawable(svg.renderToPicture())
+
+                //finally load the drawable with Glide.
+                Glide.with(this)
+                    .load(drawable)
+                    .circleCrop()
+                    .into(binding.logoImg)
+
                 //더보기
-                i("SSS","maxline"+binding.description.lineCount)
                 if(binding.description.lineCount>3){
                     binding.description.maxLines=3
                     binding.viewMore.visibility= View.VISIBLE

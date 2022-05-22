@@ -43,37 +43,37 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
+            <TextView
+                android:id="@+id/ticker_tv"
+                android:text="ticker"
+                android:textSize="13dp"
+                style="@style/TextStyle"
+                android:textColor="#9EA0A7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:paddingBottom="5dp"
-                android:orientation="horizontal"
-                android:paddingHorizontal="5dp">
-
-                <LinearLayout
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/coNameKr_tv"
+                    android:text="한국어회사이름"
+                    android:textSize="23dp"
+                    android:textStyle="bold"
+                    android:paddingRight="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingBottom="5dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/ticker_tv"
-                        android:text="한국어회사이름"
-                        android:textSize="23dp"
-                        android:textStyle="bold"
-                        android:paddingRight="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <TextView
-                        android:id="@+id/coNameUs_tv"
-                        android:text="영어회사이름"
-                        android:textSize="18dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
+                    style="@style/TitleStyle"
+                    android:textColor="#474C53"
+                    android:layout_gravity="center|right"/>
 
-
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/logo_img"
+                    android:layout_width="23dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center|right" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -131,7 +131,8 @@
                 android:visibility="gone"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp">
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/one_day_btn"
@@ -202,16 +203,20 @@
                 android:orientation="vertical"
                 android:layout_marginBottom="10dp">
                 <TextView
-                    android:id="@+id/coNameKr_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    style="@style/TitleStyle"
+                    android:textColor="#474C53"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
                     android:layout_marginBottom="5dp"
-                    android:textSize="17dp" />
+                    android:text="회사정보"/>
                 <TextView
                     android:id="@+id/description"
                     android:textSize="13dp"
+                    style="@style/TextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="회사 상세 설명"/>
                 <TextView
                     android:id="@+id/view_more"
                     android:textColor="@color/main_green_color"
