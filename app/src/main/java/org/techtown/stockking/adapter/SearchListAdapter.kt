@@ -16,18 +16,15 @@ import kotlin.collections.ArrayList
 
 class SearchListAdapter(
     val searchList: List<SearchModel>,
+    val version: String,
     val context : SearchFragment,
     val onClickItem: (searchList: SearchModel)-> Unit)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
-    private var filterList: List<SearchModel>
 
-    init{
-        this.filterList = searchList
-    }
 
     override fun getItemCount(): Int{
-        return filterList.size
+        return searchList.size
     }
 
 
@@ -37,14 +34,18 @@ class SearchListAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val binding=(holder as SearchViewHolder).binding
 
-        val ticker = filterList[position].symbol
+        val ticker = searchList[position].symbol
         binding.itemTicker.text = ticker
 
 
-        //binding.itemEnConame.text =filterList[position].name_en
-        binding.itemKrConame.text =filterList[position].name_kr+"   "
+        if(version=="kr"){
+            binding.itemConame.text =searchList[position].name_kr+"   "
+        }else{
+            binding.itemConame.text =searchList[position].name_en+"   "
+        }
+
         //SVG string content
-        val svgString = filterList[position].img
+        val svgString = searchList[position].img
 
         //convert SVG string to an object of type SVG
         val svg = SVG.getFromString(svgString)
@@ -62,7 +63,7 @@ class SearchListAdapter(
 
 
         holder.itemView.setOnClickListener{
-            onClickItem.invoke(filterList[position])
+            onClickItem.invoke(searchList[position])
         }
     }
 

@@ -50,7 +50,7 @@ class SearchFragment : Fragment() {
         }
 
         ApiWrapper.getAllCompany() { it ->
-            adapter= SearchListAdapter(it,this,onClickItem = {
+            adapter= SearchListAdapter(it,"kr",this,onClickItem = {
                 val intent = Intent(context, DetailActivity::class.java)
                 intent.putExtra("ticker",it.symbol)
                 startActivity(intent)
@@ -70,7 +70,7 @@ class SearchFragment : Fragment() {
                 //adapter?.getFilter()?.filter(newText)
                 if(binding.filterKrBtn.isSelected){
                     ApiWrapper.getSearch("kr",newText) { it ->
-                        adapter= SearchListAdapter(it,temp_context,onClickItem = {
+                        adapter= SearchListAdapter(it,"kr",temp_context,onClickItem = {
                             val intent = Intent(context, DetailActivity::class.java)
                             intent.putExtra("ticker",it.symbol)
                             startActivity(intent)
@@ -79,7 +79,7 @@ class SearchFragment : Fragment() {
                     }
                 }else if(binding.filterEnBtn.isSelected){
                     ApiWrapper.getSearch("en",newText) { it ->
-                        adapter= SearchListAdapter(it,temp_context,onClickItem = {
+                        adapter= SearchListAdapter(it,"en",temp_context,onClickItem = {
                             val intent = Intent(context, DetailActivity::class.java)
                             intent.putExtra("ticker",it.symbol)
                             startActivity(intent)
@@ -88,7 +88,7 @@ class SearchFragment : Fragment() {
                     }
                 }else{
                     ApiWrapper.getSearch("symbol",newText) { it ->
-                        adapter= SearchListAdapter(it,temp_context,onClickItem = {
+                        adapter= SearchListAdapter(it,"kr",temp_context,onClickItem = {
                             val intent = Intent(context, DetailActivity::class.java)
                             intent.putExtra("ticker",it.symbol)
                             startActivity(intent)
