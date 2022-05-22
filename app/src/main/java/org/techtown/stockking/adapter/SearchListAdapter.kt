@@ -55,7 +55,10 @@ class SearchListAdapter(
         //finally load the drawable with Glide.
         Glide.with(context)
             .load(drawable)
+            .circleCrop()
             .into(binding.testImg)
+
+
 
 
         holder.itemView.setOnClickListener{

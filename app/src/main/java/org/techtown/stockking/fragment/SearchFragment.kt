@@ -21,14 +21,13 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
-        val context = this
+        val temp_context = this
 
         ApiWrapper.getSearch("en","") { it ->
             adapter= SearchListAdapter(it,this,onClickItem = {
-//                val intent = Intent(context, DetailActivity::class.java)
-//                intent.putExtra("ticker",it.title)
-//                intent.putExtra("percent",it.percent)
-//                startActivity(intent)
+                val intent = Intent(context, DetailActivity::class.java)
+                intent.putExtra("ticker",it.symbol)
+                startActivity(intent)
             })
             binding.searchRecyclerView.adapter=adapter
         }
@@ -44,11 +43,10 @@ class SearchFragment : Fragment() {
             override fun onQueryTextChange(newText: String): Boolean {
                 //adapter?.getFilter()?.filter(newText)
                 ApiWrapper.getSearch("en",newText) { it ->
-                    adapter= SearchListAdapter(it,context,onClickItem = {
-//                        val intent = Intent(context, DetailActivity::class.java)
-//                        intent.putExtra("ticker",it.title)
-//                        intent.putExtra("percent",it.percent)
-//                        startActivity(intent)
+                    adapter= SearchListAdapter(it,temp_context,onClickItem = {
+                        val intent = Intent(context, DetailActivity::class.java)
+                        intent.putExtra("ticker",it.symbol)
+                        startActivity(intent)
                     })
                     binding.searchRecyclerView.adapter=adapter
                 }

@@ -12,10 +12,11 @@
         android:gravity="center"
         android:padding="8dp"
         android:layout_margin="10dp">
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/test_img"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:layout_width="0dp"/>
         <TextView
             android:id="@+id/item_ticker"
