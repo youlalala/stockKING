@@ -3,25 +3,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="5dp"
-    android:background="#80000000"
+    android:padding="10dp"
+    android:background="@drawable/chart_marker_view"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/date_tv"
         android:textSize="12dp"
-        android:textColor="@color/white"
+        android:textColor="@color/main_black_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:text="date"
         android:gravity="center"/>
     <TextView
         android:id="@+id/price_tv"
         android:textSize="10dp"
-        android:textColor="@color/white"
+        android:textColor="@color/main_black_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:text="price"
         android:gravity="center"/>
 
 

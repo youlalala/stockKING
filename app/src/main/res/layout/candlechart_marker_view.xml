@@ -4,13 +4,13 @@
     android:layout_width="150dp"
     android:layout_height="wrap_content"
     android:padding="5dp"
-    android:background="#80000000"
+    android:background="@drawable/chart_marker_view"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/date_tv"
         android:textSize="12dp"
-        android:textColor="@color/white"
+        android:textColor="@color/main_black_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -23,7 +23,7 @@
         <TableRow>
             <TextView
                 android:textSize="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/main_black_color"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="left"
@@ -31,21 +31,21 @@
             <TextView
                 android:id="@+id/high_tv"
                 android:textSize="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/main_black_color"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text="0"/>
             <TextView
                 android:textSize="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/main_black_color"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text=" "/>
             <TextView
                 android:textSize="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/main_black_color"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="left"
@@ -53,7 +53,7 @@
             <TextView
                 android:id="@+id/low_tv"
                 android:textSize="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/main_black_color"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="right"
@@ -63,7 +63,7 @@
         <TableRow>
             <TextView
                 android:textSize="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/main_black_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="left"
@@ -71,21 +71,21 @@
             <TextView
                 android:id="@+id/open_tv"
                 android:textSize="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/main_black_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text="0"/>
             <TextView
                 android:textSize="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/main_black_color"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text=" "/>
             <TextView
                 android:textSize="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/main_black_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="left"
@@ -93,7 +93,7 @@
             <TextView
                 android:id="@+id/close_tv"
                 android:textSize="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/main_black_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="right"

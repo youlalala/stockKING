@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.caverock.androidsvg.SVG
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
@@ -292,10 +293,16 @@ class DetailActivity : AppCompatActivity(){
         //x축 y축 숨기기
         xAxis.isEnabled=false
         yAxisL.isEnabled=false
-        yAxisR.isEnabled=false
+        yAxisR.isEnabled=true
+
+        yAxisR.setLabelCount(2,true)
+        yAxisR.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
+        yAxisR.textColor=getColor(R.color.main_green_color)
+        yAxisR.axisLineColor = Color.TRANSPARENT;
+        yAxisR.gridColor = Color.TRANSPARENT;
 
         //라인굵기
-        dataset.lineWidth=2.0F
+        dataset.lineWidth=1.5F
 
         //최대 , 최소 y축 설정
         val space = dataset.yMax/100
@@ -309,9 +316,10 @@ class DetailActivity : AppCompatActivity(){
             setDrawValues(false)
             setDrawVerticalHighlightIndicator(true)
             setDrawHorizontalHighlightIndicator(false)
-            highLightColor = R.color.main_green_color
+            highLightColor = getColor(R.color.main_green_color)
             highlightLineWidth = 1f
         }
+
 
         //marker
         val marker = LineChartMarkerView(this, R.layout.linechart_marker_view,dateList)
@@ -373,9 +381,26 @@ class DetailActivity : AppCompatActivity(){
         //x축 y축 숨기기
         xAxis.isEnabled=false
         yAxisL.isEnabled=false
-        //yAxisR.isEnabled=false
-        //데이터 값 표시 X
-        dataset.setDrawValues(false)
+        yAxisR.isEnabled=true
+        yAxisR.setLabelCount(2,true)
+        yAxisR.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
+        yAxisR.textColor=getColor(R.color.main_green_color)
+        yAxisR.axisLineColor = Color.TRANSPARENT;
+        yAxisR.gridColor = Color.TRANSPARENT;
+        //최대 , 최소 y축 설정
+        val space = dataset.yMax/1000
+        yAxisL.axisMaximum = dataset.yMax+space
+        yAxisL.axisMinimum = dataset.yMin-space
+
+        dataset.apply {
+            setGradientColor(1,0)
+            //데이터 값 표시 X
+            setDrawValues(false)
+            setDrawVerticalHighlightIndicator(true)
+            setDrawHorizontalHighlightIndicator(false)
+            highLightColor = getColor(R.color.main_green_color)
+            highlightLineWidth = 1f
+        }
         //marker
         val marker = CandleChartMarkerView(this, R.layout.candlechart_marker_view,dateList,entries)
         candleChart.marker = marker
