@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/drawable/chart_button_on.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable/chart_button_selector.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable/chart_button_shape.xml" value="0.1835" />
+        <entry key="app/src/main/res/drawable/green_gradient.xml" value="0.179" />
         <entry key="app/src/main/res/drawable/ic__button1_off.xml" value="0.146" />
         <entry key="app/src/main/res/drawable/ic_bookmarks_off.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_bookmarks_on.xml" value="0.1" />
@@ -36,7 +37,7 @@
         <entry key="app/src/main/res/drawable/switch_track_on.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable/switch_track_selector.xml" value="0.1245" />
         <entry key="app/src/main/res/font/app_font.xml" value="0.27037037037037037" />
-        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.2867630004882813" />
+        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.19184570312500002" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.5230768669540289" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.11548913043478261" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.2753623527444566" />

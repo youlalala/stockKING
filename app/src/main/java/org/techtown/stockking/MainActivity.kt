@@ -11,6 +11,7 @@ import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.databinding.ActivityMainBinding
 import org.techtown.stockking.model.UserModel
 import org.techtown.stockking.adapter.ViewPagerAdapter
+import org.techtown.stockking.module.login.LoginActivity
 import org.techtown.stockking.network.ApiWrapper
 
 class MainActivity : AppCompatActivity() {

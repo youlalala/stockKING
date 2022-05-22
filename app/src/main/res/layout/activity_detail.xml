@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:paddingHorizontal="15dp"
+    android:paddingHorizontal="13dp"
     android:paddingTop="44dp"
     style="@style/TextStyle">
 
@@ -38,11 +38,11 @@
         android:id="@+id/main_scroll"
         android:layout_weight="1"
         android:fillViewport="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
             <TextView
                 android:id="@+id/ticker_tv"
                 android:text="ticker"
@@ -94,31 +94,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="20dp"
-            android:paddingHorizontal="5dp">
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-            <TextView
-                android:id="@+id/line_chart_btn"
-                android:layout_gravity="right"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textSize="15dp"
-                android:text="라인" />
-            <TextView
-                android:id="@+id/candle_chart_btn"
-                android:layout_gravity="right"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"
-                android:text="캔들" />
+                android:orientation="horizontal"
+                android:paddingBottom="20dp"
+                android:paddingHorizontal="5dp">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:id="@+id/line_chart_btn"
+                    android:layout_gravity="right"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textSize="15dp"
+                    android:text="라인" />
+                <TextView
+                    android:id="@+id/candle_chart_btn"
+                    android:layout_gravity="right"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="15dp"
+                    android:text="캔들" />
             </LinearLayout>
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/line_chart"

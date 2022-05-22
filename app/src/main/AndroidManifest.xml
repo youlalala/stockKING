@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name=".LoginActivity"
+            android:name="org.techtown.stockking.module.login.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".SettingActivity"

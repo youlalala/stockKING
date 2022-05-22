@@ -9,18 +9,23 @@ import android.os.Vibrator
 import android.util.Log.i
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.caverock.androidsvg.SVG
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.databinding.ActivityDetailBinding
 
 import org.techtown.stockking.model.BookmarkModel
 import org.techtown.stockking.model.StockModel
-import org.techtown.stockking.module.common.detail_page.CandleChartMarkerView
-import org.techtown.stockking.module.common.detail_page.LineChartMarkerView
+import org.techtown.stockking.module.graph.CandleChartMarkerView
+import org.techtown.stockking.module.graph.LineChartMarkerView
 
 import org.techtown.stockking.network.ApiWrapper
 import java.text.DecimalFormat
@@ -192,27 +197,45 @@ class DetailActivity : AppCompatActivity(){
         }
         //3달 그래프
         binding.threeMonthBtn.setOnClickListener{
+            binding.oneDayBtn.isSelected=false
+            binding.oneWeekBtn.isSelected=false
+            binding.oneMonthBtn.isSelected=false
+            binding.threeMonthBtn.isSelected=true
+            binding.oneYearBtn.isSelected=false
+            binding.fiveYearBtn.isSelected=false
             ApiWrapper.getStock3Monthly(ticker){
-                //calPercnet2(it)
-                //drawLineChart2(it)
-                //drawCandleChart(it)
+                calPercnet(it)
+                drawLineChart(it)
+                drawCandleChart(it)
             }
         }
         //1년 그래프
         binding.oneYearBtn.setOnClickListener{
-            ApiWrapper.getStockYearly(ticker){
-                //calPercnet2(it)
-                //drawLineChart2(it)
-                //drawCandleChart(it)
+            binding.oneDayBtn.isSelected=false
+            binding.oneWeekBtn.isSelected=false
+            binding.oneMonthBtn.isSelected=false
+            binding.threeMonthBtn.isSelected=false
+            binding.oneYearBtn.isSelected=true
+            binding.fiveYearBtn.isSelected=false
+            ApiWrapper.getStock3Monthly(ticker){
+                calPercnet(it)
+                drawLineChart(it)
+                drawCandleChart(it)
             }
         }
         //5년그래프
         //1년 그래프
         binding.fiveYearBtn.setOnClickListener{
-            ApiWrapper.getStockYearly(ticker){
-                //calPercnet2(it)
-                //drawLineChart2(it)
-                //drawCandleChart(it)
+            binding.oneDayBtn.isSelected=false
+            binding.oneWeekBtn.isSelected=false
+            binding.oneMonthBtn.isSelected=false
+            binding.threeMonthBtn.isSelected=false
+            binding.oneYearBtn.isSelected=false
+            binding.fiveYearBtn.isSelected=true
+            ApiWrapper.getStock3Monthly(ticker){
+                calPercnet(it)
+                drawLineChart(it)
+                drawCandleChart(it)
             }
         }
 
@@ -280,8 +303,15 @@ class DetailActivity : AppCompatActivity(){
         yAxisL.axisMinimum = dataset.yMin-space
 
 
-        //데이터 값 표시 X
-        dataset.setDrawValues(false)
+        dataset.apply {
+            setGradientColor(1,0)
+            //데이터 값 표시 X
+            setDrawValues(false)
+            setDrawVerticalHighlightIndicator(true)
+            setDrawHorizontalHighlightIndicator(false)
+            highLightColor = R.color.main_green_color
+            highlightLineWidth = 1f
+        }
 
         //marker
         val marker = LineChartMarkerView(this, R.layout.linechart_marker_view,dateList)

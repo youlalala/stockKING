@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.kakao.sdk.user.UserApiClient
 import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.databinding.ActivitySettingBinding
+import org.techtown.stockking.module.login.LoginActivity
 
 class SettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
