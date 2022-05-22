@@ -49,7 +49,7 @@ class SearchFragment : Fragment() {
             binding.filterTickerBtn.isSelected = true
         }
 
-        ApiWrapper.getSearch("en","a") { it ->
+        ApiWrapper.getAllCompany() { it ->
             adapter= SearchListAdapter(it,this,onClickItem = {
                 val intent = Intent(context, DetailActivity::class.java)
                 intent.putExtra("ticker",it.symbol)
