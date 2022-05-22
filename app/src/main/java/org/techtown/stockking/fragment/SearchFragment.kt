@@ -2,15 +2,19 @@ package org.techtown.stockking.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import org.techtown.stockking.DetailActivity
+import org.techtown.stockking.R
+import org.techtown.stockking.adapter.RealtimeTopListAdapter
 import org.techtown.stockking.databinding.FragmentSearchBinding
 import org.techtown.stockking.adapter.SearchListAdapter
 import org.techtown.stockking.network.ApiWrapper
+import java.util.regex.Pattern
 
 class SearchFragment : Fragment() {
 
@@ -23,7 +27,29 @@ class SearchFragment : Fragment() {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
         val temp_context = this
 
-        ApiWrapper.getSearch("en","") { it ->
+        binding.filterKrBtn.isSelected = true
+        binding.filterEnBtn.isSelected = false
+        binding.filterTickerBtn.isSelected = false
+
+        binding.filterKrBtn.setOnClickListener {
+            binding.filterKrBtn.isSelected = true
+            binding.filterEnBtn.isSelected = false
+            binding.filterTickerBtn.isSelected = false
+        }
+
+        binding.filterEnBtn.setOnClickListener {
+            binding.filterKrBtn.isSelected = false
+            binding.filterEnBtn.isSelected = true
+            binding.filterTickerBtn.isSelected = false
+        }
+
+        binding.filterTickerBtn.setOnClickListener {
+            binding.filterKrBtn.isSelected = false
+            binding.filterEnBtn.isSelected = false
+            binding.filterTickerBtn.isSelected = true
+        }
+
+        ApiWrapper.getSearch("en","a") { it ->
             adapter= SearchListAdapter(it,this,onClickItem = {
                 val intent = Intent(context, DetailActivity::class.java)
                 intent.putExtra("ticker",it.symbol)
@@ -42,14 +68,35 @@ class SearchFragment : Fragment() {
             //글자 칠때 마다 변함
             override fun onQueryTextChange(newText: String): Boolean {
                 //adapter?.getFilter()?.filter(newText)
-                ApiWrapper.getSearch("en",newText) { it ->
-                    adapter= SearchListAdapter(it,temp_context,onClickItem = {
-                        val intent = Intent(context, DetailActivity::class.java)
-                        intent.putExtra("ticker",it.symbol)
-                        startActivity(intent)
-                    })
-                    binding.searchRecyclerView.adapter=adapter
+                if(binding.filterKrBtn.isSelected){
+                    ApiWrapper.getSearch("kr",newText) { it ->
+                        adapter= SearchListAdapter(it,temp_context,onClickItem = {
+                            val intent = Intent(context, DetailActivity::class.java)
+                            intent.putExtra("ticker",it.symbol)
+                            startActivity(intent)
+                        })
+                        binding.searchRecyclerView.adapter=adapter
+                    }
+                }else if(binding.filterEnBtn.isSelected){
+                    ApiWrapper.getSearch("en",newText) { it ->
+                        adapter= SearchListAdapter(it,temp_context,onClickItem = {
+                            val intent = Intent(context, DetailActivity::class.java)
+                            intent.putExtra("ticker",it.symbol)
+                            startActivity(intent)
+                        })
+                        binding.searchRecyclerView.adapter=adapter
+                    }
+                }else{
+                    ApiWrapper.getSearch("symbol",newText) { it ->
+                        adapter= SearchListAdapter(it,temp_context,onClickItem = {
+                            val intent = Intent(context, DetailActivity::class.java)
+                            intent.putExtra("ticker",it.symbol)
+                            startActivity(intent)
+                        })
+                        binding.searchRecyclerView.adapter=adapter
+                    }
                 }
+
                 return true
             }
         })

@@ -1,39 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
-    android:id="@+id/item_root"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:padding="8dp"
+    android:layout_marginBottom="10dp">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/test_img"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:padding="8dp"
-        android:layout_margin="10dp">
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/test_img"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:layout_width="0dp"/>
+        android:background="@android:color/transparent"
+        android:layout_width="0dp"/>
+    <LinearLayout
+        android:layout_weight="5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <TextView
-            android:id="@+id/item_ticker"
-            android:layout_weight="3"
+            android:id="@+id/item_kr_coname"
+            style="@style/TitleStyle"
+            android:textColor="#474C53"
             android:layout_height="wrap_content"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:textStyle="bold"
             android:textSize="18dp"
+            android:text="coname"
             android:singleLine="true"
             android:ellipsize="end"
             />
         <TextView
-            android:id="@+id/item_coname"
-            android:layout_weight="6"
+            android:id="@+id/item_ticker"
+            style="@style/TextStyle"
+            android:textColor="#9EA0A7"
             android:layout_height="wrap_content"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:textSize="13dp"
+            android:text="symbol"
             android:singleLine="true"
             android:ellipsize="end"
             />
@@ -41,4 +46,16 @@
 
     </LinearLayout>
 
+
+
 </LinearLayout>
+
+<!--<TextView-->
+<!--android:id="@+id/item_en_coname"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:textSize="13dp"-->
+<!--android:text="enname"-->
+<!--android:singleLine="true"-->
+<!--android:ellipsize="end"-->
+<!--    />-->

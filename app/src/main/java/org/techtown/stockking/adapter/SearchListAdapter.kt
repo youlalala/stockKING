@@ -41,8 +41,8 @@ class SearchListAdapter(
         binding.itemTicker.text = ticker
 
 
-        binding.itemConame.text =filterList[position].name_en
-
+        //binding.itemEnConame.text =filterList[position].name_en
+        binding.itemKrConame.text =filterList[position].name_kr+"   "
         //SVG string content
         val svgString = filterList[position].img
 
