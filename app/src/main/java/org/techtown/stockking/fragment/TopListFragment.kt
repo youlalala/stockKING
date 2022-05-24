@@ -16,21 +16,18 @@ import org.techtown.stockking.adapter.TopListChangeAdapter
 import org.techtown.stockking.databinding.FragmentToplistBinding
 
 import org.techtown.stockking.network.ApiWrapper
-
+import android.graphics.Color
 
 class TopListFragment : Fragment(){
 
     lateinit var binding: FragmentToplistBinding
 
-    //viewmodel
-    //private val viewModel: RealTimeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentToplistBinding.inflate(inflater, container, false)
-
 
         binding.buttonTitleTv.text = resources.getString(R.string.topList_btn1_title)
         binding.buttonDetailTv.text = resources.getString(R.string.topList_btn1_detail)
@@ -56,11 +53,7 @@ class TopListFragment : Fragment(){
             binding.realtimeBtn.isSelected = true
             binding.updownBtn.isSelected = false
             binding.transactionBtn.isSelected = false
-
-            //binding.exchangeSwitch.visibility = View.VISIBLE
-//            binding.sortSwitch.visibility = View.GONE
-
-
+            binding.progressBar.visibility=View.VISIBLE
             ApiWrapper.getTopListRealtime() { it ->
                 Log.i("la",it.toString())
                 binding.recyclerView.adapter= RealtimeTopListAdapter(it,onClickItem = {
@@ -87,6 +80,7 @@ class TopListFragment : Fragment(){
             binding.sortUp.isSelected=true
             binding.sortDown.isSelected=false
 
+            binding.progressBar.visibility=View.VISIBLE
             getTopList("change","desc")
             binding.sortUp.setOnClickListener {
                 binding.sortUp.isSelected=true
@@ -111,6 +105,7 @@ class TopListFragment : Fragment(){
             binding.exchangeGroup.visibility = View.VISIBLE
             binding.sortGroup.visibility = View.GONE
 
+            binding.progressBar.visibility=View.VISIBLE
             getTopList("cap","en")
             binding.exchangeDollar.isSelected=true
             binding.exchangeWon.isSelected=false

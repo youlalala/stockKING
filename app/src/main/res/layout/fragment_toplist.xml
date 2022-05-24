@@ -163,31 +163,6 @@
                 android:text="-"
                 android:gravity="center" />
         </RadioGroup>
-<!--        <androidx.appcompat.widget.SwitchCompat-->
-<!--            android:id="@+id/exchange_switch"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:switchTextAppearance="@style/switchTextAppearance"-->
-<!--            app:track="@drawable/switch_track_selector"-->
-<!--            android:thumb="@drawable/switch_thumb"-->
-<!--            />-->
-<!--        <androidx.appcompat.widget.SwitchCompat-->
-<!--            android:id="@+id/sort_switch"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:switchTextAppearance="@style/switchTextAppearance"-->
-<!--            app:track="@drawable/switch_track_selector"-->
-<!--            android:thumb="@drawable/switch_thumb"-->
-<!--            android:visibility="gone"-->
-<!--            />-->
-<!--        <androidx.appcompat.widget.SwitchCompat-->
-<!--            android:id="@+id/asc_switch"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:track="@drawable/switch_track_selector"-->
-<!--            android:thumb="@drawable/switch_thumb"-->
-<!--            android:visibility="gone"-->
-<!--            />-->
     </LinearLayout>
 
 
@@ -197,11 +172,14 @@
         android:layout_height="match_parent"
         android:id="@+id/recyclerView"/>
 </LinearLayout>
+
 <ProgressBar
-    android:layout_width="50dp"
-    android:layout_height="50dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:indeterminate="true"
     android:id="@+id/progress_bar"
+    android:indeterminateTint="@color/main_green_color"
     android:layout_gravity="center"
-    android:elevation="10dp"
-    android:visibility="gone"/>
+    android:visibility="gone"
+    android:elevation="10dp" />
 </FrameLayout>
