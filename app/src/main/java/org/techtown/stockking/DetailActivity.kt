@@ -4,10 +4,15 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.drawable.PictureDrawable
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.VibrationEffect.EFFECT_CLICK
 import android.os.Vibrator
 import android.util.Log.i
+import android.view.HapticFeedbackConstants.*
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
@@ -34,6 +39,7 @@ import java.text.DecimalFormat
 class DetailActivity : AppCompatActivity(){
     lateinit var binding: ActivityDetailBinding
     private val NOINFOMATION = "정보 없음"
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -42,9 +48,11 @@ class DetailActivity : AppCompatActivity(){
         val intent=intent
         val ticker= intent.getStringExtra("ticker").toString()
 
+        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator;
+        val vibrationEffectClick = VibrationEffect.createPredefined(EFFECT_CLICK)
+
         //즐겨찾기 check
         ApiWrapper.getBookmark(MySharedPreferences.getToken(this)){
-            i("SSS","test it"+it)
             for(i in it.indices){
                 if(it[i].symbol==ticker){
                     binding.star.isSelected = true
@@ -103,7 +111,6 @@ class DetailActivity : AppCompatActivity(){
         binding.percentTv.text = percent
 
         binding.star.setOnClickListener {
-
             if(binding.star.isSelected){
                 ApiWrapper.postBookmark(
                     BookmarkModel(
@@ -113,8 +120,8 @@ class DetailActivity : AppCompatActivity(){
                 ){}
                 binding.star.isSelected = false
             } else{
-                val vibrator = getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-                vibrator.vibrate(80)
+                //vibrator
+                vibrator.vibrate(vibrationEffectClick)
                 ApiWrapper.postBookmark(
                     BookmarkModel(
                         token = MySharedPreferences.getToken(this),
@@ -131,15 +138,22 @@ class DetailActivity : AppCompatActivity(){
 
         binding.lineChartBtn.setOnClickListener{
             binding.lineChart.visibility=View.VISIBLE
-            binding.candlestickChart.visibility=View.GONE
+            binding.candleChart.visibility=View.GONE
             binding.lineChartBtn.setShadowLayer(1F, 2F, 2F, Color.BLACK)
             binding.candleChartBtn.setShadowLayer(0F, 0F, 0F, Color.WHITE)
         }
         binding.candleChartBtn.setOnClickListener {
             binding.lineChart.visibility=View.GONE
-            binding.candlestickChart.visibility=View.VISIBLE
+            binding.candleChart.visibility=View.VISIBLE
             binding.candleChartBtn.setShadowLayer(1F, 2F, 2F, Color.BLACK)
             binding.lineChartBtn.setShadowLayer(0F, 0F, 0F, Color.WHITE)
+        }
+
+        binding.lineChart.setOnClickListener{
+            it.performHapticFeedback(CLOCK_TICK)
+        }
+        binding.candleChart.setOnClickListener{
+            it.performHapticFeedback(CLOCK_TICK)
         }
 
         binding.oneDayBtn.isSelected=true
@@ -154,7 +168,6 @@ class DetailActivity : AppCompatActivity(){
             drawCandleChart(it)
         }
         //1일 그래프
-
         binding.oneDayBtn.setOnClickListener{
             binding.oneDayBtn.isSelected=true
             binding.oneWeekBtn.isSelected=false
@@ -338,7 +351,7 @@ class DetailActivity : AppCompatActivity(){
     }
 
     fun drawCandleChart(stockList : List<StockModel>){
-        val candleChart = binding.candlestickChart
+        val candleChart = binding.candleChart
 
         val dateList = ArrayList<String>()
         val entries = ArrayList<CandleEntry>()
