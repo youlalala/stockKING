@@ -34,6 +34,11 @@ interface ApiInterface{
         @Path("sort") arg:String
     ): Call<List<TopListChangeModel>>
 
+    @GET("cap/{exchange}/top100")
+    fun topListCap(
+        @Path("exchange") arg:String
+    ): Call<List<TopListCapModel>>
+
     @GET("stock/company/specific/{symbol}")
     fun companyInfo(
         @Path("symbol") arg:String
@@ -65,6 +70,16 @@ interface ApiInterface{
         @Path("symbol") arg1:String,
     ): Call<List<StockModel>>
 
+    //search
+    @GET("search/{method}/{keyword}")
+    fun search(
+        @Path("method") arg1:String,
+        @Path("keyword") arg2:String
+    ): Call<List<SearchModel>>
+
+    @GET("stock/company/full-data")
+    fun allCompany(
+    ): Call<List<SearchModel>>
 
     @POST("login")
     fun requestLogin(
