@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
@@ -75,17 +77,28 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val viewpager=binding.viewpager
+        binding.viewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+            override fun onPageScrollStateChanged(state: Int) {}
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {}
+            override fun onPageSelected(position: Int) {
+                binding.bottomNavigation.menu.getItem(position).isChecked=true
+            }
+        })
+
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.item_one -> {
-                    viewpager.currentItem = 0
+                    binding.viewpager.currentItem = 0
                 }
                 R.id.item_two -> {
-                    viewpager.currentItem = 1
+                    binding.viewpager.currentItem = 1
                 }
                 R.id.item_three -> {
-                    viewpager.currentItem = 2
+                    binding.viewpager.currentItem = 2
                 }
                 else -> {
                     false
@@ -94,7 +107,8 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        viewpager.adapter = ViewPagerAdapter(this)
+        binding.viewpager.adapter = ViewPagerAdapter(this)
+
 
     }
 }
