@@ -34,26 +34,16 @@ class TopListChangeAdapter (
 
         binding.itemId.text = (position+1).toString()
         val symbol = stockTopList[position].symbol
-        Log.i("youla",stockTopList[position].toString())
         binding.itemSymbol.text = symbol
         binding.itemName.text =stockTopList[position].name
 
-        if(stockTopList[position].change_value.isNullOrEmpty()){
-            binding.itemChangeValue.text = "정보없음"
+        binding.itemChangeValue.text = stockTopList[position].change_value
+        if(stockTopList[position].change_percent.substring(0,1)=="-"){
+            binding.itemChangePercent.setTextColor(Color.BLUE)
         }else{
-            binding.itemChangeValue.text = stockTopList[position].change_value
+            binding.itemChangePercent.setTextColor(Color.RED)
         }
-
-        if(stockTopList[position].change_percent.isNullOrEmpty()){
-            binding.itemChangePercent.text = "정보없음"
-        }else{
-            if(stockTopList[position].change_percent.substring(0,1)=="-"){
-                binding.itemChangePercent.setTextColor(Color.BLUE)
-            }else{
-                binding.itemChangePercent.setTextColor(Color.RED)
-            }
-            binding.itemChangePercent.text = stockTopList[position].change_percent
-        }
+        binding.itemChangePercent.text = stockTopList[position].change_percent
 
         //SVG string content
         val svgString = stockTopList[position].img
