@@ -35,7 +35,8 @@
         android:id="@+id/kakao_login_btn"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginHorizontal="23dp"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/kakao_login_large_wide"
         app:layout_constraintBottom_toTopOf="@id/google_login_btn" />
 
@@ -43,8 +44,9 @@
         android:id="@+id/google_login_btn"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_margin="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
+        android:layout_marginHorizontal="50dp"
         android:text="@string/google_login_btn"
         android:textSize="40dp"
         app:isDarkTheme="true"
