@@ -8,6 +8,7 @@ import org.techtown.stockking.model.TopListCapModel
 
 class TopListCapAdapter (
     private val stockTopList: List<TopListCapModel>,
+    val version: String,
     val onClickItem: (stockTopList: TopListCapModel)-> Unit)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -29,7 +30,12 @@ class TopListCapAdapter (
         //Log.i("youla",stockTopList[1].toString())
         binding.itemSymbol.text = symbol
         binding.itemName.text =stockTopList[position].name
-        binding.itemCap.text = stockTopList[position].cap
+        if(version=="kr"){
+            binding.itemCap.text = stockTopList[position].cap + "원"
+        }else{
+            binding.itemCap.text = stockTopList[position].cap + "$"
+        }
+
 
         holder.itemView.setOnClickListener{
             onClickItem.invoke(stockTopList[position])
