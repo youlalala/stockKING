@@ -4,4 +4,5 @@ data class TopListCapModel(
     var symbol: String,
     var name: String,
     var cap: String,
+    var img:String,
 )

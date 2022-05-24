@@ -1,14 +1,19 @@
 package org.techtown.stockking.adapter
 
+import android.graphics.drawable.PictureDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.caverock.androidsvg.SVG
 import org.techtown.stockking.databinding.ToplistCapRecyclerviewBinding
+import org.techtown.stockking.fragment.TopListFragment
 import org.techtown.stockking.model.TopListCapModel
 
 class TopListCapAdapter (
     private val stockTopList: List<TopListCapModel>,
     val version: String,
+    val context : TopListFragment,
     val onClickItem: (stockTopList: TopListCapModel)-> Unit)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -31,9 +36,28 @@ class TopListCapAdapter (
         binding.itemSymbol.text = symbol
         binding.itemName.text =stockTopList[position].name
         if(version=="kr"){
-            binding.itemCap.text = stockTopList[position].cap + "원"
+            binding.itemCap.text = stockTopList[position].cap + " ₩"
         }else{
-            binding.itemCap.text = stockTopList[position].cap + "$"
+            binding.itemCap.text = stockTopList[position].cap + " $"
+        }
+
+        //SVG string content
+        val svgString = stockTopList[position].img
+
+        //convert SVG string to an object of type SVG
+        val svg = SVG.getFromString(svgString)
+
+        //create a drawable from svg
+        val drawable = PictureDrawable(svg.renderToPicture())
+
+        //finally load the drawable with Glide.
+        Glide.with(context)
+            .load(drawable)
+            .circleCrop()
+            .into(binding.itemImg)
+
+        holder.itemView.setOnClickListener{
+            onClickItem.invoke(stockTopList[position])
         }
 
 

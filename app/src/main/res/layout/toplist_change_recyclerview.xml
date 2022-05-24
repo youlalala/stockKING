@@ -10,14 +10,11 @@
     android:paddingHorizontal="5dp"
     android:layout_marginBottom="8dp"
     android:background="?attr/selectableItemBackground">
-    <TextView
+    <ImageView
         android:id="@+id/item_img"
         android:layout_width="0dp"
         android:layout_weight="2"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="10dp"
-        android:text="img"
         android:gravity="center"
         />
     <TextView

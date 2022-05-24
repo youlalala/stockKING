@@ -4,5 +4,6 @@ data class TopListChangeModel (
     var change_percent: String,
     var change_value: String,
     var symbol: String,
-    var name: String
+    var name: String,
+    var img:String
 )

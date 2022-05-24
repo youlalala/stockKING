@@ -145,7 +145,7 @@ class TopListFragment : Fragment(){
         if(filter1 == "change"){
             ApiWrapper.getTopListChange(filter2) { it ->
                 binding.progressBar.visibility=View.GONE
-                binding.recyclerView.adapter= TopListChangeAdapter(it,onClickItem = {
+                binding.recyclerView.adapter= TopListChangeAdapter(it,this,onClickItem = {
                     val intent = Intent(context, DetailActivity::class.java)
                     intent.putExtra("ticker",it.symbol)
                     startActivity(intent)
@@ -154,7 +154,7 @@ class TopListFragment : Fragment(){
         }else if(filter1 == "cap"){
             ApiWrapper.getTopListCap(filter2){ it ->
                 binding.progressBar.visibility=View.GONE
-                binding.recyclerView.adapter= TopListCapAdapter(it,filter2,onClickItem = {
+                binding.recyclerView.adapter= TopListCapAdapter(it,filter2,this,onClickItem = {
                     val intent = Intent(context, DetailActivity::class.java)
                     intent.putExtra("ticker",it.symbol)
                     startActivity(intent)
