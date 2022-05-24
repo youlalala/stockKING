@@ -59,12 +59,12 @@ class DetailActivity : AppCompatActivity(){
                 binding.tickerTv.text = NOINFOMATION
                 binding.coNameKrTv.text=NOINFOMATION
                 binding.description.text=NOINFOMATION
-                binding.shareout.text=NOINFOMATION
+//                binding.shareout.text=NOINFOMATION
             }else{
                 binding.tickerTv.text = it[0].symbol
                 binding.coNameKrTv.text=it[0].name_kr
                 binding.description.text=it[0].desc_kr
-                binding.shareout.text=it[0].shareout
+//                binding.shareout.text=it[0].shareout
 
                 //img
                 //SVG string content
@@ -319,6 +319,10 @@ class DetailActivity : AppCompatActivity(){
             highLightColor = getColor(R.color.main_green_color)
             highlightLineWidth = 1f
         }
+        lineChart.setPinchZoom(false)
+        lineChart.isDoubleTapToZoomEnabled=false
+        lineChart.setScaleEnabled(false)
+
 
 
         //marker
@@ -409,6 +413,7 @@ class DetailActivity : AppCompatActivity(){
 
         candleChart.legend.isEnabled=false
         candleChart.data=CandleData(dataset)
+        candleChart.invalidate()
 
 
     }
