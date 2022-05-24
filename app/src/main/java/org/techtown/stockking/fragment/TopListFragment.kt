@@ -21,8 +21,6 @@ import android.graphics.Color
 class TopListFragment : Fragment(){
 
     lateinit var binding: FragmentToplistBinding
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
