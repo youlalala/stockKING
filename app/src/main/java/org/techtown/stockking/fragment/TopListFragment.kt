@@ -31,23 +31,12 @@ class TopListFragment : Fragment(){
     ): View? {
         binding = FragmentToplistBinding.inflate(inflater, container, false)
 
-//        binding.exchangeSwitch.showText = true
-//        binding.exchangeSwitch.textOff = "$"
-//        binding.exchangeSwitch.textOn = "₩"
-
-        binding.sortSwitch.showText = true
-        binding.sortSwitch.textOff = ""
-        binding.sortSwitch.textOn = ""
 
         binding.buttonTitleTv.text = resources.getString(R.string.topList_btn1_title)
         binding.buttonDetailTv.text = resources.getString(R.string.topList_btn1_detail)
         binding.realtimeBtn.isSelected = true
         binding.updownBtn.isSelected = false
         binding.transactionBtn.isSelected = false
-
-        //radio group
-        binding.dolloarBtn.isSelected=true
-        binding.wonBtn.isSelected=false
 
 
         ApiWrapper.getTopListRealtime() { it ->
@@ -69,7 +58,7 @@ class TopListFragment : Fragment(){
             binding.transactionBtn.isSelected = false
 
             //binding.exchangeSwitch.visibility = View.VISIBLE
-            binding.sortSwitch.visibility = View.GONE
+//            binding.sortSwitch.visibility = View.GONE
 
 
             ApiWrapper.getTopListRealtime() { it ->
@@ -84,6 +73,7 @@ class TopListFragment : Fragment(){
             }
 
         }
+        //change : 등락율
         binding.updownBtn.setOnClickListener {
             binding.buttonTitleTv.text = resources.getString(R.string.topList_btn2_title)
             binding.buttonDetailTv.text = resources.getString(R.string.topList_btn2_detail)
@@ -91,18 +81,24 @@ class TopListFragment : Fragment(){
             binding.updownBtn.isSelected = true
             binding.transactionBtn.isSelected = false
 
-            //switch
-            //binding.exchangeSwitch.visibility = View.GONE
-            binding.sortSwitch.visibility = View.VISIBLE
+            binding.exchangeGroup.visibility = View.GONE
+            binding.sortGroup.visibility = View.VISIBLE
+
+            binding.sortUp.isSelected=true
+            binding.sortDown.isSelected=false
 
             getTopList("change","desc")
-            binding.sortSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+            binding.sortUp.setOnClickListener {
+                binding.sortUp.isSelected=true
+                binding.sortDown.isSelected=false
                 binding.progressBar.visibility=View.VISIBLE
-                if(isChecked){
-                    getTopList("change","asc")
-                }else{
-                    getTopList("change","desc")
-                }
+                getTopList("change","desc")
+            }
+            binding.sortDown.setOnClickListener {
+                binding.sortUp.isSelected=false
+                binding.sortDown.isSelected=true
+                binding.progressBar.visibility=View.VISIBLE
+                getTopList("change","asc")
             }
         }
         binding.transactionBtn.setOnClickListener {
@@ -112,30 +108,25 @@ class TopListFragment : Fragment(){
             binding.updownBtn.isSelected = false
             binding.transactionBtn.isSelected = true
 
-            //switch
-            //binding.exchangeSwitch.visibility = View.VISIBLE
-            binding.sortSwitch.visibility = View.GONE
+            binding.exchangeGroup.visibility = View.VISIBLE
+            binding.sortGroup.visibility = View.GONE
 
             getTopList("cap","en")
+            binding.exchangeDollar.isSelected=true
+            binding.exchangeWon.isSelected=false
 
-            binding.dolloarBtn.setOnClickListener{
-                binding.dolloarBtn.isSelected=true
-                binding.wonBtn.isSelected=false
+            binding.exchangeDollar.setOnClickListener{
+                binding.exchangeDollar.isSelected=true
+                binding.exchangeWon.isSelected=false
+                binding.progressBar.visibility=View.VISIBLE
                 getTopList("cap","en")
             }
-            binding.wonBtn.setOnClickListener {
-                binding.dolloarBtn.isSelected=false
-                binding.wonBtn.isSelected=true
+            binding.exchangeWon.setOnClickListener {
+                binding.exchangeDollar.isSelected=false
+                binding.exchangeWon.isSelected=true
+                binding.progressBar.visibility=View.VISIBLE
                 getTopList("cap","kr")
             }
-
-//            binding.sortSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
-//                if(isChecked){
-//                    getTopList("cap","kr")
-//                }else{
-//                    getTopList("cap","en")
-//                }
-//            }
         }
 
         return binding.root

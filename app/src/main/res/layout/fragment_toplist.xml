@@ -91,17 +91,17 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
         <RadioGroup
+            android:id="@+id/exchange_group"
             android:layout_width="56dp"
             android:layout_height="30dp"
             android:orientation="horizontal"
             android:paddingHorizontal="2dp"
-            android:layout_marginRight="20dp"
             android:background="@drawable/round_shape"
             android:backgroundTint="#F2F4F6"
             android:gravity="center"
             android:checkedButton="@+id/dolloar_btn">
             <RadioButton
-                android:id="@+id/dolloar_btn"
+                android:id="@+id/exchange_dollar"
                 android:layout_width="26dp"
                 android:layout_height="26dp"
                 android:button="@android:color/transparent"
@@ -114,7 +114,7 @@
                 android:text="$"/>
 
             <RadioButton
-                android:id="@+id/won_btn"
+                android:id="@+id/exchange_won"
                 android:layout_width="26dp"
                 android:layout_height="26dp"
                 android:button="@android:color/transparent"
@@ -126,6 +126,42 @@
                 android:gravity="center"
                 android:text="₩"/>
         </RadioGroup>
+        <RadioGroup
+            android:id="@+id/sort_group"
+            android:layout_width="56dp"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="2dp"
+            android:background="@drawable/round_shape"
+            android:backgroundTint="#F2F4F6"
+            android:gravity="center"
+            android:checkedButton="@+id/sort_up">
+            <RadioButton
+                android:id="@+id/sort_up"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:button="@android:color/transparent"
+                android:background="@drawable/round_shape"
+                android:textColor="@color/button_text_color"
+                android:backgroundTint="@drawable/radio_selector_color"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="+"
+                android:textSize="15dp"/>
+
+            <RadioButton
+                android:id="@+id/sort_down"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:button="@android:color/transparent"
+                android:background="@drawable/round_shape"
+                android:textColor="@color/button_text_color"
+                android:backgroundTint="@drawable/radio_selector_color"
+                android:layout_weight="1"
+                android:textSize="15dp"
+                android:text="-"
+                android:gravity="center" />
+        </RadioGroup>
 <!--        <androidx.appcompat.widget.SwitchCompat-->
 <!--            android:id="@+id/exchange_switch"-->
 <!--            android:layout_width="wrap_content"-->
@@ -134,23 +170,23 @@
 <!--            app:track="@drawable/switch_track_selector"-->
 <!--            android:thumb="@drawable/switch_thumb"-->
 <!--            />-->
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/sort_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:switchTextAppearance="@style/switchTextAppearance"
-            app:track="@drawable/switch_track_selector"
-            android:thumb="@drawable/switch_thumb"
-            android:visibility="gone"
-            />
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/asc_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:track="@drawable/switch_track_selector"
-            android:thumb="@drawable/switch_thumb"
-            android:visibility="gone"
-            />
+<!--        <androidx.appcompat.widget.SwitchCompat-->
+<!--            android:id="@+id/sort_switch"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:switchTextAppearance="@style/switchTextAppearance"-->
+<!--            app:track="@drawable/switch_track_selector"-->
+<!--            android:thumb="@drawable/switch_thumb"-->
+<!--            android:visibility="gone"-->
+<!--            />-->
+<!--        <androidx.appcompat.widget.SwitchCompat-->
+<!--            android:id="@+id/asc_switch"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:track="@drawable/switch_track_selector"-->
+<!--            android:thumb="@drawable/switch_thumb"-->
+<!--            android:visibility="gone"-->
+<!--            />-->
     </LinearLayout>
 
 
