@@ -39,7 +39,6 @@ class DetailActivity : AppCompatActivity(){
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         val intent=intent
         val ticker= intent.getStringExtra("ticker").toString()
 
@@ -127,6 +126,7 @@ class DetailActivity : AppCompatActivity(){
         }
         binding.backBtn.setOnClickListener{
             finish()
+            overridePendingTransition(0,R.anim.horizon_exit )
         }
 
         binding.lineChartBtn.setOnClickListener{
