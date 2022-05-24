@@ -31,19 +31,24 @@ class TopListFragment : Fragment(){
     ): View? {
         binding = FragmentToplistBinding.inflate(inflater, container, false)
 
-        binding.exchangeSwitch.showText = true
-        binding.exchangeSwitch.textOff = "$"
-        binding.exchangeSwitch.textOn = "₩"
+//        binding.exchangeSwitch.showText = true
+//        binding.exchangeSwitch.textOff = "$"
+//        binding.exchangeSwitch.textOn = "₩"
 
         binding.sortSwitch.showText = true
-        binding.sortSwitch.textOff = "△"
-        binding.sortSwitch.textOn = "▼"
+        binding.sortSwitch.textOff = ""
+        binding.sortSwitch.textOn = ""
 
         binding.buttonTitleTv.text = resources.getString(R.string.topList_btn1_title)
         binding.buttonDetailTv.text = resources.getString(R.string.topList_btn1_detail)
         binding.realtimeBtn.isSelected = true
         binding.updownBtn.isSelected = false
         binding.transactionBtn.isSelected = false
+
+        //radio group
+        binding.dolloarBtn.isSelected=true
+        binding.wonBtn.isSelected=false
+
 
         ApiWrapper.getTopListRealtime() { it ->
             Log.i("la",it.toString())
@@ -63,7 +68,7 @@ class TopListFragment : Fragment(){
             binding.updownBtn.isSelected = false
             binding.transactionBtn.isSelected = false
 
-            binding.exchangeSwitch.visibility = View.VISIBLE
+            //binding.exchangeSwitch.visibility = View.VISIBLE
             binding.sortSwitch.visibility = View.GONE
 
 
@@ -87,11 +92,12 @@ class TopListFragment : Fragment(){
             binding.transactionBtn.isSelected = false
 
             //switch
-            binding.exchangeSwitch.visibility = View.GONE
+            //binding.exchangeSwitch.visibility = View.GONE
             binding.sortSwitch.visibility = View.VISIBLE
 
             getTopList("change","desc")
             binding.sortSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+                binding.progressBar.visibility=View.VISIBLE
                 if(isChecked){
                     getTopList("change","asc")
                 }else{
@@ -107,18 +113,29 @@ class TopListFragment : Fragment(){
             binding.transactionBtn.isSelected = true
 
             //switch
-            binding.exchangeSwitch.visibility = View.VISIBLE
+            //binding.exchangeSwitch.visibility = View.VISIBLE
             binding.sortSwitch.visibility = View.GONE
 
             getTopList("cap","en")
 
-            binding.sortSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
-                if(isChecked){
-                    getTopList("cap","kr")
-                }else{
-                    getTopList("cap","en")
-                }
+            binding.dolloarBtn.setOnClickListener{
+                binding.dolloarBtn.isSelected=true
+                binding.wonBtn.isSelected=false
+                getTopList("cap","en")
             }
+            binding.wonBtn.setOnClickListener {
+                binding.dolloarBtn.isSelected=false
+                binding.wonBtn.isSelected=true
+                getTopList("cap","kr")
+            }
+
+//            binding.sortSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+//                if(isChecked){
+//                    getTopList("cap","kr")
+//                }else{
+//                    getTopList("cap","en")
+//                }
+//            }
         }
 
         return binding.root
@@ -127,6 +144,7 @@ class TopListFragment : Fragment(){
     fun getTopList(filter1: String, filter2: String){
         if(filter1 == "change"){
             ApiWrapper.getTopListChange(filter2) { it ->
+                binding.progressBar.visibility=View.GONE
                 binding.recyclerView.adapter= TopListChangeAdapter(it,onClickItem = {
                     val intent = Intent(context, DetailActivity::class.java)
                     intent.putExtra("ticker",it.symbol)
@@ -135,7 +153,8 @@ class TopListFragment : Fragment(){
             }
         }else if(filter1 == "cap"){
             ApiWrapper.getTopListCap(filter2){ it ->
-                binding.recyclerView.adapter= TopListCapAdapter(it,onClickItem = {
+                binding.progressBar.visibility=View.GONE
+                binding.recyclerView.adapter= TopListCapAdapter(it,filter2,onClickItem = {
                     val intent = Intent(context, DetailActivity::class.java)
                     intent.putExtra("ticker",it.symbol)
                     startActivity(intent)
