@@ -10,6 +10,12 @@
     <string name="topList_btn3_title">시가총액</string>
     <string name="topList_btn3_detail">시가총액이 높은 주식 순위</string>
 
+    <string name="dollar">$</string>
+    <string name="won">₩</string>
+    <string name="up">▴</string>
+    <string name="down">▾</string>
+    <string name="percent">%</string>
+
     <!--    google button-->
     <string name="google_login_btn">구글로 로그인</string>
 </resources>

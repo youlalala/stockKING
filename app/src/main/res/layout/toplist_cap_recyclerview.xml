@@ -12,14 +12,14 @@
     <ImageView
         android:id="@+id/item_img"
         android:layout_height="35dp"
-        android:layout_width="35dp"
-        android:layout_marginRight="10dp"/>
+        android:layout_width="35dp" />
     <TextView
         android:id="@+id/item_id"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:textStyle="bold"
+        android:gravity="center"
         android:textSize="10dp"
         />
     <LinearLayout

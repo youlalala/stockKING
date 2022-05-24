@@ -100,18 +100,19 @@
             android:backgroundTint="#F2F4F6"
             android:gravity="center"
             android:checkedButton="@+id/dolloar_btn">
+
             <RadioButton
                 android:id="@+id/exchange_dollar"
                 android:layout_width="26dp"
                 android:layout_height="26dp"
-                android:button="@android:color/transparent"
-                android:background="@drawable/round_shape"
-                android:textColor="@color/button_text_color"
-                android:backgroundTint="@drawable/radio_selector_color"
                 android:layout_weight="1"
+                android:background="@drawable/round_shape"
+                android:backgroundTint="@drawable/radio_selector_color"
+                android:button="@android:color/transparent"
                 android:gravity="center"
-                android:textSize="13dp"
-                android:text="$"/>
+                android:text="@string/dollar"
+                android:textColor="@color/button_text_color"
+                android:textSize="13dp" />
 
             <RadioButton
                 android:id="@+id/exchange_won"
@@ -124,7 +125,7 @@
                 android:layout_weight="1"
                 android:textSize="13dp"
                 android:gravity="center"
-                android:text="₩"/>
+                android:text="@string/won"/>
         </RadioGroup>
         <RadioGroup
             android:id="@+id/sort_group"

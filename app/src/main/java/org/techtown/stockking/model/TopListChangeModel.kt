@@ -5,5 +5,6 @@ data class TopListChangeModel (
     var change_value: String,
     var symbol: String,
     var name: String,
-    var img:String
+    var img:String,
+    var close:String
 )

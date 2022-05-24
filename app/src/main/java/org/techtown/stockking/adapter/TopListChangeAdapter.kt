@@ -1,5 +1,6 @@
 package org.techtown.stockking.adapter
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.PictureDrawable
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.caverock.androidsvg.SVG
+import org.techtown.stockking.R
 import org.techtown.stockking.databinding.ToplistChangeRecyclerviewBinding
 import org.techtown.stockking.fragment.SearchFragment
 import org.techtown.stockking.fragment.TopListFragment
@@ -28,6 +30,7 @@ class TopListChangeAdapter (
             )
         )
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val binding = (holder as TopListChangeViewHolder).binding
 
@@ -37,13 +40,20 @@ class TopListChangeAdapter (
         binding.itemSymbol.text = symbol
         binding.itemName.text =stockTopList[position].name
 
-        binding.itemChangeValue.text = stockTopList[position].change_value
+
         if(stockTopList[position].change_percent.substring(0,1)=="-"){
             binding.itemChangePercent.setTextColor(Color.BLUE)
+            binding.itemChangeValue.setTextColor(Color.BLUE)
+            binding.itemChangePercent.text = context.resources.getString(R.string.down)+stockTopList[position].change_percent.substring(1) + context.resources.getString(R.string.percent)
+            binding.itemChangeValue.text = stockTopList[position].change_value + context.resources.getString(R.string.dollar)
         }else{
             binding.itemChangePercent.setTextColor(Color.RED)
+            binding.itemChangeValue.setTextColor(Color.RED)
+            binding.itemChangePercent.text = context.resources.getString(R.string.up)+stockTopList[position].change_percent + context.resources.getString(R.string.percent)
+            binding.itemChangeValue.text = "+"+stockTopList[position].change_value + context.resources.getString(R.string.dollar)
         }
-        binding.itemChangePercent.text = stockTopList[position].change_percent
+
+        binding.itemClose.text = stockTopList[position].close+context.resources.getString(R.string.dollar)
 
         //SVG string content
         val svgString = stockTopList[position].img
