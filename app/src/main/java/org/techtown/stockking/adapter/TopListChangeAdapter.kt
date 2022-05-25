@@ -49,8 +49,8 @@ class TopListChangeAdapter (
         }else{
             binding.itemChangePercent.setTextColor(Color.RED)
             binding.itemChangeValue.setTextColor(Color.RED)
-            binding.itemChangePercent.text = context.resources.getString(R.string.up)+stockTopList[position].change_percent + context.resources.getString(R.string.percent)
-            binding.itemChangeValue.text = "+"+stockTopList[position].change_value + context.resources.getString(R.string.dollar)
+            binding.itemChangePercent.text = context.resources.getString(R.string.up)+stockTopList[position].change_percent.substring(1) + context.resources.getString(R.string.percent)
+            binding.itemChangeValue.text = stockTopList[position].change_value + context.resources.getString(R.string.dollar)
         }
 
         binding.itemClose.text = stockTopList[position].close+context.resources.getString(R.string.dollar)

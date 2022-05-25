@@ -8,5 +8,8 @@ data class CompanyInfoModel (
     var desc_en: String,
     var desc_kr: String,
     var img: String,
-    var shareout: String
+    var shareout: String,
+    var close: String,
+    var change_percent: String,
+    var change_value: String
 )

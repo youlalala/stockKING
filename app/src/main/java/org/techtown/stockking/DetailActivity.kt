@@ -66,12 +66,25 @@ class DetailActivity : AppCompatActivity(){
                 binding.tickerTv.text = NOINFOMATION
                 binding.coNameKrTv.text=NOINFOMATION
                 binding.description.text=NOINFOMATION
+                binding.closeTv.text=NOINFOMATION
 //                binding.shareout.text=NOINFOMATION
             }else{
                 binding.tickerTv.text = it[0].symbol
                 binding.coNameKrTv.text=it[0].name_kr
                 binding.description.text=it[0].desc_kr
+                binding.closeTv.text=it[0].close + " 달러"
 //                binding.shareout.text=it[0].shareout
+
+
+//                if(it[0].change_percent.substring(0,1)=="-"){
+//                    binding.changePercentTv.setTextColor(Color.BLUE)
+//                    binding.changeValueTv.setTextColor(Color.BLUE)
+//                }else{
+//                    binding.changePercentTv.setTextColor(Color.RED)
+//                    binding.changeValueTv.setTextColor(Color.RED)
+//                }
+//                binding.changePercentTv.text = it[0].change_percent
+//                binding.changeValueTv.text=it[0].change_value
 
                 //img
                 //SVG string content
@@ -100,15 +113,6 @@ class DetailActivity : AppCompatActivity(){
                 }
             }
         }
-
-        binding.priceTv.text = intent.getStringExtra("price")
-        var percent = intent.getStringExtra("percent")
-        if(percent?.substring(0,1)=="-"){
-            binding.percentTv.setTextColor(Color.BLUE)
-        }else{
-            binding.percentTv.setTextColor(Color.RED)
-        }
-        binding.percentTv.text = percent
 
         binding.star.setOnClickListener {
             if(binding.star.isSelected){
@@ -257,15 +261,20 @@ class DetailActivity : AppCompatActivity(){
 
     fun calPercnet(it: List<StockModel>){
         val df = DecimalFormat("#.##")
-        var percent = df.format((it.last().high.toFloat()-it[0].high.toFloat())/it[0].high.toFloat()*100).toString()
-        if(percent?.substring(0,1)=="-"){
-            binding.percentTv.setTextColor(Color.BLUE)
-            percent = percent+"%"
+        var value = it.last().high.toFloat()-it[0].high.toFloat()
+        var value_format = df.format(value)
+        var percent_format = df.format(value/it[0].high.toFloat()*100)
+        if(percent_format?.substring(0,1)=="-"){
+            binding.changePercentTv.setTextColor(Color.BLUE)
+            binding.changePercentTv.text = resources.getString(R.string.down)+"${percent_format.substring(1)}%"
+            binding.changeValueTv.setTextColor(Color.BLUE)
+            binding.changeValueTv.text = "$value_format 달러"
         }else{
-            binding.percentTv.setTextColor(Color.RED)
-            percent = "+"+percent+"%"
+            binding.changePercentTv.setTextColor(Color.RED)
+            binding.changePercentTv.text = resources.getString(R.string.up)+"$percent_format%"
+            binding.changeValueTv.setTextColor(Color.RED)
+            binding.changeValueTv.text = "+$value_format 달러"
         }
-        binding.percentTv.text = percent
     }
 
     fun drawLineChart(stockList: List<StockModel>){
