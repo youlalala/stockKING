@@ -1,11 +1,14 @@
 package org.techtown.stockking.network
 
+import android.content.Context
 import android.util.Log
 import android.util.Log.i
+import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.model.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.StringBuilder
 
 class ApiWrapper {
     companion object{
@@ -188,7 +191,6 @@ class ApiWrapper {
                 override fun onResponse(call: Call<List<CompanyInfoModel>>, response: Response<List<CompanyInfoModel>>) {
                     val list = response.body()
                     i(TAG,"companyinfo response")
-                    i(TAG,list.toString())
                     list?.let{
                         callback.invoke(it)
                     }
@@ -200,43 +202,46 @@ class ApiWrapper {
             })
         }
 
-//        fun getImg(symbol: String, callback: (Response<String>) -> Unit){
-//            val call = NetWorkService.api2.companyimg()
-//            call.enqueue(object : Callback<List<CompanyInfoModel>> {
-//                override fun onResponse(call: Call<Response<String>>, response: Response<Response<String>>) {
-//                    val list = response.body()
-//                    i(TAG,"companyinfo response")
-//                    i(TAG,list.toString())
-//                    list?.let{
-//                        callback.invoke(it)
-//                    }
-//                }
-//                override fun onFailure(call: Call<Response<String>>, t: Throwable) {
-//                    i(TAG,"companyinfo fail")
-//                    call.cancel()
-//                }
-//            })
-//        }
-        fun postToken(userData: UserModel , onResult: (UserModel?)->Unit){
-            val modelCall = NetWorkService.api2.requestLogin(userData)
+        fun postFirstLogin(socialName:String, userData: FirstLoginModel , callback: (UserModel?)->Unit){
+            val modelCall = NetWorkService.api2.requestFirstLogin(socialName,userData)
             modelCall.enqueue(object : Callback<UserModel> {
                 override fun onResponse(call: Call<UserModel>, response: Response<UserModel>
                 ) {
+                    i(TAG,"post first login success\n response.body : "+response.body().toString())
+                    val response = response.body()
+                    response?.let{
+                        callback.invoke(it)
+                    }
+                }
+                override fun onFailure(call: Call<UserModel>, t: Throwable) {
+                    i(TAG,"post first login fail : "+t.toString())
+                    modelCall.cancel()
+                }
+            })
+        }
+        fun postAutoLogin(token: String, onResult: (UserModel?)->Unit){
+            val modelCall = NetWorkService.api2.requestAutoLogin(token)
+            modelCall.enqueue(object : Callback<UserModel> {
+                override fun onResponse(call: Call<UserModel>, response: Response<UserModel>
+                ) {
+                    i(TAG,"get auto login success")
                     onResult(response.body())
                 }
-
                 override fun onFailure(call: Call<UserModel>, t: Throwable) {
-                    Log.i("sss","cancel : "+"t:"+t)
+                    i(TAG,"get auto login fail")
                     modelCall.cancel()
                 }
             })
         }
 
-        fun postBookmark(bookmarkData: BookmarkModel , onResult: (BookmarkModel?)->Unit){
-            val modelCall = NetWorkService.api2.requestBookmark(bookmarkData)
+        fun postBookmark(token: String, bookmarkData: BookmarkModel , onResult: (BookmarkModel?)->Unit){
+            val modelCall = NetWorkService.api2.requestBookmark(
+                authHeader = token,
+                bookmarkData)
             modelCall.enqueue(object : Callback<BookmarkModel> {
                 override fun onResponse(call: Call<BookmarkModel>, response: Response<BookmarkModel>
                 ) {
+                    i("sss","success : "+"response:"+response)
                     onResult(response.body())
                 }
                 override fun onFailure(call: Call<BookmarkModel>, t: Throwable) {

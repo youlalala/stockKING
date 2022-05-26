@@ -1,5 +1,6 @@
 package org.techtown.stockking.network
 
+import com.google.gson.GsonBuilder
 import org.techtown.stockking.model.*
 import retrofit2.Call
 import retrofit2.Response
@@ -9,14 +10,15 @@ import retrofit2.http.*
 
 object NetWorkService{
     private const val BASE_URL =" http://teststock.cafe24app.com"
-    private const val BASE_URL2 ="http://172.30.1.37:8080"
+    private const val BASE_URL2 ="http://172.30.1.48:8080"
     private val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    val gson = GsonBuilder().setLenient().create()
     private val retrofit2: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL2)
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
     val api: ApiInterface = retrofit.create(ApiInterface::class.java)
     val api2: ApiInterface = retrofit2.create(ApiInterface::class.java)
@@ -81,13 +83,20 @@ interface ApiInterface{
     fun allCompany(
     ): Call<List<SearchModel>>
 
-    @POST("login")
-    fun requestLogin(
-        @Body userData: UserModel
+    @POST("login/{social_name}")
+    fun requestFirstLogin(
+        @Path("social_name") arg:String,
+        @Body userData: FirstLoginModel
+    ): Call<UserModel>
+
+    @GET("login/auto-login")
+    fun requestAutoLogin(
+        @Header("authorization") authHeader:String,
     ): Call<UserModel>
 
     @POST("bookmark")
     fun requestBookmark(
+        @Header("authorization") authHeader:String,
         @Body bookmarkData: BookmarkModel
     ): Call<BookmarkModel>
 

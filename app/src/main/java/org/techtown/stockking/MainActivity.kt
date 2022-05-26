@@ -27,43 +27,36 @@ class MainActivity : AppCompatActivity() {
         Log.d("sss",keyHash)
 
         val method = MySharedPreferences.getMethod(this)
-        val token = MySharedPreferences.getToken(this)
 
         if (method == "kakao") {
-            val userInfo = UserModel(
-                method = "kakao",
-                token= MySharedPreferences.getToken(this)
-            )
 
-            Log.i("sss","userInfo : "+userInfo)
-
-            ApiWrapper.postToken(userInfo){
+            ApiWrapper.postAutoLogin(MySharedPreferences.getToken(this)){
                 Log.i("sss","it!!!"+it.toString())
             }
 
             //response 받아오기 :
 
             // 사용자 정보 요청 (기본)
-            if(token != null){
-                UserApiClient.instance.me { user, error ->
-                    if (error != null) {
-                        Log.d("sss", "사용자 정보 요청 실패", error)
-                        val intent= Intent(this, LoginActivity::class.java)
-                        startActivity(intent)
-                    }
-                    else if (user != null) {
-                        Log.d("sss",user.toString())
-                        Log.d(
-                            "sss", "사용자 정보 요청 성공" +
-                                    "\n회원번호: ${user.id}" +
-                                    "\n이메일: ${user.kakaoAccount?.email}" +
-                                    "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
-                                    "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}"
-                        )
-                        MySharedPreferences.setUserName(this,user.kakaoAccount?.profile?.nickname.toString())
-                    }
-                }
-            }
+//            if(token != null){
+//                UserApiClient.instance.me { user, error ->
+//                    if (error != null) {
+//                        Log.d("sss", "사용자 정보 요청 실패", error)
+//                        val intent= Intent(this, LoginActivity::class.java)
+//                        startActivity(intent)
+//                    }
+//                    else if (user != null) {
+//                        Log.d("sss",user.toString())
+//                        Log.d(
+//                            "sss", "사용자 정보 요청 성공" +
+//                                    "\n회원번호: ${user.id}" +
+//                                    "\n이메일: ${user.kakaoAccount?.email}" +
+//                                    "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
+//                                    "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}"
+//                        )
+//                        MySharedPreferences.setUserName(this,user.kakaoAccount?.profile?.nickname.toString())
+//                    }
+//                }
+//            }
         }else if(method == "google"){
             //response 받아오기 :
 

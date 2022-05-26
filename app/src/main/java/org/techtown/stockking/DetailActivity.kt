@@ -34,6 +34,7 @@ import org.techtown.stockking.module.graph.CandleChartMarkerView
 import org.techtown.stockking.module.graph.LineChartMarkerView
 
 import org.techtown.stockking.network.ApiWrapper
+import retrofit2.http.Header
 import java.text.DecimalFormat
 
 class DetailActivity : AppCompatActivity(){
@@ -117,8 +118,8 @@ class DetailActivity : AppCompatActivity(){
         binding.star.setOnClickListener {
             if(binding.star.isSelected){
                 ApiWrapper.postBookmark(
+                    token = MySharedPreferences.getToken(this),
                     BookmarkModel(
-                        token = MySharedPreferences.getToken(this),
                         request = "delete",
                         symbol = ticker)
                 ){}
@@ -127,8 +128,8 @@ class DetailActivity : AppCompatActivity(){
                 //vibrator
                 vibrator.vibrate(vibrationEffectClick)
                 ApiWrapper.postBookmark(
+                    token = MySharedPreferences.getToken(this),
                     BookmarkModel(
-                        token = MySharedPreferences.getToken(this),
                         request = "add",
                         symbol = ticker)
                 ){}
