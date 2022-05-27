@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         var keyHash = Utility.getKeyHash(this)
-        Log.d("sss",keyHash)
+        //Log.d("sss",keyHash)
 
         val method = MySharedPreferences.getMethod(this)
 

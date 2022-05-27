@@ -224,7 +224,7 @@ class ApiWrapper {
             modelCall.enqueue(object : Callback<UserModel> {
                 override fun onResponse(call: Call<UserModel>, response: Response<UserModel>
                 ) {
-                    i(TAG,"get auto login success")
+                    i(TAG,"get auto login success\n response.body : "+response.body().toString())
                     onResult(response.body())
                 }
                 override fun onFailure(call: Call<UserModel>, t: Throwable) {
