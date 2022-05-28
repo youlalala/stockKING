@@ -288,7 +288,7 @@ class DetailActivity : AppCompatActivity(){
             }else{
                 dateList.add(element.date)
             }
-            priceList.add(element.high)
+            priceList.add(element.close)
         }
 
         //entry

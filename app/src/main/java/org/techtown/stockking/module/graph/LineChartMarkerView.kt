@@ -22,9 +22,6 @@ class LineChartMarkerView(
     private val price: TextView = findViewById(R.id.price_tv)
     private val uiScreenWidth = resources.displayMetrics.widthPixels
 
-//    override fun getOffset(): MPPointF {
-//        return MPPointF(-(width / 2f), 0f)
-//    }
     override fun draw(canvas: Canvas, posx: Float, posy: Float) {
         //Check marker position and update offsets.
         var posx = posx
@@ -35,15 +32,13 @@ class LineChartMarkerView(
         canvas.translate(posx, 0f)
         draw(canvas)
         canvas.translate(-posx, 0f)
-
     }
-
 
     // entry content의 텍스트에 지정
     override fun refreshContent(e: Entry?, highlight: Highlight?) {
         val xIdx = e?.x?.toInt()
-        date.text = labels[xIdx!!].toString()
-        price.text = e?.y.toString()
+        date.text = labels[xIdx!!]
+        price.text = e.y.toString()+" $"
         super.refreshContent(e, highlight)
     }
 }
