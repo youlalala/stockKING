@@ -3,34 +3,28 @@
     android:id="@+id/item_root"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="50dp"
     android:orientation="horizontal"
-    android:gravity="center"
-    android:paddingVertical="8dp"
-    android:paddingHorizontal="5dp"
+    android:gravity="center_vertical"
+    android:paddingVertical="6dp"
     android:layout_marginBottom="8dp"
     android:background="?attr/selectableItemBackground">
-    <TextView
+    <ImageView
         android:id="@+id/item_img"
-        android:layout_width="0dp"
-        android:layout_weight="2"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="10dp"
-        android:text="img"
-        android:gravity="center"
-        />
+        android:layout_width="33dp"
+        android:layout_height="33dp"/>
     <TextView
         android:id="@+id/item_id"
-        android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_width="20dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginHorizontal="5dp"
         android:textStyle="bold"
         android:textSize="10dp"
         />
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_weight="6"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
@@ -39,46 +33,57 @@
             android:layout_width="wrap_content"
             style="@style/TitleStyle"
             android:textStyle="bold"
-            android:textSize="15dp"
+            android:textSize="14dp"
             android:singleLine="true"
             android:ellipsize="end"
-            />
+            android:layout_marginBottom="3dp" />
         <TextView
             android:id="@+id/item_ticker"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:textSize="12dp"
+            android:textSize="10dp"
             android:singleLine="true"
             android:ellipsize="end"
             />
     </LinearLayout>
-
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="3"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
         <TextView
-            android:id="@+id/item_percent"
+            android:id="@+id/item_close"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="14dp"
             android:textStyle="bold"
-            android:textSize="15dp"
+            style="@style/TitleStyle"
+            android:layout_marginBottom="2dp"
             android:gravity="right"
-            android:text="percent"
             />
-        <TextView
-            android:id="@+id/item_price"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12dp"
-            android:gravity="right"
-            />
-
-
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="3dp">
+            <TextView
+                android:id="@+id/item_change_value"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
+                android:gravity="right"
+                android:text="percent"
+                />
+            <TextView
+                android:id="@+id/item_change_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textSize="12dp"
+                android:gravity="right"
+                android:text="percent"
+                />
+        </LinearLayout>
     </LinearLayout>
-
-
-
 </LinearLayout>

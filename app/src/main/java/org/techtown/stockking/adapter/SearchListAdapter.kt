@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.techtown.stockking.databinding.SearchRecyclerviewBinding
-import org.techtown.stockking.model.StockTopList
-import android.widget.Filter
 import com.bumptech.glide.Glide
 import com.caverock.androidsvg.SVG
 import org.techtown.stockking.fragment.SearchFragment

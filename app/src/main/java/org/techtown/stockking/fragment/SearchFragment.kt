@@ -2,19 +2,15 @@ package org.techtown.stockking.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import org.techtown.stockking.DetailActivity
-import org.techtown.stockking.R
-import org.techtown.stockking.adapter.RealtimeTopListAdapter
 import org.techtown.stockking.databinding.FragmentSearchBinding
 import org.techtown.stockking.adapter.SearchListAdapter
 import org.techtown.stockking.network.ApiWrapper
-import java.util.regex.Pattern
 
 class SearchFragment : Fragment() {
 

@@ -17,17 +17,17 @@ import java.lang.StringBuilder
 class ApiWrapper {
     companion object{
         private val TAG = this.javaClass.simpleName
-        fun getTopListRealtime(callback: (List<StockTopList>) -> Unit){
-            val modelCall = NetWorkService.api2.topListRealtime("realtime")
-            modelCall.enqueue(object : Callback<TopListRealtimeModel> {
-                override fun onResponse(call: Call<TopListRealtimeModel>, response: Response<TopListRealtimeModel>) {
+        fun getTopListRealtime(exchange: String, callback: (List<TopListRealtimeModel>) -> Unit){
+            val modelCall = NetWorkService.api.topListRealtime(exchange)
+            modelCall.enqueue(object : Callback<List<TopListRealtimeModel>> {
+                override fun onResponse(call: Call<List<TopListRealtimeModel>>, response: Response<List<TopListRealtimeModel>>) {
                     val list = response.body()
                     i(TAG,"stock top list response")
                     list?.let{
-                        callback.invoke(it.symbols)
+                        callback.invoke(it)
                     }
                 }
-                override fun onFailure(call: Call<TopListRealtimeModel>, t: Throwable) {
+                override fun onFailure(call: Call<List<TopListRealtimeModel>>, t: Throwable) {
                     i(TAG,"stock top list response")
                     modelCall.cancel()
                 }

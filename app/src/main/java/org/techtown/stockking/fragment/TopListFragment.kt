@@ -2,14 +2,13 @@ package org.techtown.stockking.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import org.techtown.stockking.DetailActivity
 import org.techtown.stockking.R
-import org.techtown.stockking.adapter.RealtimeTopListAdapter
+import org.techtown.stockking.adapter.TopListRealtimeAdapter
 import org.techtown.stockking.adapter.TopListCapAdapter
 import org.techtown.stockking.adapter.TopListChangeAdapter
 import org.techtown.stockking.databinding.FragmentToplistBinding
@@ -29,18 +28,8 @@ class TopListFragment : Fragment(){
         binding.realtimeBtn.isSelected = true
         binding.updownBtn.isSelected = false
         binding.transactionBtn.isSelected = false
-
-
-        ApiWrapper.getTopListRealtime() { it ->
-            Log.i("la",it.toString())
-            binding.recyclerView.adapter= RealtimeTopListAdapter(it,onClickItem = {
-                val intent = Intent(context, DetailActivity::class.java)
-                intent.putExtra("ticker",it.title)
-                intent.putExtra("percent",it.percent)
-                intent.putExtra("price",it.price)
-                startActivity(intent)
-            })
-        }
+        binding.progressBar.visibility=View.VISIBLE
+        getTopList("realtime","kr")
         //Realtime : 실시간
         binding.realtimeBtn.setOnClickListener {
             binding.buttonTitleTv.text = resources.getString(R.string.topList_btn1_title)
@@ -56,36 +45,18 @@ class TopListFragment : Fragment(){
             binding.exchangeDollar.isSelected=true
             binding.exchangeWon.isSelected=false
             //network
-            ApiWrapper.getTopListRealtime() { it ->
-                binding.recyclerView.adapter= RealtimeTopListAdapter(it,onClickItem = {
-                    val intent = Intent(context, DetailActivity::class.java)
-                    intent.putExtra("ticker",it.title)
-                    startActivity(intent)
-                })
-            }
+            getTopList("realtime","kr")
             binding.exchangeDollar.setOnClickListener{
                 binding.exchangeDollar.isSelected=true
                 binding.exchangeWon.isSelected=false
                 binding.progressBar.visibility=View.VISIBLE
-                ApiWrapper.getTopListRealtime() { it ->
-                    binding.recyclerView.adapter= RealtimeTopListAdapter(it,onClickItem = {
-                        val intent = Intent(context, DetailActivity::class.java)
-                        intent.putExtra("ticker",it.title)
-                        startActivity(intent)
-                    })
-                }
+                getTopList("realtime","en")
             }
             binding.exchangeWon.setOnClickListener {
                 binding.exchangeDollar.isSelected=false
                 binding.exchangeWon.isSelected=true
                 binding.progressBar.visibility=View.VISIBLE
-                ApiWrapper.getTopListRealtime() { it ->
-                    binding.recyclerView.adapter= RealtimeTopListAdapter(it,onClickItem = {
-                        val intent = Intent(context, DetailActivity::class.java)
-                        intent.putExtra("ticker",it.title)
-                        startActivity(intent)
-                    })
-                }
+                getTopList("realtime","kr")
             }
         }
         //Change : 등락율
@@ -150,7 +121,16 @@ class TopListFragment : Fragment(){
     }
 
     fun getTopList(filter1: String, filter2: String){
-        if(filter1 == "change"){
+        if(filter1 == "realtime"){
+            ApiWrapper.getTopListRealtime(filter2) { it ->
+                binding.progressBar.visibility=View.GONE
+                binding.recyclerView.adapter= TopListRealtimeAdapter(it,this,onClickItem = {
+                    val intent = Intent(context, DetailActivity::class.java)
+                    intent.putExtra("ticker",it.symbol)
+                    startActivity(intent)
+                })
+            }
+        } else if(filter1 == "change"){
             ApiWrapper.getTopListChange(filter2) { it ->
                 binding.progressBar.visibility=View.GONE
                 binding.recyclerView.adapter= TopListChangeAdapter(it,this,onClickItem = {

@@ -60,8 +60,8 @@
         <entry key="app/src/main/res/layout/linechart_marker_view.xml" value="1.3405364990234374" />
         <entry key="app/src/main/res/layout/search_recyclerview.xml" value="0.43522338867187504" />
         <entry key="app/src/main/res/layout/toplist_cap_recyclerview.xml" value="0.1703125" />
-        <entry key="app/src/main/res/layout/toplist_change_recyclerview.xml" value="0.5681411743164063" />
-        <entry key="app/src/main/res/layout/toplist_recyclerview.xml" value="0.14437689969604864" />
+        <entry key="app/src/main/res/layout/toplist_change_recyclerview.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/toplist_recyclerview.xml" value="0.1" />
         <entry key="app/src/main/res/menu/bottom_navigation_item.xml" value="0.2520833333333333" />
         <entry key="app/src/main/res/menu/search_menu.xml" value="0.4415176391601563" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
