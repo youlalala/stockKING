@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import org.techtown.stockking.DetailActivity
 import org.techtown.stockking.R
@@ -14,9 +13,7 @@ import org.techtown.stockking.adapter.RealtimeTopListAdapter
 import org.techtown.stockking.adapter.TopListCapAdapter
 import org.techtown.stockking.adapter.TopListChangeAdapter
 import org.techtown.stockking.databinding.FragmentToplistBinding
-
 import org.techtown.stockking.network.ApiWrapper
-import android.graphics.Color
 
 class TopListFragment : Fragment(){
 
@@ -44,27 +41,54 @@ class TopListFragment : Fragment(){
                 startActivity(intent)
             })
         }
-
+        //Realtime : 실시간
         binding.realtimeBtn.setOnClickListener {
             binding.buttonTitleTv.text = resources.getString(R.string.topList_btn1_title)
             binding.buttonDetailTv.text = resources.getString(R.string.topList_btn1_detail)
             binding.realtimeBtn.isSelected = true
             binding.updownBtn.isSelected = false
             binding.transactionBtn.isSelected = false
+            //progress bar
             binding.progressBar.visibility=View.VISIBLE
+            //radio group
+            binding.exchangeGroup.visibility = View.VISIBLE
+            binding.sortGroup.visibility = View.GONE
+            binding.exchangeDollar.isSelected=true
+            binding.exchangeWon.isSelected=false
+            //network
             ApiWrapper.getTopListRealtime() { it ->
-                Log.i("la",it.toString())
                 binding.recyclerView.adapter= RealtimeTopListAdapter(it,onClickItem = {
                     val intent = Intent(context, DetailActivity::class.java)
                     intent.putExtra("ticker",it.title)
-                    intent.putExtra("percent",it.percent)
-                    intent.putExtra("price",it.price)
                     startActivity(intent)
                 })
             }
-
+            binding.exchangeDollar.setOnClickListener{
+                binding.exchangeDollar.isSelected=true
+                binding.exchangeWon.isSelected=false
+                binding.progressBar.visibility=View.VISIBLE
+                ApiWrapper.getTopListRealtime() { it ->
+                    binding.recyclerView.adapter= RealtimeTopListAdapter(it,onClickItem = {
+                        val intent = Intent(context, DetailActivity::class.java)
+                        intent.putExtra("ticker",it.title)
+                        startActivity(intent)
+                    })
+                }
+            }
+            binding.exchangeWon.setOnClickListener {
+                binding.exchangeDollar.isSelected=false
+                binding.exchangeWon.isSelected=true
+                binding.progressBar.visibility=View.VISIBLE
+                ApiWrapper.getTopListRealtime() { it ->
+                    binding.recyclerView.adapter= RealtimeTopListAdapter(it,onClickItem = {
+                        val intent = Intent(context, DetailActivity::class.java)
+                        intent.putExtra("ticker",it.title)
+                        startActivity(intent)
+                    })
+                }
+            }
         }
-        //change : 등락율
+        //Change : 등락율
         binding.updownBtn.setOnClickListener {
             binding.buttonTitleTv.text = resources.getString(R.string.topList_btn2_title)
             binding.buttonDetailTv.text = resources.getString(R.string.topList_btn2_detail)

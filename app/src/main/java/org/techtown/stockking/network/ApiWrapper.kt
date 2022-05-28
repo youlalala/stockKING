@@ -1,10 +1,14 @@
 package org.techtown.stockking.network
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.util.Log.i
+import androidx.core.content.ContextCompat.startActivity
+import org.techtown.stockking.MainActivity
 import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.model.*
+import org.techtown.stockking.module.login.LoginActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -202,37 +206,6 @@ class ApiWrapper {
             })
         }
 
-        fun postFirstLogin(socialName:String, userData: FirstLoginModel , callback: (UserModel?)->Unit){
-            val modelCall = NetWorkService.api2.requestFirstLogin(socialName,userData)
-            modelCall.enqueue(object : Callback<UserModel> {
-                override fun onResponse(call: Call<UserModel>, response: Response<UserModel>
-                ) {
-                    i(TAG,"post first login success\n response.body : "+response.body().toString())
-                    val response = response.body()
-                    response?.let{
-                        callback.invoke(it)
-                    }
-                }
-                override fun onFailure(call: Call<UserModel>, t: Throwable) {
-                    i(TAG,"post first login fail : "+t.toString())
-                    modelCall.cancel()
-                }
-            })
-        }
-        fun postAutoLogin(token: String, onResult: (UserModel?)->Unit){
-            val modelCall = NetWorkService.api2.requestAutoLogin(token)
-            modelCall.enqueue(object : Callback<UserModel> {
-                override fun onResponse(call: Call<UserModel>, response: Response<UserModel>
-                ) {
-                    i(TAG,"get auto login success\n response.body : "+response.body().toString())
-                    onResult(response.body())
-                }
-                override fun onFailure(call: Call<UserModel>, t: Throwable) {
-                    i(TAG,"get auto login fail")
-                    modelCall.cancel()
-                }
-            })
-        }
 
         fun postBookmark(token: String, bookmarkData: BookmarkModel , onResult: (BookmarkModel?)->Unit){
             val modelCall = NetWorkService.api2.requestBookmark(

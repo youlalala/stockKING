@@ -84,8 +84,6 @@
                 android:textSize="13dp"
                 android:text="detail_tv"/>
         </LinearLayout>
-
-
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -96,36 +94,34 @@
             android:layout_height="30dp"
             android:orientation="horizontal"
             android:paddingHorizontal="2dp"
-            android:background="@drawable/round_shape"
+            android:background="@drawable/radio_shape"
             android:backgroundTint="#F2F4F6"
             android:gravity="center"
-            android:checkedButton="@+id/dolloar_btn">
-
+            android:checkedButton="@+id/exchange_dollar">
             <RadioButton
                 android:id="@+id/exchange_dollar"
                 android:layout_width="26dp"
                 android:layout_height="26dp"
                 android:layout_weight="1"
-                android:background="@drawable/round_shape"
+                android:background="@drawable/radio_shape"
                 android:backgroundTint="@drawable/radio_selector_color"
                 android:button="@android:color/transparent"
                 android:gravity="center"
                 android:text="@string/dollar"
                 android:textColor="@color/button_text_color"
                 android:textSize="13dp" />
-
             <RadioButton
                 android:id="@+id/exchange_won"
                 android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:button="@android:color/transparent"
-                android:background="@drawable/round_shape"
-                android:textColor="@color/button_text_color"
-                android:backgroundTint="@drawable/radio_selector_color"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="13dp"
+                android:background="@drawable/radio_shape"
+                android:backgroundTint="@drawable/radio_selector_color"
+                android:button="@android:color/transparent"
                 android:gravity="center"
-                android:text="@string/won"/>
+                android:text="@string/won"
+                android:textColor="@color/button_text_color"
+                android:textSize="13dp" />
         </RadioGroup>
         <RadioGroup
             android:id="@+id/sort_group"
@@ -133,6 +129,7 @@
             android:layout_height="30dp"
             android:orientation="horizontal"
             android:paddingHorizontal="2dp"
+            android:visibility="gone"
             android:background="@drawable/round_shape"
             android:backgroundTint="#F2F4F6"
             android:gravity="center"

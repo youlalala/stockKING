@@ -16,6 +16,7 @@ import org.techtown.stockking.databinding.ActivityLoginBinding
 import org.techtown.stockking.model.FirstLoginModel
 import org.techtown.stockking.model.UserModel
 import org.techtown.stockking.network.ApiWrapper
+import org.techtown.stockking.network.ApiWrapperLogin
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
                             accessToken= token.accessToken
                         )
 
-                        ApiWrapper.postFirstLogin("kakao",userInfo){
+                        ApiWrapperLogin.postFirstLogin("kakao",userInfo){
                             if (it != null) {
                                 MySharedPreferences.setToken(this, it.userToken)
                             }
