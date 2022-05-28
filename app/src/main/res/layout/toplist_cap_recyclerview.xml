@@ -50,8 +50,8 @@
         android:id="@+id/item_cap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/TitleStyle"
-        android:textSize="14dp"
+        style="@style/TextStyle"
+        android:textSize="13dp"
         android:gravity="right"
         android:text="cap"
         />

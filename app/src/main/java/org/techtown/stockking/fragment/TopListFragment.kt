@@ -29,6 +29,11 @@ class TopListFragment : Fragment(){
         binding.updownBtn.isSelected = false
         binding.transactionBtn.isSelected = false
         binding.progressBar.visibility=View.VISIBLE
+        //radio group
+        binding.exchangeGroup.visibility = View.VISIBLE
+        binding.sortGroup.visibility = View.GONE
+        binding.exchangeDollar.isSelected=true
+        binding.exchangeWon.isSelected=false
         getTopList("realtime","kr")
         //Realtime : 실시간
         binding.realtimeBtn.setOnClickListener {
