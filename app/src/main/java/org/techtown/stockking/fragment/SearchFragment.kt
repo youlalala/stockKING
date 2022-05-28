@@ -2,11 +2,13 @@ package org.techtown.stockking.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.postDelayed
 import org.techtown.stockking.DetailActivity
 import org.techtown.stockking.databinding.FragmentSearchBinding
 import org.techtown.stockking.adapter.SearchListAdapter
@@ -56,41 +58,45 @@ class SearchFragment : Fragment() {
             }
             //글자 칠때 마다 변함
             override fun onQueryTextChange(newText: String): Boolean {
-                if(binding.searchBar.query.isNullOrEmpty()){
-                    if(binding.filterEnBtn.isSelected){
-                        getAllCompanyVersion("en")
+                val handler = Handler()
+                handler.postDelayed(500){
+                    if(binding.searchBar.query.isNullOrEmpty()){
+                        if(binding.filterEnBtn.isSelected){
+                            getAllCompanyVersion("en")
+                        }else{
+                            getAllCompanyVersion("kr")
+                        }
+                    }
+                    if(binding.filterKrBtn.isSelected){
+                        ApiWrapper.getSearch("kr",newText) { it ->
+                            adapter= SearchListAdapter(it,"kr",this@SearchFragment,onClickItem = {
+                                val intent = Intent(context, DetailActivity::class.java)
+                                intent.putExtra("ticker",it.symbol)
+                                startActivity(intent)
+                            })
+                            binding.searchRecyclerView.adapter=adapter
+                        }
+                    }else if(binding.filterEnBtn.isSelected){
+                        ApiWrapper.getSearch("en",newText) { it ->
+                            adapter= SearchListAdapter(it,"en",this@SearchFragment,onClickItem = {
+                                val intent = Intent(context, DetailActivity::class.java)
+                                intent.putExtra("ticker",it.symbol)
+                                startActivity(intent)
+                            })
+                            binding.searchRecyclerView.adapter=adapter
+                        }
                     }else{
-                        getAllCompanyVersion("kr")
+                        ApiWrapper.getSearch("symbol",newText) { it ->
+                            adapter= SearchListAdapter(it,"kr",this@SearchFragment,onClickItem = {
+                                val intent = Intent(context, DetailActivity::class.java)
+                                intent.putExtra("ticker",it.symbol)
+                                startActivity(intent)
+                            })
+                            binding.searchRecyclerView.adapter=adapter
+                        }
                     }
                 }
-                if(binding.filterKrBtn.isSelected){
-                    ApiWrapper.getSearch("kr",newText) { it ->
-                        adapter= SearchListAdapter(it,"kr",this@SearchFragment,onClickItem = {
-                            val intent = Intent(context, DetailActivity::class.java)
-                            intent.putExtra("ticker",it.symbol)
-                            startActivity(intent)
-                        })
-                        binding.searchRecyclerView.adapter=adapter
-                    }
-                }else if(binding.filterEnBtn.isSelected){
-                    ApiWrapper.getSearch("en",newText) { it ->
-                        adapter= SearchListAdapter(it,"en",this@SearchFragment,onClickItem = {
-                            val intent = Intent(context, DetailActivity::class.java)
-                            intent.putExtra("ticker",it.symbol)
-                            startActivity(intent)
-                        })
-                        binding.searchRecyclerView.adapter=adapter
-                    }
-                }else{
-                    ApiWrapper.getSearch("symbol",newText) { it ->
-                        adapter= SearchListAdapter(it,"kr",this@SearchFragment,onClickItem = {
-                            val intent = Intent(context, DetailActivity::class.java)
-                            intent.putExtra("ticker",it.symbol)
-                            startActivity(intent)
-                        })
-                        binding.searchRecyclerView.adapter=adapter
-                    }
-                }
+
 
                 return true
             }

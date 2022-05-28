@@ -105,8 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingBottom="20dp"
-                android:paddingHorizontal="5dp">
+                android:paddingBottom="20dp">
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -227,11 +226,19 @@
                     android:layout_height="wrap_content"
                     android:text="회사 상세 설명"/>
                 <TextView
-                    android:id="@+id/view_more"
+                    android:id="@+id/unfold_btn"
                     android:textColor="@color/main_green_color"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="..More"
+                    android:visibility="gone"
+                    />
+                <TextView
+                    android:id="@+id/fold_btn"
+                    android:textColor="@color/main_green_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..접기"
                     android:visibility="gone"
                     />
 

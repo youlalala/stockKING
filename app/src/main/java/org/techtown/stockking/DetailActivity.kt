@@ -34,6 +34,7 @@ import org.techtown.stockking.module.graph.CandleChartMarkerView
 import org.techtown.stockking.module.graph.LineChartMarkerView
 
 import org.techtown.stockking.network.ApiWrapper
+import org.techtown.stockking.network.ApiWrapperChart
 import retrofit2.http.Header
 import java.text.DecimalFormat
 
@@ -76,18 +77,6 @@ class DetailActivity : AppCompatActivity(){
                 binding.closeTv.text=it[0].close + " 달러"
 //                binding.shareout.text=it[0].shareout
 
-
-//                if(it[0].change_percent.substring(0,1)=="-"){
-//                    binding.changePercentTv.setTextColor(Color.BLUE)
-//                    binding.changeValueTv.setTextColor(Color.BLUE)
-//                }else{
-//                    binding.changePercentTv.setTextColor(Color.RED)
-//                    binding.changeValueTv.setTextColor(Color.RED)
-//                }
-//                binding.changePercentTv.text = it[0].change_percent
-//                binding.changeValueTv.text=it[0].change_value
-
-                //img
                 //SVG string content
                 val svgString = it[0].img
 
@@ -103,13 +92,19 @@ class DetailActivity : AppCompatActivity(){
                     .circleCrop()
                     .into(binding.logoImg)
 
-                //더보기
+                //more button
                 if(binding.description.lineCount>3){
                     binding.description.maxLines=3
-                    binding.viewMore.visibility= View.VISIBLE
-                    binding.viewMore.setOnClickListener {
+                    binding.unfoldBtn.visibility= View.VISIBLE
+                    binding.foldBtn.setOnClickListener {
+                        binding.description.maxLines=3
+                        binding.foldBtn.visibility= View.GONE
+                        binding.unfoldBtn.visibility=View.VISIBLE
+                    }
+                    binding.unfoldBtn.setOnClickListener {
                         binding.description.maxLines=binding.description.lineCount
-                        binding.viewMore.visibility= View.GONE
+                        binding.unfoldBtn.visibility= View.GONE
+                        binding.foldBtn.visibility=View.VISIBLE
                     }
                 }
             }
@@ -141,6 +136,8 @@ class DetailActivity : AppCompatActivity(){
             overridePendingTransition(0,R.anim.horizon_exit )
         }
 
+        binding.lineChartBtn.setShadowLayer(1F, 2F, 2F, Color.BLACK)
+        binding.candleChartBtn.setShadowLayer(0F, 0F, 0F, Color.WHITE)
         binding.lineChartBtn.setOnClickListener{
             binding.lineChart.visibility=View.VISIBLE
             binding.candleChart.visibility=View.GONE
@@ -167,7 +164,7 @@ class DetailActivity : AppCompatActivity(){
         binding.threeMonthBtn.isSelected=false
         binding.oneYearBtn.isSelected=false
         binding.fiveYearBtn.isSelected=false
-        ApiWrapper.getStockDaily(ticker){
+        ApiWrapperChart.getStockDaily(ticker){
             calPercnet(it)
             drawLineChart(it)
             drawCandleChart(it)
@@ -180,7 +177,7 @@ class DetailActivity : AppCompatActivity(){
             binding.threeMonthBtn.isSelected=false
             binding.oneYearBtn.isSelected=false
             binding.fiveYearBtn.isSelected=false
-            ApiWrapper.getStockDaily(ticker){
+            ApiWrapperChart.getStockDaily(ticker){
                 calPercnet(it)
                 drawLineChart(it)
                 drawCandleChart(it)
@@ -194,7 +191,7 @@ class DetailActivity : AppCompatActivity(){
             binding.threeMonthBtn.isSelected=false
             binding.oneYearBtn.isSelected=false
             binding.fiveYearBtn.isSelected=false
-            ApiWrapper.getStockWeekly(ticker){
+            ApiWrapperChart.getStockWeekly(ticker){
                 calPercnet(it)
                 drawLineChart(it)
                 drawCandleChart(it)
@@ -208,7 +205,7 @@ class DetailActivity : AppCompatActivity(){
             binding.threeMonthBtn.isSelected=false
             binding.oneYearBtn.isSelected=false
             binding.fiveYearBtn.isSelected=false
-            ApiWrapper.getStockMonthly(ticker){
+            ApiWrapperChart.getStockMonthly(ticker){
                 calPercnet(it)
                 drawLineChart(it)
                 drawCandleChart(it)
@@ -222,7 +219,7 @@ class DetailActivity : AppCompatActivity(){
             binding.threeMonthBtn.isSelected=true
             binding.oneYearBtn.isSelected=false
             binding.fiveYearBtn.isSelected=false
-            ApiWrapper.getStock3Monthly(ticker){
+            ApiWrapperChart.getStock3Monthly(ticker){
                 calPercnet(it)
                 drawLineChart(it)
                 drawCandleChart(it)
@@ -236,14 +233,13 @@ class DetailActivity : AppCompatActivity(){
             binding.threeMonthBtn.isSelected=false
             binding.oneYearBtn.isSelected=true
             binding.fiveYearBtn.isSelected=false
-            ApiWrapper.getStock3Monthly(ticker){
+            ApiWrapperChart.getStockYearly(ticker){
                 calPercnet(it)
                 drawLineChart(it)
                 drawCandleChart(it)
             }
         }
         //5년그래프
-        //1년 그래프
         binding.fiveYearBtn.setOnClickListener{
             binding.oneDayBtn.isSelected=false
             binding.oneWeekBtn.isSelected=false
@@ -251,7 +247,7 @@ class DetailActivity : AppCompatActivity(){
             binding.threeMonthBtn.isSelected=false
             binding.oneYearBtn.isSelected=false
             binding.fiveYearBtn.isSelected=true
-            ApiWrapper.getStock3Monthly(ticker){
+            ApiWrapperChart.getStock5Yearly(ticker){
                 calPercnet(it)
                 drawLineChart(it)
                 drawCandleChart(it)
@@ -346,8 +342,6 @@ class DetailActivity : AppCompatActivity(){
         lineChart.isDoubleTapToZoomEnabled=false
         lineChart.setScaleEnabled(false)
 
-
-
         //marker
         val marker = LineChartMarkerView(this, R.layout.linechart_marker_view,dateList)
         lineChart.marker = marker
@@ -362,10 +356,9 @@ class DetailActivity : AppCompatActivity(){
 
     fun drawCandleChart(stockList : List<StockModel>){
         val candleChart = binding.candleChart
-
         val dateList = ArrayList<String>()
         val entries = ArrayList<CandleEntry>()
-        for(i in 0..29){
+        for(i in 0 until stockList.size){
             if (stockList[i].date.isNullOrEmpty()){
                 val day=stockList[i].datetime.subSequence(0,10).toString()
                 val time=stockList[i].datetime.subSequence(11,16)
@@ -381,12 +374,9 @@ class DetailActivity : AppCompatActivity(){
                 stockList[i].close.toFloat()
             ))
         }
-        i("SSS","candle"+entries[3])
-
-
         val dataset= CandleDataSet(entries, null).apply{
             // 심지 부분
-            shadowColor = Color.LTGRAY
+            shadowColor = Color.DKGRAY
             shadowWidth = 0.1F
 
             // 음봄
@@ -398,7 +388,8 @@ class DetailActivity : AppCompatActivity(){
 
             neutralColor = Color.DKGRAY
             // 터치시 노란 선 제거
-            //highLightColor = Color.TRANSPARENT
+            highLightColor = getColor(R.color.main_green_color)
+            highlightLineWidth = 1f
         }
         val xAxis=candleChart.xAxis
         val yAxisL=candleChart.axisLeft
@@ -431,6 +422,10 @@ class DetailActivity : AppCompatActivity(){
         //marker
         val marker = CandleChartMarkerView(this, R.layout.candlechart_marker_view,dateList,entries)
         candleChart.marker = marker
+
+        candleChart.setPinchZoom(false)
+        candleChart.isDoubleTapToZoomEnabled=false
+        candleChart.setScaleEnabled(false)
 
         candleChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
 

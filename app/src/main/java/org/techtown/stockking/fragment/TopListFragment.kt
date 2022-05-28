@@ -34,7 +34,19 @@ class TopListFragment : Fragment(){
         binding.sortGroup.visibility = View.GONE
         binding.exchangeDollar.isSelected=true
         binding.exchangeWon.isSelected=false
-        getTopList("realtime","kr")
+        getTopList("realtime","en")
+        binding.exchangeDollar.setOnClickListener{
+            binding.exchangeDollar.isSelected=true
+            binding.exchangeWon.isSelected=false
+            binding.progressBar.visibility=View.VISIBLE
+            getTopList("realtime","en")
+        }
+        binding.exchangeWon.setOnClickListener {
+            binding.exchangeDollar.isSelected=false
+            binding.exchangeWon.isSelected=true
+            binding.progressBar.visibility=View.VISIBLE
+            getTopList("realtime","kr")
+        }
         //Realtime : 실시간
         binding.realtimeBtn.setOnClickListener {
             binding.buttonTitleTv.text = resources.getString(R.string.topList_btn1_title)
@@ -50,7 +62,7 @@ class TopListFragment : Fragment(){
             binding.exchangeDollar.isSelected=true
             binding.exchangeWon.isSelected=false
             //network
-            getTopList("realtime","kr")
+            getTopList("realtime","en")
             binding.exchangeDollar.setOnClickListener{
                 binding.exchangeDollar.isSelected=true
                 binding.exchangeWon.isSelected=false
@@ -129,7 +141,7 @@ class TopListFragment : Fragment(){
         if(filter1 == "realtime"){
             ApiWrapper.getTopListRealtime(filter2) { it ->
                 binding.progressBar.visibility=View.GONE
-                binding.recyclerView.adapter= TopListRealtimeAdapter(it,this,onClickItem = {
+                binding.recyclerView.adapter= TopListRealtimeAdapter(it,filter2,this,onClickItem = {
                     val intent = Intent(context, DetailActivity::class.java)
                     intent.putExtra("ticker",it.symbol)
                     startActivity(intent)

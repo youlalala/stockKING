@@ -15,6 +15,7 @@ import org.techtown.stockking.model.TopListRealtimeModel
 
 class TopListRealtimeAdapter(
     private val stockTopList: List<TopListRealtimeModel>,
+    val version: String,
     val context : TopListFragment,
     val onClickItem: (stockTopList: TopListRealtimeModel)-> Unit)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
@@ -32,20 +33,33 @@ class TopListRealtimeAdapter(
         binding.itemConame.text =stockTopList[position].name
         binding.itemClose.text = stockTopList[position].close
 
+        if(version=="kr"){
+            binding.itemClose.text = stockTopList[position].close + " ₩"
+        }else{
+            binding.itemClose.text = stockTopList[position].close + " $"
+        }
+
         if(stockTopList[position].change_percent.substring(0,1)=="-"){
             binding.itemChangePercent.setTextColor(Color.BLUE)
             binding.itemChangeValue.setTextColor(Color.BLUE)
             binding.itemChangePercent.text = context.resources.getString(R.string.down)+stockTopList[position].change_percent.substring(1) + context.resources.getString(
                 R.string.percent)
-            binding.itemChangeValue.text = stockTopList[position].change_value + context.resources.getString(
-                R.string.dollar)
+            if(version=="kr"){
+                binding.itemChangeValue.text = stockTopList[position].change_value + context.resources.getString(R.string.won)
+            }else{
+                binding.itemChangeValue.text = stockTopList[position].change_value + context.resources.getString(R.string.dollar)
+            }
+
         }else{
             binding.itemChangePercent.setTextColor(Color.RED)
             binding.itemChangeValue.setTextColor(Color.RED)
             binding.itemChangePercent.text = context.resources.getString(R.string.up)+stockTopList[position].change_percent.substring(1) + context.resources.getString(
                 R.string.percent)
-            binding.itemChangeValue.text = stockTopList[position].change_value + context.resources.getString(
-                R.string.dollar)
+            if(version=="kr"){
+                binding.itemChangeValue.text =  stockTopList[position].change_value + context.resources.getString(R.string.won)
+            }else{
+                binding.itemChangeValue.text =  stockTopList[position].change_value + context.resources.getString(R.string.dollar)
+            }
         }
 
         //SVG string content

@@ -16,7 +16,6 @@ class CandleChartMarkerView (
     private val labels: ArrayList<String>,
     private val entries: ArrayList<CandleEntry>,
 ): MarkerView(context, layout) {
-
     private val date: TextView = findViewById(R.id.date_tv)
     private val high: TextView = findViewById(R.id.high_tv)
     private val low: TextView = findViewById(R.id.low_tv)
