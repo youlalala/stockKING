@@ -41,10 +41,10 @@ class CandleChartMarkerView (
     override fun refreshContent(e: Entry?, highlight: Highlight?) {
         val xIdx = e?.x?.toInt()
         date.text = labels[xIdx!!]
-        high.text = entries[xIdx!!].high.toString()
-        low.text = entries[xIdx!!].low.toString()
-        open.text = entries[xIdx!!].open.toString()
-        close.text = entries[xIdx!!].close.toString()
+        high.text = entries[xIdx!!].high.toString()+" $"
+        low.text = entries[xIdx!!].low.toString()+" $"
+        open.text = entries[xIdx!!].open.toString()+" $"
+        close.text = entries[xIdx!!].close.toString()+" $"
         super.refreshContent(e, highlight)
     }
 }
