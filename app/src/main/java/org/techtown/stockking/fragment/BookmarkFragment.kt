@@ -36,7 +36,7 @@ class BookmarkFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         ApiWrapperBookmark.getBookmarkList(MySharedPreferences.getToken(requireContext())){
-            if(it.result.symbol.size>0){
+            if(it.code == "200"){
                 binding.emptyTv.visibility=View.GONE
                 binding.recyclerView.visibility=View.VISIBLE
                 val adapter= BookmarkListAdapter(it.result.symbol,this,

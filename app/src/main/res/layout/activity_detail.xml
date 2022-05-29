@@ -211,37 +211,38 @@
                 android:layout_height="wrap_content"
                 android:stretchColumns="0,1,2,3,4">
                 <TableRow
-                    android:layout_marginBottom="15dp"
-                    android:visibility="gone">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/TextStyle"
-                        android:textSize="13dp"
-                        android:text="시가총액" />
+                    android:layout_marginBottom="15dp">
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        style="@style/TextStyle"
+                        android:textSize="11dp"
+                        android:text="시가총액" />
+                    <TextView
+                        android:id="@+id/add_cap"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         style="@style/TitleStyle"
                         android:layout_marginRight="15dp"
-                        android:textSize="13dp"
+                        android:textSize="11dp"
                         android:text="00000000"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/TextStyle"
-                        android:textSize="13dp"
-                        android:text="시총순위"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        style="@style/TextStyle"
+                        android:textSize="11dp"
+                        android:text="시총순위"/>
+                    <TextView
+                        android:id="@+id/add_rank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:gravity="right"
                         style="@style/TitleStyle"
                         android:paddingHorizontal="6dp"
-                        android:textSize="13dp"
+                        android:textSize="11dp"
                         android:text="1위"/>
                 </TableRow>
                 <TableRow
@@ -251,7 +252,7 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         style="@style/TextStyle"
-                        android:textSize="13dp"
+                        android:textSize="11dp"
                         android:text="PER"/>
                     <TextView
                         android:id="@+id/add_PER"
@@ -260,14 +261,14 @@
                         android:gravity="right"
                         style="@style/TitleStyle"
                         android:layout_marginRight="15dp"
-                        android:textSize="13dp"
+                        android:textSize="11dp"
                         android:text="00000"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         style="@style/TextStyle"
-                        android:textSize="13dp"
+                        android:textSize="11dp"
                         android:text="PBR"/>
                     <TextView
                         android:id="@+id/add_PBR"
@@ -276,7 +277,7 @@
                         android:gravity="right"
                         style="@style/TitleStyle"
                         android:paddingHorizontal="6dp"
-                        android:textSize="13dp"
+                        android:textSize="11dp"
                         android:text="1위"/>
 
                 </TableRow>
@@ -287,7 +288,7 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         style="@style/TextStyle"
-                        android:textSize="13dp"
+                        android:textSize="11dp"
                         android:text="EPS"/>
                     <TextView
                         android:id="@+id/add_EPS"
@@ -296,14 +297,14 @@
                         android:gravity="right"
                         style="@style/TitleStyle"
                         android:layout_marginRight="15dp"
-                        android:textSize="13dp"
+                        android:textSize="11dp"
                         android:text="00000"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         style="@style/TextStyle"
-                        android:textSize="13dp"
+                        android:textSize="11dp"
                         android:text="ROE"/>
                     <TextView
                         android:id="@+id/add_ROE"
@@ -312,7 +313,7 @@
                         android:gravity="right"
                         style="@style/TitleStyle"
                         android:paddingHorizontal="6dp"
-                        android:textSize="13dp"
+                        android:textSize="11dp"
                         android:text="1위"/>
                 </TableRow>
                 <TableRow>
@@ -322,7 +323,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:text="52주 LOW"
-                        android:textSize="13dp" />
+                        android:textSize="11dp" />
                     <TextView
                         android:id="@+id/add_LOW"
                         android:layout_width="wrap_content"
@@ -330,14 +331,14 @@
                         android:gravity="right"
                         style="@style/TitleStyle"
                         android:layout_marginRight="15dp"
-                        android:textSize="13dp"
+                        android:textSize="11dp"
                         android:text="000000"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         style="@style/TextStyle"
-                        android:textSize="13dp"
+                        android:textSize="11dp"
                         android:text="52주 HIGH"/>
                     <TextView
                         android:id="@+id/add_HIGH"
@@ -346,7 +347,7 @@
                         android:gravity="right"
                         style="@style/TitleStyle"
                         android:paddingHorizontal="6dp"
-                        android:textSize="13dp"
+                        android:textSize="11dp"
                         android:text="1위"/>
                 </TableRow>
             </TableLayout>

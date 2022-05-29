@@ -56,9 +56,11 @@ class DetailActivity : AppCompatActivity(){
 
         //즐겨찾기 check
         ApiWrapperBookmark.getBookmarkList(MySharedPreferences.getToken(this)){
-            for(i in it.result.symbol.indices){
-                if(it.result.symbol[i].symbol==ticker){
-                    binding.star.isSelected = true
+            if(it.code == "200"){
+                for(i in it.result.symbol.indices){
+                    if(it.result.symbol[i].symbol==ticker){
+                        binding.star.isSelected = true
+                    }
                 }
             }
         }
@@ -113,6 +115,8 @@ class DetailActivity : AppCompatActivity(){
 
         //회사 추가정보 입력
         ApiWrapper.getCompanyInfoAdd(ticker){
+            binding.addCap.text=it[0].cap
+            binding.addRank.text=it[0].rank
             binding.addEPS.text=it[0].eps
             binding.addROE.text=it[0].roe
             binding.addPBR.text=it[0].pbr

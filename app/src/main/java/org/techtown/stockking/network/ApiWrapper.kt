@@ -116,7 +116,7 @@ class ApiWrapper {
             call.enqueue(object : Callback<List<CompanyInfoAddModel>> {
                 override fun onResponse(call: Call<List<CompanyInfoAddModel>>, response: Response<List<CompanyInfoAddModel>>) {
                     val list = response.body()
-                    i(TAG,"companyinfo response")
+                    i(TAG,"companyinfo response"+response.body())
                     list?.let{
                         callback.invoke(it)
                     }

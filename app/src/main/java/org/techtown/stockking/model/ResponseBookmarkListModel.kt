@@ -14,7 +14,7 @@ data class BookmarkListResult(
 
 data class BookmarkListModel(
     var symbol: String,
-    var name: String,
+    var name_kr: String,
     var img: String,
     var close: String,
     var change_percent: String,

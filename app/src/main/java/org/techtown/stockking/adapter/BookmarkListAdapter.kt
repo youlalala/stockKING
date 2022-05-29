@@ -40,8 +40,8 @@ class BookmarkListAdapter(
 
         val ticker = bookmarkList[position].symbol
         binding.itemTicker.text = ticker
-        binding.itemConame.text = bookmarkList[position].name
-        binding.itemClose.text =  bookmarkList[position].close
+        binding.itemConame.text = bookmarkList[position].name_kr
+        binding.itemClose.text =  bookmarkList[position].close + context.resources.getString(R.string.dollar)
 
         if(bookmarkList[position].change_percent.substring(0,1)=="-"){
             binding.itemChangePercent.setTextColor(Color.BLUE)

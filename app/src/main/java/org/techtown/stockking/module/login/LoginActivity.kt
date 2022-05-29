@@ -108,7 +108,8 @@ class LoginActivity : AppCompatActivity() {
 
             ApiWrapperLogin.postFirstLogin("google",userInfo){
                 if (it != null) {
-                    MySharedPreferences.setToken(this, account.idToken!!)
+                    MySharedPreferences.setToken(this, it.result.userToken)
+                    MySharedPreferences.setUserName(this, it.result.name)
                     MySharedPreferences.setMethod(this, "google")
                 }
                 val intent = Intent(this, MainActivity::class.java)

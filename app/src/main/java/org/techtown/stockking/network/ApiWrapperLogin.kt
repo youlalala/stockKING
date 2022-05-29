@@ -26,8 +26,8 @@ class ApiWrapperLogin {
                 ) {
                     Log.i(
                         TAG,
-                        "post first login success\n response.body : " +
-                                response.body().toString()
+                        "post first login success\n response: " +
+                                response
                     )
                     val response = response.body()
                     response?.let {

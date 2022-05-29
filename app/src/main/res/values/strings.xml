@@ -16,6 +16,8 @@
     <string name="down">▾</string>
     <string name="percent">%</string>
 
+    <string name="compnayAddInfo">12dp</string>
+
     <!--    google button-->
     <string name="google_login_btn">구글 로그인</string>
 </resources>
