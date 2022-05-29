@@ -29,52 +29,29 @@ class BookmarkFragment : Fragment() {
             startActivity(intent)
         }
         binding.userNameTv.text=MySharedPreferences.getUserName(requireContext())+" 님의 즐겨찾기"
-        getBookmarkList()
-
         return binding.root
 
     }
 
     override fun onStart() {
         super.onStart()
-        ApiWrapperBookmark.getBookmark(MySharedPreferences.getToken(requireContext())){
-            val adapter= BookmarkListAdapter(it,
+        ApiWrapperBookmark.getBookmarkList(MySharedPreferences.getToken(requireContext())){
+            val adapter= BookmarkListAdapter(it.result.symbol,
                 onClickItem = {
                     val intent = Intent(context, DetailActivity::class.java)
                     intent.putExtra("ticker",it.symbol)
                     startActivity(intent)
                 }, onClickStar={
                     AppLog.i("Stock", "onClickStar"+"it:"+it)
-                    ApiWrapperBookmark.postBookmark(
-                        token = MySharedPreferences.getToken(requireContext()),
-                        BookmarkModel(
-                            request = "delete",
-                            symbol = it.symbol)
-                    )
+//                    ApiWrapperBookmark.postBookmark(
+//                        token = MySharedPreferences.getToken(requireContext()),
+//                        BookmarkModel(
+//                            request = "delete",
+//                            symbol = it.symbol)
+//                    )
                 }
             )
             binding.recyclerView.adapter = adapter
-        }
-    }
-
-    fun getBookmarkList(){
-        ApiWrapperBookmark.getBookmark(MySharedPreferences.getToken(requireContext())){
-            binding.recyclerView.adapter= BookmarkListAdapter(it,
-                onClickItem = {
-                    val intent = Intent(context, DetailActivity::class.java)
-                    intent.putExtra("ticker",it.symbol)
-                    startActivity(intent)
-                }, onClickStar={
-                    AppLog.i("Stock", "onClickStar"+"it:"+it)
-                    ApiWrapperBookmark.postBookmark(
-                        token = MySharedPreferences.getToken(requireContext()),
-                        BookmarkModel(
-                            request = "delete",
-                            symbol = it.symbol)
-                    )
-
-                }
-            )
         }
     }
 

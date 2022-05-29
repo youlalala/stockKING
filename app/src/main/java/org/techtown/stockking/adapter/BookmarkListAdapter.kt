@@ -6,14 +6,14 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import org.techtown.stockking.databinding.BookmarkRecyclerviewBinding
-import org.techtown.stockking.model.BookMarkPersonalModel
+import org.techtown.stockking.model.BookmarkListModel
 
 
 class BookmarkListAdapter(
-    private val bookmarkList: List<BookMarkPersonalModel>,
+    private val bookmarkList: List<BookmarkListModel>,
     //val context: Context,
-    val onClickItem: (bookmarkList: BookMarkPersonalModel)-> Unit,
-    val onClickStar: (bookmarkList: BookMarkPersonalModel)-> Unit
+    val onClickItem: (bookmarkList: BookmarkListModel)-> Unit,
+    val onClickStar: (bookmarkList: BookmarkListModel)-> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int{
@@ -34,14 +34,6 @@ class BookmarkListAdapter(
         }
         binding.star.setOnClickListener{
             onClickStar.invoke(bookmarkList[position])
-            //onClickStar.invoke(bookmarkList[position])
-//
-            //ApiWrapper.postBookmark(
-//                    BookmarkModel(
-//                        token = MySharedPreferences.getToken(context),
-//                        request = "delete",
-//                        symbol = ticker)
-//                ){}
         }
     }
 

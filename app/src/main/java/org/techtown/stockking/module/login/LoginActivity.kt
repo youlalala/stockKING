@@ -56,7 +56,6 @@ class LoginActivity : AppCompatActivity() {
                                 MySharedPreferences.setUserName(this, it.result.name)
                                 MySharedPreferences.setMethod(this, "kakao")
                                 val intent = Intent(this, MainActivity::class.java)
-                                intent.putExtra("auto-login","no")
                                 startActivity(intent)
                                 finish()
                             }

@@ -211,6 +211,7 @@
                 android:layout_height="wrap_content"
                 android:stretchColumns="0,1,2,3,4">
                 <TableRow
+                    android:layout_marginBottom="15dp"
                     android:visibility="gone">
                     <TextView
                         android:layout_width="wrap_content"
@@ -224,7 +225,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         style="@style/TitleStyle"
-                        android:paddingHorizontal="6dp"
+                        android:layout_marginRight="15dp"
                         android:textSize="13dp"
                         android:text="00000000"/>
                     <TextView
@@ -243,33 +244,34 @@
                         android:textSize="13dp"
                         android:text="1위"/>
                 </TableRow>
-                <TableRow>
+                <TableRow
+                    android:layout_marginBottom="15dp">
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         style="@style/TextStyle"
                         android:textSize="13dp"
                         android:text="PER"/>
                     <TextView
                         android:id="@+id/add_PER"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         style="@style/TitleStyle"
-                        android:paddingHorizontal="6dp"
+                        android:layout_marginRight="15dp"
                         android:textSize="13dp"
-                        android:text="00000000"/>
+                        android:text="00000"/>
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         style="@style/TextStyle"
                         android:textSize="13dp"
                         android:text="PBR"/>
                     <TextView
                         android:id="@+id/add_PBR"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         style="@style/TitleStyle"
@@ -278,33 +280,34 @@
                         android:text="1위"/>
 
                 </TableRow>
-                <TableRow>
+                <TableRow
+                    android:layout_marginBottom="15dp">
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         style="@style/TextStyle"
                         android:textSize="13dp"
                         android:text="EPS"/>
                     <TextView
                         android:id="@+id/add_EPS"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         style="@style/TitleStyle"
-                        android:paddingHorizontal="6dp"
+                        android:layout_marginRight="15dp"
                         android:textSize="13dp"
-                        android:text="00000000"/>
+                        android:text="00000"/>
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         style="@style/TextStyle"
                         android:textSize="13dp"
                         android:text="ROE"/>
                     <TextView
                         android:id="@+id/add_ROE"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         style="@style/TitleStyle"
@@ -315,30 +318,30 @@
                 <TableRow>
                     <TextView
                         style="@style/TextStyle"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:text="52주 LOW"
                         android:textSize="13dp" />
                     <TextView
                         android:id="@+id/add_LOW"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         style="@style/TitleStyle"
-                        android:paddingHorizontal="6dp"
+                        android:layout_marginRight="15dp"
                         android:textSize="13dp"
-                        android:text="00000000"/>
+                        android:text="000000"/>
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         style="@style/TextStyle"
                         android:textSize="13dp"
                         android:text="52주 HIGH"/>
                     <TextView
                         android:id="@+id/add_HIGH"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         style="@style/TitleStyle"

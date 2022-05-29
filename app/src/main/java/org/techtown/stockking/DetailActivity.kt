@@ -55,9 +55,9 @@ class DetailActivity : AppCompatActivity(){
         val vibrationEffectClick = VibrationEffect.createPredefined(EFFECT_CLICK)
 
         //즐겨찾기 check
-        ApiWrapperBookmark.getBookmark(MySharedPreferences.getToken(this)){
-            for(i in it.indices){
-                if(it[i].symbol==ticker){
+        ApiWrapperBookmark.getBookmarkList(MySharedPreferences.getToken(this)){
+            for(i in it.result.symbol.indices){
+                if(it.result.symbol[i].symbol==ticker){
                     binding.star.isSelected = true
                 }
             }
@@ -117,27 +117,23 @@ class DetailActivity : AppCompatActivity(){
             binding.addROE.text=it[0].roe
             binding.addPBR.text=it[0].pbr
             binding.addPER.text=it[0].per
-            binding.addHIGH.text=it[0].highest
-            binding.addLOW.text=it[0].lowest
+            binding.addHIGH.text=it[0].highest+" $"
+            binding.addLOW.text=it[0].lowest+" $"
         }
 
         binding.star.setOnClickListener {
             if(binding.star.isSelected){
-                ApiWrapperBookmark.postBookmark(
+                ApiWrapperBookmark.deleteFavorite(
                     token = MySharedPreferences.getToken(this),
-                    BookmarkModel(
-                        request = "delete",
-                        symbol = ticker)
+                    BookmarkModel(symbol = ticker)
                 )
                 binding.star.isSelected = false
             } else{
                 //vibrator
                 vibrator.vibrate(vibrationEffectClick)
-                ApiWrapperBookmark.postBookmark(
+                ApiWrapperBookmark.addFavorite(
                     token = MySharedPreferences.getToken(this),
-                    BookmarkModel(
-                        request = "add",
-                        symbol = ticker)
+                    BookmarkModel(symbol = ticker)
                 )
                 binding.star.isSelected = true
             }

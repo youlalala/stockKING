@@ -104,14 +104,20 @@ interface ApiInterface{
         @Header("authorization") authHeader:String,
     ): Call<ResponseLoginModel>
 
-    @POST("bookmark")
-    fun requestBookmark(
+    @POST("favorite")
+    fun addFavorite(
         @Header("authorization") authHeader:String,
         @Body bookmarkData: BookmarkModel
-    ): Call<BookmarkModel>
+    ): Call<ResponseBookmarkModel>
 
-    @GET("bookmarkpersonal/{token}")
+    @HTTP(method = "DELETE", path = "favorite", hasBody = true)
+    fun deleteFavorite(
+        @Header("authorization") authHeader:String,
+        @Body bookmarkData: BookmarkModel
+    ): Call<ResponseBookmarkModel>
+
+    @GET("favorite/all")
     fun bookMarkPersonalList(
-        @Path("token") arg1:String,
-    ): Call<List<BookMarkPersonalModel>>
+        @Header("authorization") authHeader:String,
+    ): Call<ResponseBookmarkListModel>
 }

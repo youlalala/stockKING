@@ -6,7 +6,6 @@ data class ResponseLoginModel(
     var message: String,
     var result: UserModel
 )
-
 data class UserModel (
     var userId: String,
     var name: String,
