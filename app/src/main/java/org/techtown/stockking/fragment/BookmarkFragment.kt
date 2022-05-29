@@ -36,22 +36,29 @@ class BookmarkFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         ApiWrapperBookmark.getBookmarkList(MySharedPreferences.getToken(requireContext())){
-            val adapter= BookmarkListAdapter(it.result.symbol,
-                onClickItem = {
-                    val intent = Intent(context, DetailActivity::class.java)
-                    intent.putExtra("ticker",it.symbol)
-                    startActivity(intent)
-                }, onClickStar={
-                    AppLog.i("Stock", "onClickStar"+"it:"+it)
-//                    ApiWrapperBookmark.postBookmark(
-//                        token = MySharedPreferences.getToken(requireContext()),
-//                        BookmarkModel(
-//                            request = "delete",
-//                            symbol = it.symbol)
-//                    )
-                }
-            )
-            binding.recyclerView.adapter = adapter
+            if(it.result.symbol.size>0){
+                binding.emptyTv.visibility=View.GONE
+                binding.recyclerView.visibility=View.VISIBLE
+                val adapter= BookmarkListAdapter(it.result.symbol,this,
+                    onClickItem = {
+                        val intent = Intent(context, DetailActivity::class.java)
+                        intent.putExtra("ticker",it.symbol)
+                        startActivity(intent)
+                    }, onClickStar={
+                        AppLog.i("Stock", "onClickStar"+"it:"+it)
+                        ApiWrapperBookmark.deleteFavorite(
+                            token = MySharedPreferences.getToken(requireContext()),
+                            BookmarkModel(
+                                symbol = it.symbol)
+                        )
+                    }
+                )
+                binding.recyclerView.adapter = adapter
+            }else{
+                binding.emptyTv.visibility=View.VISIBLE
+                binding.recyclerView.visibility=View.GONE
+            }
+
         }
     }
 

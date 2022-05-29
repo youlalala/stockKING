@@ -1,12 +1,14 @@
 package org.techtown.stockking.module.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import org.techtown.stockking.MainActivity
@@ -14,9 +16,8 @@ import org.techtown.stockking.R
 import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.databinding.ActivityLoginBinding
 import org.techtown.stockking.model.FirstLoginModel
-import org.techtown.stockking.model.UserModel
-import org.techtown.stockking.network.ApiWrapper
 import org.techtown.stockking.network.ApiWrapperLogin
+
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,9 +92,34 @@ class LoginActivity : AppCompatActivity() {
         binding.googleLoginBtn.setOnClickListener {
             val intent = mGoogleSignInClient.signInIntent
 
+
             startActivityForResult(intent, 1)
         }
 
+    }
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+        try {
+            val account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
+
+            // TODO(developer): send ID Token to server and validate
+            val userInfo = FirstLoginModel(
+                accessToken= account.idToken!!
+            )
+
+            ApiWrapperLogin.postFirstLogin("google",userInfo){
+                if (it != null) {
+                    MySharedPreferences.setToken(this, account.idToken!!)
+                    MySharedPreferences.setMethod(this, "google")
+                }
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+            //updateUI(account)
+        } catch (e: ApiException) {
+            Log.i("SSS", "handleSignInResult:error", e)
+            //updateUI(null)
+        }
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -104,24 +130,23 @@ class LoginActivity : AppCompatActivity() {
                 // The Task returned from this call is always completed, no need to attach
                 // a listener.
                 val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-                val account = task.getResult(ApiException::class.java)
-                Log.i("SSS","account"+account.toString())
-                MySharedPreferences.setToken(this, account.idToken!!)
-
-                //first login request
-                val userInfo = FirstLoginModel(
-                    accessToken= account.idToken!!
-                )
-
-                ApiWrapperLogin.postFirstLogin("google",userInfo){
-                    if (it != null) {
-                        MySharedPreferences.setToken(this, account.idToken!!)
-                        MySharedPreferences.setMethod(this, "google")
-                    }
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
+                handleSignInResult(task);
+//                val account = task.getResult(ApiException::class.java)
+//                Log.i("SSS","account token\n"+account.idToken.toString())
+//                //first login request
+//                val userInfo = FirstLoginModel(
+//                    accessToken= account.idToken!!
+//                )
+//
+//                ApiWrapperLogin.postFirstLogin("google",userInfo){
+//                    if (it != null) {
+//                        MySharedPreferences.setToken(this, account.idToken!!)
+//                        MySharedPreferences.setMethod(this, "google")
+//                    }
+//                    val intent = Intent(this, MainActivity::class.java)
+//                    startActivity(intent)
+//                    finish()
+//                }
 //                val intent = Intent(this, MainActivity::class.java)
 //                startActivity(intent)
             }catch(e: ApiException){
