@@ -10,7 +10,7 @@ import retrofit2.http.*
 
 object NetWorkService{
     private const val BASE_URL =" http://teststock.cafe24app.com"
-    private const val BASE_URL2 ="http://172.30.1.54:8080"
+    private const val BASE_URL2 ="http://172.30.1.19:8080"
     private val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -45,6 +45,11 @@ interface ApiInterface{
     fun companyInfo(
         @Path("symbol") arg:String
     ): Call<List<CompanyInfoModel>>
+
+    @GET("stock/company/additional/{symbol}")
+    fun companyInfoAdd(
+        @Path("symbol") arg:String
+    ): Call<List<CompanyInfoAddModel>>
 
     // 1일
     @GET("stock/intraday/specific/for-daily/{symbol}")

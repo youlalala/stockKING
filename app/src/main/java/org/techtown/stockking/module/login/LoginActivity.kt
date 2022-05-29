@@ -53,10 +53,13 @@ class LoginActivity : AppCompatActivity() {
                         ApiWrapperLogin.postFirstLogin("kakao",userInfo){
                             if (it != null) {
                                 MySharedPreferences.setToken(this, it.userToken)
+                                MySharedPreferences.setMethod(this, "kakao")
+                                val intent = Intent(this, MainActivity::class.java)
+                                startActivity(intent)
+                                finish()
                             }
-                            MySharedPreferences.setMethod(this, "kakao")
-                            val intent = Intent(this, MainActivity::class.java)
-                            startActivity(intent)
+//                            val intent = Intent(this, MainActivity::class.java)
+//                            startActivity(intent)
                         }
                     }
                 }
@@ -70,7 +73,7 @@ class LoginActivity : AppCompatActivity() {
                     //카카오톡이 있을 경우
                     loginWithKakaoTalk(this@LoginActivity, callback = callback)
                 } else {
-                    //카카오ㅗㄱ이 없을 경우 카카오 계정으로 로그인하기
+                    //카카오톡이 없을 경우 카카오 계정으로 로그인하기
                     loginWithKakaoAccount(this@LoginActivity, callback = callback)
                 }
             }
@@ -89,7 +92,6 @@ class LoginActivity : AppCompatActivity() {
         binding.googleLoginBtn.setOnClickListener {
             val intent = mGoogleSignInClient.signInIntent
 
-            MySharedPreferences.setMethod(this,"google")
             startActivityForResult(intent, 1)
         }
 
@@ -106,19 +108,23 @@ class LoginActivity : AppCompatActivity() {
                 val account = task.getResult(ApiException::class.java)
                 Log.i("SSS","account"+account.toString())
                 MySharedPreferences.setToken(this, account.idToken!!)
-                MySharedPreferences.setMethod(this, "google")
-//                val userInfo = UserModel(
-//                    method = "google",
-//                    token= MySharedPreferences.getToken(this)
-//                )
-//
-//                Log.i("sss","userInfo : "+userInfo)
-//
-//                ApiWrapper.postToken(userInfo){
-//                }
-//                Log.i("SSS","구글 로그인 성공")
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
+
+                //first login request
+                val userInfo = FirstLoginModel(
+                    accessToken= account.idToken!!
+                )
+
+                ApiWrapperLogin.postFirstLogin("google",userInfo){
+                    if (it != null) {
+                        MySharedPreferences.setToken(this, account.idToken!!)
+                        MySharedPreferences.setMethod(this, "google")
+                    }
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+//                val intent = Intent(this, MainActivity::class.java)
+//                startActivity(intent)
             }catch(e: ApiException){
                 Log.i("SSS","구글 로그인 실패:"+e)
             }

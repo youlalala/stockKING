@@ -39,12 +39,15 @@ class SettingActivity : AppCompatActivity() {
             }
             else {
                 Log.i("SSS", "로그아웃 성공. SDK에서 토큰 삭제됨")
-                val intent= Intent(this, LoginActivity::class.java)
+                val intent= Intent(this, MainActivity::class.java)
                 startActivity(intent)
+                finish()
             }
         }
     }
     private fun googleLogout(){
+        //preference clear
+        MySharedPreferences.clearPreference(this)
         // 구글 로그아웃을 위해 로그인 세션 가져오기
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.server_client_id))
@@ -52,12 +55,9 @@ class SettingActivity : AppCompatActivity() {
             .build()
         val googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        //preference clear
-        MySharedPreferences.clearPreference(this)
-
         googleSignInClient.signOut()
             .addOnCompleteListener(this, OnCompleteListener<Void?> {
-                val intent= Intent(this, LoginActivity::class.java)
+                val intent= Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             })

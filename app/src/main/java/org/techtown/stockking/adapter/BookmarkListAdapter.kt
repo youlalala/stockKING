@@ -3,6 +3,7 @@ package org.techtown.stockking.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import org.techtown.stockking.databinding.BookmarkRecyclerviewBinding
 import org.techtown.stockking.model.BookMarkPersonalModel
@@ -12,7 +13,7 @@ class BookmarkListAdapter(
     private val bookmarkList: List<BookMarkPersonalModel>,
     //val context: Context,
     val onClickItem: (bookmarkList: BookMarkPersonalModel)-> Unit,
-    val onClickStar: ()-> Unit
+    val onClickStar: (bookmarkList: BookMarkPersonalModel)-> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int{
@@ -31,9 +32,8 @@ class BookmarkListAdapter(
         holder.itemView.setOnClickListener{
             onClickItem.invoke(bookmarkList[position])
         }
-
         binding.star.setOnClickListener{
-            onClickStar.invoke()
+            onClickStar.invoke(bookmarkList[position])
             //onClickStar.invoke(bookmarkList[position])
 //
             //ApiWrapper.postBookmark(
@@ -44,6 +44,8 @@ class BookmarkListAdapter(
 //                ){}
         }
     }
+
+
     class BookmarkViewHolder(val binding: BookmarkRecyclerviewBinding): RecyclerView.ViewHolder(binding.root)
 }
 

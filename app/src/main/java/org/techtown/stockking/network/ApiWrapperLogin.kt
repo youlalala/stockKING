@@ -40,7 +40,7 @@ class ApiWrapperLogin {
             })
         }
 
-        fun getAutoLogin(token: String, context: Context, callback: (UserModel?) -> Unit) {
+        fun getAutoLogin(token: String, callback: (UserModel?) -> Unit) {
             val modelCall = NetWorkService.api2.requestAutoLogin(token)
             modelCall.enqueue(object : Callback<UserModel> {
                 override fun onResponse(

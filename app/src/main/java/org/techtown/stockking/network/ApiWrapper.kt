@@ -1,18 +1,11 @@
 package org.techtown.stockking.network
 
-import android.content.Context
-import android.content.Intent
-import android.util.Log
+
 import android.util.Log.i
-import androidx.core.content.ContextCompat.startActivity
-import org.techtown.stockking.MainActivity
-import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.model.*
-import org.techtown.stockking.module.login.LoginActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.StringBuilder
 
 class ApiWrapper {
     companion object{
@@ -102,7 +95,6 @@ class ApiWrapper {
             })
         }
 
-
         fun getCompanyInfo(symbol: String, callback: (List<CompanyInfoModel>) -> Unit){
             val call = NetWorkService.api.companyInfo(symbol)
             call.enqueue(object : Callback<List<CompanyInfoModel>> {
@@ -119,42 +111,22 @@ class ApiWrapper {
                 }
             })
         }
-
-
-        fun postBookmark(token: String, bookmarkData: BookmarkModel , onResult: (BookmarkModel?)->Unit){
-            val modelCall = NetWorkService.api2.requestBookmark(
-                authHeader = token,
-                bookmarkData)
-            modelCall.enqueue(object : Callback<BookmarkModel> {
-                override fun onResponse(call: Call<BookmarkModel>, response: Response<BookmarkModel>
-                ) {
-                    i("sss","success : "+"response:"+response)
-                    onResult(response.body())
-                }
-                override fun onFailure(call: Call<BookmarkModel>, t: Throwable) {
-                    Log.i("sss","cancel : "+"t:"+t)
-                    modelCall.cancel()
-                }
-            })
-        }
-        fun getBookmark(token: String, callback: (List<BookMarkPersonalModel>) -> Unit){
-            val modelCall = NetWorkService.api2.bookMarkPersonalList(token)
-            modelCall.enqueue(object : Callback<List<BookMarkPersonalModel>> {
-                override fun onResponse(call: Call<List<BookMarkPersonalModel>>, response: Response<List<BookMarkPersonalModel>>) {
-                    val data = response.body()
-                    data?.let {
+        fun getCompanyInfoAdd(symbol: String, callback: (List<CompanyInfoAddModel>) -> Unit){
+            val call = NetWorkService.api.companyInfoAdd(symbol)
+            call.enqueue(object : Callback<List<CompanyInfoAddModel>> {
+                override fun onResponse(call: Call<List<CompanyInfoAddModel>>, response: Response<List<CompanyInfoAddModel>>) {
+                    val list = response.body()
+                    i(TAG,"companyinfo response")
+                    list?.let{
                         callback.invoke(it)
                     }
                 }
-                override fun onFailure(call: Call<List<BookMarkPersonalModel>>, t: Throwable) {
-                    i(TAG,"intraday stock fail")
-                    modelCall.cancel()
+                override fun onFailure(call: Call<List<CompanyInfoAddModel>>, t: Throwable) {
+                    i(TAG,"companyinfo fail")
+                    call.cancel()
                 }
             })
         }
-
-
-
     }
 
 }

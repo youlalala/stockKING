@@ -34,6 +34,7 @@ import org.techtown.stockking.module.graph.CandleChartMarkerView
 import org.techtown.stockking.module.graph.LineChartMarkerView
 
 import org.techtown.stockking.network.ApiWrapper
+import org.techtown.stockking.network.ApiWrapperBookmark
 import org.techtown.stockking.network.ApiWrapperChart
 import retrofit2.http.Header
 import java.text.DecimalFormat
@@ -54,7 +55,7 @@ class DetailActivity : AppCompatActivity(){
         val vibrationEffectClick = VibrationEffect.createPredefined(EFFECT_CLICK)
 
         //즐겨찾기 check
-        ApiWrapper.getBookmark(MySharedPreferences.getToken(this)){
+        ApiWrapperBookmark.getBookmark(MySharedPreferences.getToken(this)){
             for(i in it.indices){
                 if(it[i].symbol==ticker){
                     binding.star.isSelected = true
@@ -112,22 +113,22 @@ class DetailActivity : AppCompatActivity(){
 
         binding.star.setOnClickListener {
             if(binding.star.isSelected){
-                ApiWrapper.postBookmark(
+                ApiWrapperBookmark.postBookmark(
                     token = MySharedPreferences.getToken(this),
                     BookmarkModel(
                         request = "delete",
                         symbol = ticker)
-                ){}
+                )
                 binding.star.isSelected = false
             } else{
                 //vibrator
                 vibrator.vibrate(vibrationEffectClick)
-                ApiWrapper.postBookmark(
+                ApiWrapperBookmark.postBookmark(
                     token = MySharedPreferences.getToken(this),
                     BookmarkModel(
                         request = "add",
                         symbol = ticker)
-                ){}
+                )
                 binding.star.isSelected = true
             }
         }
