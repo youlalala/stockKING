@@ -44,12 +44,12 @@
         <entry key="app/src/main/res/drawable/switch_track_on.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable/switch_track_selector.xml" value="0.1245" />
         <entry key="app/src/main/res/font/app_font.xml" value="0.27037037037037037" />
-        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.29257049560546877" />
+        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.4282745361328125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.11548913043478261" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.2753623527444566" />
         <entry key="app/src/main/res/layout/bookmark_recyclerview.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/candlechart_marker_view.xml" value="0.9" />
+        <entry key="app/src/main/res/layout/candlechart_marker_view.xml" value="0.1" />
         <entry key="app/src/main/res/layout/custom_marker_view.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_account.xml" value="0.2788844621513944" />
         <entry key="app/src/main/res/layout/fragment_bookmark.xml" value="0.4592511013215859" />

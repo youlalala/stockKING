@@ -111,6 +111,16 @@ class DetailActivity : AppCompatActivity(){
             }
         }
 
+        //회사 추가정보 입력
+        ApiWrapper.getCompanyInfoAdd(ticker){
+            binding.addEPS.text=it[0].eps
+            binding.addROE.text=it[0].roe
+            binding.addPBR.text=it[0].pbr
+            binding.addPER.text=it[0].per
+            binding.addHIGH.text=it[0].highest
+            binding.addLOW.text=it[0].lowest
+        }
+
         binding.star.setOnClickListener {
             if(binding.star.isSelected){
                 ApiWrapperBookmark.postBookmark(

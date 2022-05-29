@@ -97,12 +97,12 @@ interface ApiInterface{
     fun requestFirstLogin(
         @Path("social_name") arg:String,
         @Body userData: FirstLoginModel
-    ): Call<UserModel>
+    ): Call<ResponseLoginModel>
 
     @GET("login/auto-login")
     fun requestAutoLogin(
         @Header("authorization") authHeader:String,
-    ): Call<UserModel>
+    ): Call<ResponseLoginModel>
 
     @POST("bookmark")
     fun requestBookmark(

@@ -52,14 +52,14 @@ class LoginActivity : AppCompatActivity() {
 
                         ApiWrapperLogin.postFirstLogin("kakao",userInfo){
                             if (it != null) {
-                                MySharedPreferences.setToken(this, it.userToken)
+                                MySharedPreferences.setToken(this, it.result.userToken)
+                                MySharedPreferences.setUserName(this, it.result.name)
                                 MySharedPreferences.setMethod(this, "kakao")
                                 val intent = Intent(this, MainActivity::class.java)
+                                intent.putExtra("auto-login","no")
                                 startActivity(intent)
                                 finish()
                             }
-//                            val intent = Intent(this, MainActivity::class.java)
-//                            startActivity(intent)
                         }
                     }
                 }

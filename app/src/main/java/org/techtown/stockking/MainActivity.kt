@@ -24,6 +24,18 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if(!intent.hasExtra("auto-login")){
+            ApiWrapperLogin.getAutoLogin(MySharedPreferences.getToken(this)){
+                Log.i("get auto token","it!!!"+it.toString())
+                if(it == null){
+                    val intent= Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            }
+        }
+
+
         binding.viewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageScrollStateChanged(state: Int) {}
             override fun onPageScrolled(
@@ -57,17 +69,5 @@ class MainActivity : AppCompatActivity() {
         binding.viewpager.adapter = ViewPagerAdapter(this)
 
 
-    }
-
-    override fun onStart() {
-        super.onStart()
-        ApiWrapperLogin.getAutoLogin(MySharedPreferences.getToken(this)){
-            Log.i("sss","it!!!"+it.toString())
-            if(it==null){
-                val intent= Intent(this, LoginActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-        }
     }
 }
