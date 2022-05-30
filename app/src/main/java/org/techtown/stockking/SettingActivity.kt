@@ -11,6 +11,7 @@ import com.kakao.sdk.user.UserApiClient
 import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.databinding.ActivitySettingBinding
 import org.techtown.stockking.module.login.LoginActivity
+import org.techtown.stockking.network.ApiWrapperLogin
 
 class SettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +23,15 @@ class SettingActivity : AppCompatActivity() {
 
         binding.backBtn.setOnClickListener{
             finish()
+        }
+        binding.withdrawBtn.setOnClickListener {
+            ApiWrapperLogin.deleteAccount(MySharedPreferences.getToken(this)){
+                if(it?.code==200){
+                    val intent= Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            }
         }
         binding.logoutBtn.setOnClickListener {
             if (MySharedPreferences.getMethod(this) == "kakao") {

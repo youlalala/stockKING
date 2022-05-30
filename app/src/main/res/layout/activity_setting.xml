@@ -83,7 +83,17 @@
                 />
         </LinearLayout>
     </LinearLayout>
-
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/withdraw_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/logout_btn"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/round_shape"
+        android:backgroundTint="@drawable/button_selector_color"
+        style="@style/TextStyle"
+        android:textSize="16dp"
+        android:text="회원탈퇴" />
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/logout_btn"
         android:layout_width="match_parent"

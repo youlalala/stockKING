@@ -5,6 +5,7 @@ import android.content.Intent
 import android.util.Log
 import org.techtown.stockking.model.FirstLoginModel
 import org.techtown.stockking.model.ResponseLoginModel
+import org.techtown.stockking.model.ResponseWithdrawModel
 import org.techtown.stockking.model.UserModel
 import org.techtown.stockking.module.login.LoginActivity
 import retrofit2.Call
@@ -58,6 +59,26 @@ class ApiWrapperLogin {
 
                 override fun onFailure(call: Call<ResponseLoginModel>, t: Throwable) {
                     Log.i(TAG, "get auto login fail\n error msg:"+t.toString())
+                    modelCall.cancel()
+                }
+            })
+        }
+        fun deleteAccount(token: String, callback: (ResponseWithdrawModel?) -> Unit) {
+            val modelCall = NetWorkService.api.deleteAccount(authHeader = token)
+            modelCall.enqueue(object : Callback<ResponseWithdrawModel> {
+                override fun onResponse(
+                    call: Call<ResponseWithdrawModel>, response: Response<ResponseWithdrawModel>
+                ) {
+                    Log.i(TAG, "delete Account success\n response.body : " + response.body().toString())
+                    if(response.isSuccessful){
+                        callback(response.body())
+                    }else{
+                        callback(null)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseWithdrawModel>, t: Throwable) {
+                    Log.i(TAG, "deleteAccount fail\n error msg:"+t.toString())
                     modelCall.cancel()
                 }
             })

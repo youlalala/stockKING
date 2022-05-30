@@ -10,18 +10,11 @@ import retrofit2.http.*
 
 object NetWorkService{
     private const val BASE_URL =" http://teststock.cafe24app.com"
-    private const val BASE_URL2 ="http://172.30.1.19:8080"
     private val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-    val gson = GsonBuilder().setLenient().create()
-    private val retrofit2: Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL2)
-        .addConverterFactory(GsonConverterFactory.create(gson))
-        .build()
     val api: ApiInterface = retrofit.create(ApiInterface::class.java)
-    val api2: ApiInterface = retrofit2.create(ApiInterface::class.java)
 }
 
 
@@ -103,6 +96,11 @@ interface ApiInterface{
     fun requestAutoLogin(
         @Header("authorization") authHeader:String,
     ): Call<ResponseLoginModel>
+
+    @HTTP(method = "DELETE", path = "login", hasBody = true)
+    fun deleteAccount(
+        @Header("authorization") authHeader:String,
+    ): Call<ResponseWithdrawModel>
 
     @POST("favorite")
     fun addFavorite(
