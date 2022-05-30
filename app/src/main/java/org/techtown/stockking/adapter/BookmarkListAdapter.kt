@@ -1,11 +1,15 @@
 package org.techtown.stockking.adapter
 
-
+import android.os.VibrationEffect
+import android.os.VibrationEffect.EFFECT_CLICK
 import android.R.attr.data
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.PictureDrawable
+import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.caverock.androidsvg.SVG
@@ -28,9 +32,6 @@ class BookmarkListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder{
         val binding = BookmarkRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-//        binding.star.setOnClickListener{
-//            onClickStar.invoke(it.)
-//        }
         return BookmarkViewHolder(binding)
     }
 
@@ -77,16 +78,13 @@ class BookmarkListAdapter(
             onClickItem.invoke(bookmarkList[position])
         }
 
+
+
         binding.star.setOnClickListener{
             onClickStar.invoke(bookmarkList[position])
         }
 
     }
-
-    fun update(position: Int) {
-        notifyItemRemoved(position)
-    }
-
 
     class BookmarkViewHolder(val binding: BookmarkRecyclerviewBinding): RecyclerView.ViewHolder(binding.root)
 }

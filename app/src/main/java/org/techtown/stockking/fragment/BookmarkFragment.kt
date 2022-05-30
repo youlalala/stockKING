@@ -1,12 +1,13 @@
 package org.techtown.stockking.fragment
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import org.techtown.stockking.DetailActivity
 import org.techtown.stockking.SettingActivity
 import org.techtown.stockking.common.AppLog
@@ -46,11 +47,16 @@ class BookmarkFragment : Fragment() {
                         startActivity(intent)
                     }, onClickStar={
                         AppLog.i("Stock", "onClickStar"+"it:"+it)
+                        Toast.makeText(context,it.symbol+"가(이) 삭제되었습니다.",Toast.LENGTH_SHORT).show()
                         ApiWrapperBookmark.deleteFavorite(
                             token = MySharedPreferences.getToken(requireContext()),
                             BookmarkModel(
                                 symbol = it.symbol)
-                        )
+                        ) {
+                            if (it) {
+                                onStart()
+                            }
+                        }
                     }
                 )
                 binding.recyclerView.adapter = adapter

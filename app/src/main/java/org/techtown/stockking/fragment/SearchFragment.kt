@@ -50,7 +50,7 @@ class SearchFragment : Fragment() {
             getAllCompanyVersion("kr")
         }
 
-
+        val handler = Handler()
         binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             //확인 누르면
             override fun onQueryTextSubmit(query: String): Boolean {
@@ -58,7 +58,7 @@ class SearchFragment : Fragment() {
             }
             //글자 칠때 마다 변함
             override fun onQueryTextChange(newText: String): Boolean {
-                val handler = Handler()
+
                 handler.postDelayed(500){
                     if(binding.searchBar.query.isNullOrEmpty()){
                         if(binding.filterEnBtn.isSelected){

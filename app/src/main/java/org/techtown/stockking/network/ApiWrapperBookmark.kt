@@ -31,7 +31,8 @@ class ApiWrapperBookmark {
         }
         fun deleteFavorite(
             token: String,
-            bookmarkData: BookmarkModel){
+            bookmarkData: BookmarkModel,
+            callback: (Boolean)->Unit){
             val modelCall = NetWorkService.api.deleteFavorite(
                 authHeader = token,
                 bookmarkData)
@@ -39,6 +40,7 @@ class ApiWrapperBookmark {
                 override fun onResponse(call: Call<ResponseBookmarkModel>, response: Response<ResponseBookmarkModel>
                 ) {
                     Log.i("sss", "success : " + "response:" + response.body())
+                    callback.invoke(response.body()!!.isSuccess)
                     //onResult(response.body())
                 }
                 override fun onFailure(call: Call<ResponseBookmarkModel>, t: Throwable) {

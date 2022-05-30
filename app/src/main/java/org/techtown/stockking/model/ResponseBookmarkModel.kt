@@ -1,7 +1,7 @@
 package org.techtown.stockking.model
 
 data class ResponseBookmarkModel(
-    var isSuccess: String,
+    var isSuccess: Boolean,
     var code: String,
     var message: String,
     var result: BookmarkResult

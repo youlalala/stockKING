@@ -130,7 +130,7 @@ class DetailActivity : AppCompatActivity(){
                 ApiWrapperBookmark.deleteFavorite(
                     token = MySharedPreferences.getToken(this),
                     BookmarkModel(symbol = ticker)
-                )
+                ){}
                 binding.star.isSelected = false
             } else{
                 //vibrator
