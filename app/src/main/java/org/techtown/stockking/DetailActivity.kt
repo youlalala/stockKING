@@ -42,6 +42,7 @@ import java.text.DecimalFormat
 class DetailActivity : AppCompatActivity(){
     lateinit var binding: ActivityDetailBinding
     private val NOINFOMATION = "정보 없음"
+    lateinit var ticker : String
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +50,7 @@ class DetailActivity : AppCompatActivity(){
         setContentView(binding.root)
 
         val intent=intent
-        val ticker= intent.getStringExtra("ticker").toString()
+        ticker= intent.getStringExtra("ticker").toString()
 
         val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator;
         val vibrationEffectClick = VibrationEffect.createPredefined(EFFECT_CLICK)
@@ -72,13 +73,11 @@ class DetailActivity : AppCompatActivity(){
                 binding.coNameKrTv.text=NOINFOMATION
                 binding.description.text=NOINFOMATION
                 binding.closeTv.text=NOINFOMATION
-//                binding.shareout.text=NOINFOMATION
             }else{
                 binding.tickerTv.text = it[0].symbol
                 binding.coNameKrTv.text=it[0].name_kr
                 binding.description.text=it[0].desc_kr
                 binding.closeTv.text=it[0].close + " 달러"
-//                binding.shareout.text=it[0].shareout
 
                 //SVG string content
                 val svgString = it[0].img
@@ -112,7 +111,6 @@ class DetailActivity : AppCompatActivity(){
                 }
             }
         }
-
         //회사 추가정보 입력
         ApiWrapper.getCompanyInfoAdd(ticker){
             binding.addCap.text=it[0].cap

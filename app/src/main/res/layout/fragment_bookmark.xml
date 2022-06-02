@@ -30,7 +30,7 @@
             android:textColor="#9EA0A7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
+            android:backgroundTint="@drawable/button_selector_color"
             android:paddingLeft="15dp"
             android:text="설정 >"
             android:textSize="13dp"/>

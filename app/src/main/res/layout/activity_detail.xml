@@ -1,146 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingHorizontal="13dp"
     android:paddingTop="44dp"
     android:background="@color/white"
+    android:id="@+id/root"
     style="@style/TextStyle">
-
-    <LinearLayout
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/back_btn"
+        app:layout_constraintStart_toStartOf="@+id/root"
+        app:layout_constraintTop_toTopOf="@+id/root"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="20dp"
+        android:scaleType="center"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_arrow_back"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/star"
+        app:layout_constraintRight_toRightOf="@+id/root"
+        app:layout_constraintTop_toTopOf="@+id/root"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:hapticFeedbackEnabled="true"
+        android:background="@drawable/bookmark_selector"/>
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:orientation="horizontal">
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/back_btn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginBottom="20dp"
-            android:scaleType="center"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_arrow_back"/>
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <Button
-            android:id="@+id/star"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:hapticFeedbackEnabled="true"
-            android:background="@drawable/bookmark_selector"/>
-    </LinearLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
+        android:layout_marginTop="26dp"
+        app:layout_constraintStart_toStartOf="@+id/root"
+        app:layout_constraintEnd_toEndOf="@+id/root"
+        app:layout_constraintTop_toBottomOf="@+id/back_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_height="0dp"
         android:id="@+id/main_scroll"
         android:layout_weight="1"
         android:fillViewport="true">
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
             <TextView
                 android:id="@+id/ticker_tv"
+                app:layout_constraintStart_toStartOf="@+id/constraint"
+                app:layout_constraintTop_toTopOf="@+id/constraint"
                 android:text="ticker"
                 android:textSize="13dp"
                 style="@style/TextStyle"
                 android:textColor="#9EA0A7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:paddingBottom="5dp"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/coNameKr_tv"
-                    android:text="한국어회사이름"
-                    android:textSize="23dp"
-                    android:textStyle="bold"
-                    android:paddingRight="8dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/TitleStyle"
-                    android:textColor="#474C53"
-                    android:layout_gravity="center|right"/>
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/logo_img"
-                    android:layout_width="23dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center|right" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/coNameKr_tv"
+                app:layout_constraintStart_toStartOf="@+id/ticker_tv"
+                app:layout_constraintTop_toBottomOf="@+id/ticker_tv"
+                android:text="한국어회사이름"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:paddingRight="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TitleStyle"
+                android:textColor="#474C53"
+                android:layout_gravity="center|right"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/logo_img"
+                app:layout_constraintLeft_toRightOf="@+id/coNameKr_tv"
+                app:layout_constraintTop_toTopOf="@+id/coNameKr_tv"
+                android:layout_width="23dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center|right" />
             <TextView
                 android:id="@+id/close_tv"
+                app:layout_constraintStart_toStartOf="@+id/coNameKr_tv"
+                app:layout_constraintTop_toBottomOf="@+id/coNameKr_tv"
                 style="@style/TitleStyle"
+                android:text="close"
                 android:textSize="20dp"
                 android:textStyle="bold"
+                android:paddingTop="5dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/change_value_tv"
+                app:layout_constraintStart_toStartOf="@+id/close_tv"
+                app:layout_constraintTop_toBottomOf="@+id/close_tv"
+                android:text="value"
+                android:textSize="15dp"
+                android:paddingRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/change_percent_tv"
+                android:text="percent"
+                app:layout_constraintLeft_toRightOf="@+id/change_value_tv"
+                app:layout_constraintTop_toTopOf="@+id/change_value_tv"
+                android:textSize="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/line_chart_btn"
+                android:layout_marginTop="20dp"
+                app:layout_constraintRight_toLeftOf="@+id/candle_chart_btn"
+                app:layout_constraintTop_toBottomOf="@+id/change_value_tv"
+                android:layout_gravity="right"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="20dp">
-                <TextView
-                    android:id="@+id/change_value_tv"
-                    android:textSize="15dp"
-                    android:paddingRight="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:id="@+id/change_percent_tv"
-                    android:textSize="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_marginRight="10dp"
+                android:textSize="15dp"
+                android:text="라인" />
+            <TextView
+                android:id="@+id/candle_chart_btn"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/change_value_tv"
+                app:layout_constraintRight_toRightOf="@+id/constraint"
+                android:layout_gravity="right"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="20dp">
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
-                <TextView
-                    android:id="@+id/line_chart_btn"
-                    android:layout_gravity="right"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:textSize="15dp"
-                    android:text="라인" />
-                <TextView
-                    android:id="@+id/candle_chart_btn"
-                    android:layout_gravity="right"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="15dp"
-                    android:text="캔들" />
-            </LinearLayout>
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/line_chart"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:hapticFeedbackEnabled="true"/>
-            <com.github.mikephil.charting.charts.CandleStickChart
-                android:id="@+id/candle_chart"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:visibility="gone"
-                android:hapticFeedbackEnabled="true"/>
-            <LinearLayout
+                android:layout_width="wrap_content"
+                android:textSize="15dp"
+                android:text="캔들" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chart"
+                app:layout_constraintTop_toBottomOf="@+id/candle_chart_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/line_chart"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toTopOf="@+id/chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:hapticFeedbackEnabled="true"/>
+                <com.github.mikephil.charting.charts.CandleStickChart
+                    android:id="@+id/candle_chart"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toTopOf="@+id/chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:visibility="gone"
+                    android:hapticFeedbackEnabled="true"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:id="@+id/button_group"
+                android:paddingBottom="18dp"
+                app:layout_constraintTop_toBottomOf="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/one_day_btn"
                     android:layout_height="35dp"
@@ -203,219 +213,261 @@
                     android:text="5년"/>
             </LinearLayout>
             <View
+                android:id="@+id/line"
+                app:layout_constraintTop_toBottomOf="@+id/button_group"
                 android:layout_width="match_parent"
                 android:layout_height="6dp"
-                android:layout_marginVertical="18dp"
-                android:background="@color/sub_color"/>
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:stretchColumns="0,1,2,3,4">
-                <TableRow
-                    android:layout_marginBottom="15dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        style="@style/TextStyle"
-                        android:textSize="11dp"
-                        android:text="시가총액" />
-                    <TextView
-                        android:id="@+id/add_cap"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        style="@style/TitleStyle"
-                        android:layout_marginRight="15dp"
-                        android:textSize="11dp"
-                        android:text="00000000"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        style="@style/TextStyle"
-                        android:textSize="11dp"
-                        android:text="시총순위"/>
-                    <TextView
-                        android:id="@+id/add_rank"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        style="@style/TitleStyle"
-                        android:paddingHorizontal="6dp"
-                        android:textSize="11dp"
-                        android:text="1위"/>
-                </TableRow>
-                <TableRow
-                    android:layout_marginBottom="15dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        style="@style/TextStyle"
-                        android:textSize="11dp"
-                        android:text="PER"/>
-                    <TextView
-                        android:id="@+id/add_PER"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        style="@style/TitleStyle"
-                        android:layout_marginRight="15dp"
-                        android:textSize="11dp"
-                        android:text="00000"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        style="@style/TextStyle"
-                        android:textSize="11dp"
-                        android:text="PBR"/>
-                    <TextView
-                        android:id="@+id/add_PBR"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        style="@style/TitleStyle"
-                        android:paddingHorizontal="6dp"
-                        android:textSize="11dp"
-                        android:text="1위"/>
-
-                </TableRow>
-                <TableRow
-                    android:layout_marginBottom="15dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        style="@style/TextStyle"
-                        android:textSize="11dp"
-                        android:text="EPS"/>
-                    <TextView
-                        android:id="@+id/add_EPS"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        style="@style/TitleStyle"
-                        android:layout_marginRight="15dp"
-                        android:textSize="11dp"
-                        android:text="00000"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        style="@style/TextStyle"
-                        android:textSize="11dp"
-                        android:text="ROE"/>
-                    <TextView
-                        android:id="@+id/add_ROE"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        style="@style/TitleStyle"
-                        android:paddingHorizontal="6dp"
-                        android:textSize="11dp"
-                        android:text="1위"/>
-                </TableRow>
-                <TableRow>
-                    <TextView
-                        style="@style/TextStyle"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent"
-                        android:text="52주 LOW"
-                        android:textSize="11dp" />
-                    <TextView
-                        android:id="@+id/add_LOW"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        style="@style/TitleStyle"
-                        android:layout_marginRight="15dp"
-                        android:textSize="11dp"
-                        android:text="000000"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        style="@style/TextStyle"
-                        android:textSize="11dp"
-                        android:text="52주 HIGH"/>
-                    <TextView
-                        android:id="@+id/add_HIGH"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        style="@style/TitleStyle"
-                        android:paddingHorizontal="6dp"
-                        android:textSize="11dp"
-                        android:text="1위"/>
-                </TableRow>
-            </TableLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="6dp"
-                android:layout_marginVertical="18dp"
+                android:layout_marginBottom="18dp"
                 android:background="@color/sub_color"/>
             <LinearLayout
+                android:id="@+id/add_group"
+                android:layout_marginTop="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="10dp">
-                <TextView
-                    android:textSize="16dp"
-                    style="@style/TitleStyle"
-                    android:textColor="#474C53"
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="회사정보"/>
-                <TextView
-                    android:id="@+id/description"
-                    android:textSize="13dp"
-                    style="@style/TextStyle"
+                app:layout_constraintTop_toBottomOf="@+id/line"
+                app:layout_constraintLeft_toLeftOf="@+id/line"
+                android:orientation="vertical">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="회사 상세 설명"/>
-                <TextView
-                    android:id="@+id/unfold_btn"
-                    android:textColor="@color/main_green_color"
-                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            style="@style/TextStyle"
+                            android:textSize="13dp"
+                            android:text="시가총액"/>
+                        <TextView
+                            android:id="@+id/add_cap"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            style="@style/TitleStyle"
+                            android:paddingHorizontal="6dp"
+                            android:textSize="13dp"
+                            android:text="00000000"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            style="@style/TextStyle"
+                            android:textSize="13dp"
+                            android:text="시총순위"/>
+                        <TextView
+                            android:id="@+id/add_rank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            style="@style/TitleStyle"
+                            android:paddingHorizontal="6dp"
+                            android:textSize="13dp"
+                            android:text="1위"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="..More"
-                    android:visibility="gone"
-                    />
-                <TextView
-                    android:id="@+id/fold_btn"
-                    android:textColor="@color/main_green_color"
-                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            style="@style/TextStyle"
+                            android:textSize="13dp"
+                            android:text="PER"/>
+                        <TextView
+                            android:id="@+id/add_PER"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            style="@style/TitleStyle"
+                            android:paddingHorizontal="6dp"
+                            android:textSize="13dp"
+                            android:text="00000000"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            style="@style/TextStyle"
+                            android:textSize="13dp"
+                            android:text="PBR"/>
+                        <TextView
+                            android:id="@+id/add_PBR"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            style="@style/TitleStyle"
+                            android:paddingHorizontal="6dp"
+                            android:textSize="13dp"
+                            android:text="1위"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="..접기"
-                    android:visibility="gone"
-                    />
-
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            style="@style/TextStyle"
+                            android:textSize="13dp"
+                            android:text="EPS"/>
+                        <TextView
+                            android:id="@+id/add_EPS"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            style="@style/TitleStyle"
+                            android:paddingHorizontal="6dp"
+                            android:textSize="13dp"
+                            android:text="00000000"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            style="@style/TextStyle"
+                            android:textSize="13dp"
+                            android:text="ROE"/>
+                        <TextView
+                            android:id="@+id/add_ROE"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            style="@style/TitleStyle"
+                            android:paddingHorizontal="6dp"
+                            android:textSize="13dp"
+                            android:text="0"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            style="@style/TextStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="52주 LOW"
+                            android:textSize="13dp" />
+                        <TextView
+                            android:id="@+id/add_LOW"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            style="@style/TitleStyle"
+                            android:paddingHorizontal="6dp"
+                            android:textSize="13dp"
+                            android:text="00000000"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/TextStyle"
+                            android:textSize="13dp"
+                            android:text="52주 HIGH"/>
+                        <TextView
+                            android:id="@+id/add_HIGH"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            style="@style/TitleStyle"
+                            android:paddingHorizontal="6dp"
+                            android:textSize="13dp"
+                            android:text="1위"/>
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical">-->
-<!--                <TextView-->
-<!--                    android:text="발행 주식 수"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginBottom="5dp"-->
-<!--                    android:textSize="15dp" />-->
-<!--                <TextView-->
-<!--                    android:id="@+id/shareout"-->
-<!--                    android:textSize="13dp"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"/>-->
-<!--            </LinearLayout>-->
-
-
-        </LinearLayout>
-
-    </ScrollView>
-
-</LinearLayout>
+            <View
+                android:id="@+id/line2"
+                app:layout_constraintTop_toBottomOf="@+id/add_group"
+                app:layout_constraintLeft_toLeftOf="@+id/add_group"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:layout_marginTop="18dp"
+                android:background="@color/sub_color"/>
+            <TextView
+                android:id="@+id/company_info_title"
+                android:textSize="16dp"
+                android:layout_marginTop="18dp"
+                app:layout_constraintTop_toBottomOf="@+id/line2"
+                app:layout_constraintLeft_toLeftOf="@+id/line2"
+                style="@style/TitleStyle"
+                android:textColor="#474C53"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginBottom="5dp"
+                android:text="회사정보"/>
+            <TextView
+                android:id="@+id/description"
+                app:layout_constraintTop_toBottomOf="@+id/company_info_title"
+                app:layout_constraintLeft_toLeftOf="@+id/company_info_title"
+                android:textSize="13dp"
+                style="@style/TextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="회사 상세 설명"/>
+            <TextView
+                android:id="@+id/unfold_btn"
+                app:layout_constraintTop_toBottomOf="@+id/description"
+                app:layout_constraintLeft_toLeftOf="@+id/description"
+                android:textColor="@color/main_green_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..More"
+                android:visibility="gone"
+                />
+            <TextView
+                android:id="@+id/fold_btn"
+                app:layout_constraintTop_toBottomOf="@+id/description"
+                app:layout_constraintLeft_toLeftOf="@+id/description"
+                android:textColor="@color/main_green_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..접기"
+                android:visibility="gone"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
