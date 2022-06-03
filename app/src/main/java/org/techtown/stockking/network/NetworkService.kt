@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 object NetWorkService{
-    private const val BASE_URL =" http://teststock.cafe24app.com"
+    private const val BASE_URL ="https://www.stock-king.shop"
     private val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
