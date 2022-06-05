@@ -57,6 +57,7 @@
                 android:id="@+id/coNameKr_tv"
                 app:layout_constraintStart_toStartOf="@+id/ticker_tv"
                 app:layout_constraintTop_toBottomOf="@+id/ticker_tv"
+                android:layout_marginTop="8dp"
                 android:text="한국어회사이름"
                 android:textSize="22dp"
                 android:textStyle="bold"
