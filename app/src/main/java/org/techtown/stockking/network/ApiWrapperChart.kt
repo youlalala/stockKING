@@ -15,12 +15,12 @@ class ApiWrapperChart {
                 override fun onResponse(call: Call<List<StockModel>>, response: Response<List<StockModel>>) {
                     val data = response.body()
                     data?.let {
-                        Log.i(TAG, "daily stock response")
+                        Log.i(TAG, "daily stock response : " + data.toString())
                         callback.invoke(it)
                     }
                 }
                 override fun onFailure(call: Call<List<StockModel>>, t: Throwable) {
-                    Log.i(TAG, "daily stock fail")
+                    Log.i(TAG, "daily stock fail : "+ t.toString())
                     modelCall.cancel()
                 }
             })

@@ -16,6 +16,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.toColor
 import com.bumptech.glide.Glide
 import com.caverock.androidsvg.SVG
 import com.github.mikephil.charting.components.XAxis
@@ -299,15 +300,27 @@ class DetailActivity : AppCompatActivity(){
             }
             priceList.add(element.close)
         }
-
         //entry
         val entries = ArrayList<Entry>()
+        val colors = ArrayList<Int>()
         for(i in 0 until priceList.size){
             entries.add(Entry(i.toFloat(), priceList[i].toFloat()))
+            if(i==priceList.size-1){
+                colors.add(Color.RED)
+            }else{
+                colors.add(getColor(R.color.main_green_color))
+            }
         }
+//        dateList.add("tomorrow")
+//        entries.add(Entry(priceList.size.toFloat(), priceList[priceList.size-1].toFloat()+1))
+//        colors.add(Color.RED)
 
         val dataset= LineDataSet(entries, null)
-        dataset.color = getColor(R.color.main_green_color)
+        dataset.colors = colors
+
+        //dataset.color = getColor(R.color.main_green_color)
+
+
         //원 없애기
         dataset.setDrawCircles(false)
 
@@ -317,7 +330,7 @@ class DetailActivity : AppCompatActivity(){
 
         lineChart.xAxis.valueFormatter= IndexAxisValueFormatter(dateList)
         //description 지우기
-        lineChart.description=null
+        lineChart.description.text=""
         //x축 y축 숨기기
         xAxis.isEnabled=false
         yAxisL.isEnabled=false

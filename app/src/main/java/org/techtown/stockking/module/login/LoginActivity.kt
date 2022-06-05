@@ -111,15 +111,14 @@ class LoginActivity : AppCompatActivity() {
                     MySharedPreferences.setToken(this, it.result.userToken)
                     MySharedPreferences.setUserName(this, it.result.name)
                     MySharedPreferences.setMethod(this, "google")
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("first","success")
+                    startActivity(intent)
                 }
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
             }
             //updateUI(account)
         } catch (e: ApiException) {
             Log.i("SSS", "handleSignInResult:error", e)
-            //updateUI(null)
         }
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -132,28 +131,9 @@ class LoginActivity : AppCompatActivity() {
                 // a listener.
                 val task = GoogleSignIn.getSignedInAccountFromIntent(data)
                 handleSignInResult(task);
-//                val account = task.getResult(ApiException::class.java)
-//                Log.i("SSS","account token\n"+account.idToken.toString())
-//                //first login request
-//                val userInfo = FirstLoginModel(
-//                    accessToken= account.idToken!!
-//                )
-//
-//                ApiWrapperLogin.postFirstLogin("google",userInfo){
-//                    if (it != null) {
-//                        MySharedPreferences.setToken(this, account.idToken!!)
-//                        MySharedPreferences.setMethod(this, "google")
-//                    }
-//                    val intent = Intent(this, MainActivity::class.java)
-//                    startActivity(intent)
-//                    finish()
-//                }
-//                val intent = Intent(this, MainActivity::class.java)
-//                startActivity(intent)
             }catch(e: ApiException){
                 Log.i("SSS","구글 로그인 실패:"+e)
             }
-
         }
     }
 

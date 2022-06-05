@@ -2,6 +2,7 @@ package org.techtown.stockking.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log.i
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -140,6 +141,7 @@ class TopListFragment : Fragment(){
     fun getTopList(filter1: String, filter2: String){
         if(filter1 == "realtime"){
             ApiWrapper.getTopListRealtime(filter2) { it ->
+                i("stock top list","realtime : "+it.toString())
                 binding.progressBar.visibility=View.GONE
                 binding.recyclerView.adapter= TopListRealtimeAdapter(it,filter2,this,onClickItem = {
                     val intent = Intent(context, DetailActivity::class.java)

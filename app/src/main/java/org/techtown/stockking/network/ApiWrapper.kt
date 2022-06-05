@@ -15,13 +15,13 @@ class ApiWrapper {
             modelCall.enqueue(object : Callback<List<TopListRealtimeModel>> {
                 override fun onResponse(call: Call<List<TopListRealtimeModel>>, response: Response<List<TopListRealtimeModel>>) {
                     val list = response.body()
-                    i(TAG,"stock top list response")
+                    i(TAG,"stock top list response : respose"+response.body().toString())
                     list?.let{
                         callback.invoke(it)
                     }
                 }
                 override fun onFailure(call: Call<List<TopListRealtimeModel>>, t: Throwable) {
-                    i(TAG,"stock top list response")
+                    i(TAG,"stock top list fail : "+t.toString())
                     modelCall.cancel()
                 }
             })

@@ -24,15 +24,18 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        ApiWrapperLogin.getAutoLogin(MySharedPreferences.getToken(this)){
-            Log.i("get auto token","it!!!"+it.toString())
-            if(it == null){
-                val intent= Intent(this, LoginActivity::class.java)
-                startActivity(intent)
-                finish()
+        val intent=intent
+
+        Log.i("get auto","intent : "+intent.getStringExtra("first"))
+        if(intent.getStringExtra("first").isNullOrEmpty()){
+            ApiWrapperLogin.getAutoLogin(MySharedPreferences.getToken(this)){
+                if(it == null){
+                    val intent= Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
             }
         }
-
 
         binding.viewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageScrollStateChanged(state: Int) {}
