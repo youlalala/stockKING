@@ -56,8 +56,6 @@ class LoginActivity : AppCompatActivity() {
                                 MySharedPreferences.setToken(this, it.result.userToken)
                                 MySharedPreferences.setUserName(this, it.result.name)
                                 MySharedPreferences.setMethod(this, "kakao")
-                                val intent = Intent(this, MainActivity::class.java)
-                                startActivity(intent)
                                 finish()
                             }
                         }
@@ -111,9 +109,7 @@ class LoginActivity : AppCompatActivity() {
                     MySharedPreferences.setToken(this, it.result.userToken)
                     MySharedPreferences.setUserName(this, it.result.name)
                     MySharedPreferences.setMethod(this, "google")
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.putExtra("first","success")
-                    startActivity(intent)
+                    finish()
                 }
             }
             //updateUI(account)

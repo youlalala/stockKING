@@ -27,9 +27,9 @@ class SettingActivity : AppCompatActivity() {
         binding.withdrawBtn.setOnClickListener {
             ApiWrapperLogin.deleteAccount(MySharedPreferences.getToken(this)){
                 if(it?.code==200){
-                    val intent= Intent(this, MainActivity::class.java)
+                    val intent= Intent(this, LoginActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
-                    finish()
                 }
             }
         }
@@ -49,9 +49,9 @@ class SettingActivity : AppCompatActivity() {
             }
             else {
                 Log.i("SSS", "로그아웃 성공. SDK에서 토큰 삭제됨")
-                val intent= Intent(this, MainActivity::class.java)
+                val intent= Intent(this, LoginActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
-                finish()
             }
         }
     }
@@ -67,9 +67,9 @@ class SettingActivity : AppCompatActivity() {
 
         googleSignInClient.signOut()
             .addOnCompleteListener(this, OnCompleteListener<Void?> {
-                val intent= Intent(this, MainActivity::class.java)
+                val intent= Intent(this, LoginActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
-                finish()
             })
     }
 }

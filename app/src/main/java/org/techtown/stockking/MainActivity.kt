@@ -26,14 +26,14 @@ class MainActivity : AppCompatActivity() {
 
         val intent=intent
 
-        Log.i("get auto","intent : "+intent.getStringExtra("first"))
-        if(intent.getStringExtra("first").isNullOrEmpty()){
-            ApiWrapperLogin.getAutoLogin(MySharedPreferences.getToken(this)){
-                if(it == null){
-                    val intent= Intent(this, LoginActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
+//        Log.i("get auto","intent : "+intent.getStringExtra("first"))
+//        if(intent.getStringExtra("first").isNullOrEmpty()){
+//
+//        }
+        ApiWrapperLogin.getAutoLogin(MySharedPreferences.getToken(this)){
+            if(it == null){
+                val intent= Intent(this, LoginActivity::class.java)
+                startActivity(intent)
             }
         }
 
