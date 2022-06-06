@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
             if(it == null){
                 val intent= Intent(this, LoginActivity::class.java)
                 startActivity(intent)
+                finish()
             }else if(it.isSuccess){
 
             }

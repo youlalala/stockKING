@@ -3,6 +3,7 @@ package org.techtown.stockking.module.login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -56,6 +57,8 @@ class LoginActivity : AppCompatActivity() {
                                 MySharedPreferences.setToken(this, it.result.userToken)
                                 MySharedPreferences.setUserName(this, it.result.name)
                                 MySharedPreferences.setMethod(this, "kakao")
+                                val intent= Intent(this, MainActivity::class.java)
+                                startActivity(intent)
                                 finish()
                             }
                         }
@@ -108,6 +111,9 @@ class LoginActivity : AppCompatActivity() {
                     MySharedPreferences.setUserName(this, it.result.name)
                     MySharedPreferences.setMethod(this, "google")
                     finish()
+                    val intent= Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+
                 }
             }
             //updateUI(account)
@@ -131,6 +137,18 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        var backKeyPressedTime = 0L
+        if (System.currentTimeMillis() > backKeyPressedTime + 2500) {
+            backKeyPressedTime = System.currentTimeMillis();
+            Toast.makeText(this, "뒤로 가기 버튼을 한 번 더 누르시면 종료됩니다.", Toast.LENGTH_LONG).show()
+            return
+        }
+        if (System.currentTimeMillis() <= backKeyPressedTime + 2500) {
+            System.exit(0);
+        }
+    }
 
 }
 

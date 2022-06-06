@@ -15,6 +15,7 @@ import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.databinding.FragmentBookmarkBinding
 import org.techtown.stockking.adapter.BookmarkListAdapter
 import org.techtown.stockking.model.BookmarkModel
+import org.techtown.stockking.module.login.LoginActivity
 import org.techtown.stockking.network.ApiWrapperBookmark
 
 class BookmarkFragment : Fragment() {
@@ -25,11 +26,22 @@ class BookmarkFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentBookmarkBinding.inflate(inflater, container, false)
-        binding.settingTv.setOnClickListener {
-            val intent = Intent(context, SettingActivity::class.java)
-            startActivity(intent)
+
+        if(MySharedPreferences.getUserName(requireContext()).isNullOrEmpty()) {
+            binding.userNameTv.text = "로그인 하세요"
+            binding.settingTv.text = "로그인 >"
+            binding.settingTv.setOnClickListener {
+                val intent = Intent(context, LoginActivity::class.java)
+                startActivity(intent)
+            }
+        }else{
+            binding.userNameTv.text=MySharedPreferences.getUserName(requireContext())+" 님의 즐겨찾기"
+            binding.settingTv.setOnClickListener {
+                val intent = Intent(context, SettingActivity::class.java)
+                startActivity(intent)
+            }
         }
-        binding.userNameTv.text=MySharedPreferences.getUserName(requireContext())+" 님의 즐겨찾기"
+
         return binding.root
 
     }
