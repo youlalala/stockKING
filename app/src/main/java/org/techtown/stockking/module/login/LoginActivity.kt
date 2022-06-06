@@ -89,8 +89,6 @@ class LoginActivity : AppCompatActivity() {
 
         binding.googleLoginBtn.setOnClickListener {
             val intent = mGoogleSignInClient.signInIntent
-
-
             startActivityForResult(intent, 1)
         }
 

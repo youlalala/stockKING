@@ -1,44 +1,37 @@
 package org.techtown.stockking
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.viewpager.widget.ViewPager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.kakao.sdk.common.util.Utility
-import com.kakao.sdk.user.UserApiClient
+import org.techtown.stockking.adapter.ViewPagerAdapter
 import org.techtown.stockking.common.MySharedPreferences
 import org.techtown.stockking.databinding.ActivityMainBinding
-import org.techtown.stockking.model.UserModel
-import org.techtown.stockking.adapter.ViewPagerAdapter
+import org.techtown.stockking.fragment.TopListFragment
 import org.techtown.stockking.module.login.LoginActivity
-import org.techtown.stockking.network.ApiWrapper
 import org.techtown.stockking.network.ApiWrapperLogin
 
+
 class MainActivity : AppCompatActivity() {
+    lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val intent=intent
-
-//        Log.i("get auto","intent : "+intent.getStringExtra("first"))
-//        if(intent.getStringExtra("first").isNullOrEmpty()){
-//
-//        }
         ApiWrapperLogin.getAutoLogin(MySharedPreferences.getToken(this)){
             if(it == null){
                 val intent= Intent(this, LoginActivity::class.java)
                 startActivity(intent)
+            }else if(it.isSuccess){
+
             }
         }
-
+        binding.viewpager.adapter = ViewPagerAdapter(this)
         binding.viewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
-            override fun onPageScrollStateChanged(state: Int) {}
+            override fun onPageScrollStateChanged(state: Int) {
+            }
             override fun onPageScrolled(
                 position: Int,
                 positionOffset: Float,
@@ -67,7 +60,14 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        binding.viewpager.adapter = ViewPagerAdapter(this)
+    }
+
+    fun viewpagerStart(){
+
+    }
+
+    override fun onStart() {
+        super.onStart()
 
 
     }
