@@ -127,6 +127,23 @@ class ApiWrapper {
                 }
             })
         }
+
+        fun getStockPredict(symbol: String, callback: (PredictModel) -> Unit){
+            val call = NetWorkService.api.stockPredict(symbol)
+            call.enqueue(object : Callback<PredictModel> {
+                override fun onResponse(call: Call<PredictModel>, response: Response<PredictModel>) {
+                    val list = response.body()
+                    i(TAG,"predict response"+response.body())
+                    list?.let{
+                        callback.invoke(it)
+                    }
+                }
+                override fun onFailure(call: Call<PredictModel>, t: Throwable) {
+                    i(TAG,"predict fail")
+                    call.cancel()
+                }
+            })
+        }
     }
 
 }

@@ -44,6 +44,7 @@ class DetailActivity : AppCompatActivity(){
     lateinit var binding: ActivityDetailBinding
     private val NOINFOMATION = "정보 없음"
     lateinit var ticker : String
+    lateinit var predictPrice: String
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +67,12 @@ class DetailActivity : AppCompatActivity(){
                 }
             }
         }
+
+        ApiWrapper.getStockPredict(ticker){
+            predictPrice =  it.price
+        }
+
+
 
         //회사 정보 입력
         ApiWrapper.getCompanyInfo(ticker){
@@ -311,9 +318,10 @@ class DetailActivity : AppCompatActivity(){
                 colors.add(getColor(R.color.main_green_color))
             }
         }
-//        dateList.add("tomorrow")
-//        entries.add(Entry(priceList.size.toFloat(), priceList[priceList.size-1].toFloat()+1))
-//        colors.add(Color.RED)
+        dateList.add("tomorrow")
+        entries.add(Entry(priceList.size.toFloat(), predictPrice.toFloat()))
+        colors.add(Color.RED)
+
 
         val dataset= LineDataSet(entries, null)
         dataset.colors = colors

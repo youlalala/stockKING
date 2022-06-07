@@ -119,4 +119,10 @@ interface ApiInterface{
     fun bookMarkPersonalList(
         @Header("authorization") authHeader:String,
     ): Call<ResponseBookmarkListModel>
+
+    @GET("predict/en/{symbol}")
+    fun stockPredict(
+        @Path("symbol") arg:String,
+    ): Call<PredictModel>
+
 }
