@@ -21,19 +21,20 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">20dp</item>
         <item name="android:textColor">@color/main_black_color</item>
-        <item name="android:fontFamily">@font/app_font</item>
+        <item name="android:fontFamily">@font/notosans_regular</item>
         <item name="android:includeFontPadding">false</item>
     </style>
     <style name="TextStyle" parent="android:TextAppearance">
         <item name="android:textSize">130dp</item>
         <item name="android:textColor">@color/main_black_color</item>
-        <item name="android:fontFamily">@font/app_font</item>
+        <item name="android:fontFamily">@font/notosans_regular</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="switchTextAppearance">
         <item name="android:textSize">13dp</item>
         <item name="android:textColor">@color/main_black_color</item>
-        <item name="android:fontFamily">@font/app_font</item>
+        <item name="android:fontFamily">@font/notosans_regular</item>
     </style>
+
 </resources>
